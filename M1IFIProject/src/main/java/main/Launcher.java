@@ -127,7 +127,7 @@ public class Launcher extends JFrame {
 		menuBuilder.setMenuTitle("Creatures");
 		menuBuilder.buildMenu();
 		menuTest = new PluginMenuItemBuilder(factory.getConstructorMap(),listener);
-		menuTest.setMenuTitle("Test");
+		menuTest.setMenuTitle("Tests");
 		menuTest.buildMenu();
 		mb.add(menuBuilder.getMenu());
 		mb.add(menuTest.getMenu());
