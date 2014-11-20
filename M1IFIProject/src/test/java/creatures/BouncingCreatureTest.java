@@ -15,7 +15,7 @@ import junit.framework.TestCase;
 
 import creatures.visual.CreatureSimulator;
 
-public class BouncingCreatureTest {
+public class BouncingCreatureTest extends TestCase{
 	CreatureSimulator environment = mock(CreatureSimulator.class);
 	final double w = 200;
 	final double h = 100;
