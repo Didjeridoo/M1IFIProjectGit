@@ -41,6 +41,7 @@ public class Launcher extends JFrame {
 	private final CreatureSimulator simulator;
 	
 	private PluginMenuItemBuilder menuBuilder;
+	private PluginMenuItemBuilder menuTest;
 	private JMenuBar mb = new JMenuBar();	
 	private Constructor<? extends ICreature> currentConstructor = null;
 	  
@@ -125,7 +126,11 @@ public class Launcher extends JFrame {
 		menuBuilder = new PluginMenuItemBuilder(factory.getConstructorMap(),listener);
 		menuBuilder.setMenuTitle("Creatures");
 		menuBuilder.buildMenu();
+		menuTest = new PluginMenuItemBuilder(factory.getConstructorMap(),listener);
+		menuTest.setMenuTitle("Test");
+		menuTest.buildMenu();
 		mb.add(menuBuilder.getMenu());
+		mb.add(menuTest.getMenu());
 		setJMenuBar(mb);
 	}
 	
