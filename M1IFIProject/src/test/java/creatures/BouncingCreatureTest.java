@@ -11,11 +11,10 @@ import java.awt.geom.Point2D;
 
 import org.junit.Before;
 import org.junit.Test;
-import junit.framework.TestCase;
 
 import creatures.visual.CreatureSimulator;
 
-public class BouncingCreatureTest extends TestCase{
+public class BouncingCreatureTest {
 	CreatureSimulator environment = mock(CreatureSimulator.class);
 	final double w = 200;
 	final double h = 100;

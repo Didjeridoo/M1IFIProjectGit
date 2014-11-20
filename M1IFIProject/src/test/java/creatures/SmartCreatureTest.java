@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
-import junit.framework.TestCase;
+
 import creatures.visual.CreatureSimulator;
 
 public class SmartCreatureTest {
