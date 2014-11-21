@@ -26,7 +26,7 @@ import commons.Utils.Predicate;
  */
 public class SmartCreature extends AbstractCreature {
 	
-	static class CreaturesAroundCreature implements Predicate<ICreature> {
+	public static class CreaturesAroundCreature implements Predicate<ICreature> {
 		private final SmartCreature observer;
 
 		public CreaturesAroundCreature(SmartCreature observer) {
