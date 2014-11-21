@@ -18,6 +18,7 @@ public class TestResultsDisplay extends JFrame {
 	private Point middle;
 	private Point newLocation;
 	private TestPlugin testPlugin;
+	private String text;
 
 	public TestResultsDisplay() {
 		this.setLayout(new BorderLayout());
@@ -27,20 +28,10 @@ public class TestResultsDisplay extends JFrame {
 		this.newLocation = new Point(middle.x - (getWidth() / 2), 0);
 		this.setLocation(newLocation);
 		this.textArea = new JTextArea();
-		//this.textArea.append("Testons c'est good\n");
-		testPlugin = TestPlugin.getInstance();
-		String res = testPlugin.getResultTest();
-		System.out.println("res : " + res);
-		this.textArea.append(res);
+		this.testPlugin = TestPlugin.getInstance();
+		this.text = this.testPlugin.getResultTest();
+		this.textArea.append(text);
 		this.add(textArea, BorderLayout.CENTER);
 		this.pack();
 	}
-	
-	/*public void setCreature(AbstractCreature creature) {
-		if (creature != null) {
-			textArea.append(creature.toString());
-		} else {
-			textArea.append(null);
-		}
-	}*/
 }

@@ -156,28 +156,30 @@ public class PluginLoader {
 				if (plugin != null) {
 					// debut lancement test plugins
 					Class loadedClassTest;
-					try {
-						// TODO ICIIIIIIIII TESTER LES AUTRES SI RUNNER PASSE, L
-						// IDEE EST LA MAIS
-						// TODO IL NE ME TROUVE PAS LA CLASSE JUNITCORE
-						loadedClassTest = loader.loadClass(plugin.getName()
-								+ "Test");
-						plugTest.test(loadedClassTest);
+					try
+					{
+						loadedClassTest = loader.loadClass(plugin.getName()+"Test");
+						boolean correctTest = plugTest.test(loadedClassTest);
 						System.out.println(plugTest.getResultTest());
-					} catch (ClassNotFoundException e) {
+
+						if (correctTest) {
+							//All tests passed
+							logger.info("Tous les plugins ont été correctement chargés");
+							boolean notLoaded = (loadedPluginClasses.get(plugin.getName()) == null);
+							if (notLoaded) {
+								logger.info("Class " + qualifiedClassName
+										+ " is a new plugin!");
+								loadedPluginClasses.put(plugin.getName(), plugin);
+							} else {
+								logger.info("Class " + qualifiedClassName
+										+ " is already loaded, IGNORING!");
+							}
+						} else {
+							//At least one test failed
+                            logger.info("Erreur dans l'un des plugins, tous les chargements n'ont pu se faire");
+                        }
+					} catch (ClassNotFoundException e){
 						e.printStackTrace();
-					}
-				}
-				if (plugin != null) {
-					boolean notLoaded = (loadedPluginClasses.get(plugin
-							.getName()) == null);
-					if (notLoaded) {
-						logger.info("Class " + qualifiedClassName
-								+ " is a new plugin!");
-						loadedPluginClasses.put(plugin.getName(), plugin);
-					} else {
-						logger.info("Class " + qualifiedClassName
-								+ " is already loaded, IGNORING!");
 					}
 				}
 			}
