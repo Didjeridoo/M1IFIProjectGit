@@ -154,7 +154,7 @@ public class PluginLoader {
 				Class<IPlugin> plugin = loadOnePluginClass(qualifiedClassName);
 				if (plugin != null) {
 					//test plugins
-					Class loadedClassTest;
+					Class<?> loadedClassTest;
 					try
 					{
 						loadedClassTest = loader.loadClass(plugin.getName()+"Test");
