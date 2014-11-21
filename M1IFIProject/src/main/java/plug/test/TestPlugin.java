@@ -10,7 +10,7 @@ import org.junit.runner.notification.Failure;
 
 import plug.IPlugin;
 
-public class PluginTest implements IPlugin{
+public class TestPlugin implements IPlugin{
 
 	JUnitCore runner;
 	String resultat;

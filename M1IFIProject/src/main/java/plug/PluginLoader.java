@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import plug.test.PluginTest;
+import plug.test.TestPlugin;
 
 /*
  * Non Generic Class Loader (PluginLoader<P> would be a pain, see why?)
@@ -152,7 +152,7 @@ public class PluginLoader {
 				// TODO
 				System.out.println(qualifiedClassName);
 				Class<IPlugin> plugin = loadOnePluginClass(qualifiedClassName);
-				PluginTest plugTest = new PluginTest();
+				TestPlugin plugTest = new TestPlugin();
 				if (plugin != null) {
 					// debut lancement test plugins
 					Class loadedClassTest;
