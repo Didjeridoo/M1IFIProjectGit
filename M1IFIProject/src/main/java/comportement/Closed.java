@@ -25,7 +25,7 @@ public class Closed implements IComportement{
 
 		double hw = s.getWidth() / 2;
 		double hh = s.getHeight() / 2;
-		// newX and newY were just put on the border of the envt. It's not a bug
+		// newX and newY were just put on the border of the env. It's not a bug
 		// as long as the tests passed. Now, the mirroring position is computed.
 		if (newX < -hw) {
 			newX = - 2*hw - newX;
