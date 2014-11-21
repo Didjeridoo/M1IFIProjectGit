@@ -7,14 +7,17 @@ import static org.mockito.Mockito.when;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import plug.IPlugin;
 import creatures.visual.CreatureSimulator;
 
 public class BouncingCreatureTest {
+	
 	CreatureSimulator environment = mock(CreatureSimulator.class);
 	final double w = 200;
 	final double h = 100;
@@ -148,5 +151,9 @@ public class BouncingCreatureTest {
 		assertEquals(toRadians(150), creature.getDirection(), 0.01);
 		assertEquals(h/2, creature.getPosition().getY(), 1);		
 	}
-	
+
+
+	public String getName() {
+		return getClass().getName();
+	}
 }
