@@ -50,7 +50,7 @@ public class Closed implements IComportement{
 		creature.setPosition(newX, newY);
 	}
 
-	public static Closed getInstance(AbstractCreature creature){return instance;}
+	public static Closed getInstance(){return instance;}
 	
 	public void setCreature(AbstractCreature creature){this.creature = creature;}
 	
