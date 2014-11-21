@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import plug.test.TestPlugin;
+import data.test.plugins.TestPlugin;
 
 /*
  * Non Generic Class Loader (PluginLoader<P> would be a pain, see why?)
@@ -150,17 +150,15 @@ public class PluginLoader {
 			String path = file.getPath();
 			String qualifiedClassName = getQualifiedName(baseNameLength, path);
 			if (qualifiedClassName != null) {
-				// TODO
-				System.out.println(qualifiedClassName);
+				//load plugins
 				Class<IPlugin> plugin = loadOnePluginClass(qualifiedClassName);
 				if (plugin != null) {
-					// debut lancement test plugins
-					Class loadedClassTest;
+					//test plugins
+					Class<?> loadedClassTest;
 					try
 					{
 						loadedClassTest = loader.loadClass(plugin.getName()+"Test");
 						boolean correctTest = plugTest.test(loadedClassTest);
-						System.out.println(plugTest.getResultTest());
 
 						if (correctTest) {
 							//All tests passed
