@@ -13,9 +13,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import comportement.Circular;
+import comportement.Closed;
 import creatures.BouncingCreature;
 import creatures.Creature;
 import creatures.visual.CreatureSimulator;
+import deplacements.Stupid;
 
 public class ToricComportementTest {
 
