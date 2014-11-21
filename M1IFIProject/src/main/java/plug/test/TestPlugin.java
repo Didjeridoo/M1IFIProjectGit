@@ -2,52 +2,60 @@ package plug.test;
 
 import java.util.List;
 
-
-
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
 import plug.IPlugin;
 
-public class TestPlugin implements IPlugin{
+public class TestPlugin implements IPlugin {
 
 	JUnitCore runner;
 	String resultat;
-	
-	private static TestPlugin testplugin = new TestPlugin();
-	public static TestPlugin getInstance(){return testplugin;}
-	
-	private TestPlugin()
-	{
+	private static TestPlugin testPlugin = new TestPlugin();
+
+	private TestPlugin() {
+		// TODO Auto-generated constructor stub
 		runner = new JUnitCore();
-		resultat="";
+		resultat = "";
 	}
-	
+
+	public static TestPlugin getInstance() {
+		return testPlugin;
+	}
+
 	public boolean test(Class<?> class_)
 	{
 		Result result = runner.run(class_);
 		int nbFail = result.getFailureCount();
 		
+		resultat += class_.getName() + "\n";
+		resultat += "Runs: " + result.getRunCount() + "\n";
+		resultat += "Failures: " + nbFail + "\n";
+		resultat += "Finished after " + result.getRunTime() / 1000.f + " seconds" + "\n";
+		
 		if(nbFail == 0)
 		{
-			resultat += "Pas d'erreur concernant "+class_+"\n";
+			resultat += "----------------------\n";
 			return true;
 		}
 		else
 		{
 			List<Failure> testFailed = result.getFailures();
-			resultat +="Erreur dans " +class_+ ":\n";
 
 			for (Failure f : testFailed) {
-				resultat +="\t - Méthode "+f.getTestHeader()+"\n";
+				resultat += "\nMethod failed: "+f.getTestHeader()+"\n";
+				resultat += "Exception: " + f.getException() + "\n";
 			}
+			resultat += "----------------------\n";
 			return false;
 		}
 	}
-	
-	public String getResultTest(){return resultat;}
-	
+
+	public String getResultTest() {
+		return resultat;
+	}
+
 	public String getName() {
 		return getClass().getName();
 	}

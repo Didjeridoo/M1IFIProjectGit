@@ -138,6 +138,7 @@ public class PluginLoader {
 		File[] files = dir.listFiles();
 		logger.info("Le listing : " + files);
 		// for (int i = 0; i < files.length; i++) {
+		TestPlugin plugTest = TestPlugin.getInstance();
 		for (File file : files) {
 			if (file.isDirectory()) {
 				loadFromSubdirectory(file, baseName);
@@ -152,7 +153,6 @@ public class PluginLoader {
 				// TODO
 				System.out.println(qualifiedClassName);
 				Class<IPlugin> plugin = loadOnePluginClass(qualifiedClassName);
-				TestPlugin plugTest = TestPlugin.getInstance();
 				if (plugin != null) {
 					// debut lancement test plugins
 					Class loadedClassTest;

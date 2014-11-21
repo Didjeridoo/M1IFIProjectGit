@@ -1,7 +1,9 @@
 package main;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -16,9 +18,11 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 import plug.creatures.CreaturePluginFactory;
 import plug.creatures.PluginMenuItemBuilder;
+import visual.TestResultsDisplay;
 import creatures.ICreature;
 import creatures.visual.ColorCube;
 import creatures.visual.CreatureInspector;
@@ -31,24 +35,24 @@ import creatures.visual.CreatureVisualizer;
  */
 @SuppressWarnings("serial")
 public class Launcher extends JFrame {
+	private TestResultsDisplay testResultsDisplay;
 
 	private final CreaturePluginFactory factory;
-	
+
 	private final CreatureInspector inspector;
 	private final CreatureVisualizer visualizer;
 	private final CreatureSimulator simulator;
-	
+
 	private PluginMenuItemBuilder menuBuilder;
-	private PluginMenuItemBuilder menuTest;
-	private JMenuBar mb = new JMenuBar();	
+	private JMenuBar mb = new JMenuBar();
 	private Constructor<? extends ICreature> currentConstructor = null;
-	  
+
 	public Launcher() {
 		factory = CreaturePluginFactory.getInstance();
 
 		setName("Creature Simulator Plugin Version");
 		setLayout(new BorderLayout());
-		
+
 		JPanel buttons = new JPanel();
 		JButton loader = new JButton("Load plugins");
 		loader.addActionListener(new ActionListener() {
@@ -72,75 +76,85 @@ public class Launcher extends JFrame {
 		restart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (currentConstructor != null) {
-					synchronized(simulator) {
+					synchronized (simulator) {
 						if (simulator.isRunning()) {
 							simulator.stop();
 						}
 					}
 					simulator.clearCreatures();
-					Collection<? extends ICreature> creatures = factory.createCreatures(simulator, 30, new ColorCube(50),currentConstructor);
+					Collection<? extends ICreature> creatures = factory
+							.createCreatures(simulator, 30, new ColorCube(50),
+									currentConstructor);
 					simulator.addAllCreatures(creatures);
 					simulator.start();
 				}
 			}
 		});
 		buttons.add(restart);
-		
+
+		JButton rapportDeTests = new JButton("Rapport de tests");
+		rapportDeTests.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (testResultsDisplay == null) {
+					testResultsDisplay = new TestResultsDisplay();
+				}
+				if (!testResultsDisplay.isVisible()) {
+					testResultsDisplay.setVisible(true);
+				}
+			}
+		});
+		buttons.add(rapportDeTests);
+
 		add(buttons, BorderLayout.SOUTH);
-				
-		simulator = new CreatureSimulator(new Dimension(640, 480));		
+
+		simulator = new CreatureSimulator(new Dimension(640, 480));
 		inspector = new CreatureInspector();
 		inspector.setFocusableWindowState(false);
 		visualizer = new CreatureVisualizer(simulator);
 		visualizer.setDebug(false);
 		visualizer.setPreferredSize(simulator.getSize());
-		
-		add(visualizer, BorderLayout.CENTER);
-	
-	    buildPluginMenus();
 
-	    pack();
+		add(visualizer, BorderLayout.CENTER);
+
+		buildPluginMenus();
+
+		pack();
 
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent evt) {
 				exit(evt);
 			}
 		});
-		
+
 	}
-	
+
 	private void exit(WindowEvent evt) {
 		System.exit(0);
 	}
 
-	public void buildPluginMenus() {	
+	public void buildPluginMenus() {
 		mb.removeAll();
 		ActionListener listener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// the name of the plugin is in the ActionCommand
-				currentConstructor = factory.getConstructorMap().get(((JMenuItem) e.getSource()).getActionCommand());
+				currentConstructor = factory.getConstructorMap().get(
+						((JMenuItem) e.getSource()).getActionCommand());
 			}
 		};
-		menuBuilder = new PluginMenuItemBuilder(factory.getConstructorMap(),listener);
+		menuBuilder = new PluginMenuItemBuilder(factory.getConstructorMap(),
+				listener);
 		menuBuilder.setMenuTitle("Creatures");
 		menuBuilder.buildMenu();
-		menuTest = new PluginMenuItemBuilder(factory.getConstructorMap(),listener);
-		menuTest.setMenuTitle("Tests");
-		menuTest.buildMenu();
 		mb.add(menuBuilder.getMenu());
-		mb.add(menuTest.getMenu());
 		setJMenuBar(mb);
 	}
-	
-	
+
 	public static void main(String args[]) {
-	    Logger.getLogger("plug").setLevel(Level.INFO);
+		Logger.getLogger("plug").setLevel(Level.INFO);
 		double myMaxSpeed = 5;
 		CreaturePluginFactory.init(myMaxSpeed);
 		Launcher launcher = new Launcher();
 		launcher.setVisible(true);
 	}
-	
+
 }
-
-
