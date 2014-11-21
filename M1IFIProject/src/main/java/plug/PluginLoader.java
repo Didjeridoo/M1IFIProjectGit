@@ -149,18 +149,16 @@ public class PluginLoader {
 			String path = file.getPath();
 			String qualifiedClassName = getQualifiedName(baseNameLength, path);
 			if (qualifiedClassName != null) {
-				// TODO
-				System.out.println(qualifiedClassName);
+				//load plugins
 				Class<IPlugin> plugin = loadOnePluginClass(qualifiedClassName);
 				TestPlugin plugTest = TestPlugin.getInstance();
 				if (plugin != null) {
-					// debut lancement test plugins
+					//test plugins
 					Class loadedClassTest;
 					try
 					{
 						loadedClassTest = loader.loadClass(plugin.getName()+"Test");
 						boolean correctTest = plugTest.test(loadedClassTest);
-						System.out.println(plugTest.getResultTest());
 
 						if (correctTest) {
 							//All tests passed
