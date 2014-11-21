@@ -31,7 +31,7 @@ public class SmartCreatureTest {
 	public void testEmerginBehavior() throws Exception {
 		SmartCreature main = new SmartCreature(environment, new Point2D.Double(0, 0), toRadians(0), 5, Color.RED);
 
-		ICreature other = mock(ICreature.class);
+		SmartCreature other = mock(SmartCreature.class);
 		when(other.getDirection()).thenReturn(toRadians(270));
 		when(other.getSpeed()).thenReturn(10.0);
 		when(other.getPosition()).thenReturn(new Point2D.Double(1,0));
@@ -54,6 +54,7 @@ public class SmartCreatureTest {
 		verify(other).directionFormAPoint(eq(main.getPosition()),eq(0.0));
 		verify(other).distanceFromAPoint(eq(main.getPosition()));
 		verifyNoMoreInteractions(other);
+		assertTrue(true);
 	}
 
 	public String getName() {

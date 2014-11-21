@@ -1,6 +1,6 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
-target/
+M1IFIProject/target/
 
 # Package Files #
 *.jar
