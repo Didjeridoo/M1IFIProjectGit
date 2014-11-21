@@ -14,6 +14,15 @@ public class TestPlugin implements IPlugin{
 
 	JUnitCore runner;
 	String resultat;
+	private static TestPlugin testPlugin = new TestPlugin();
+	
+	private TestPlugin() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public static TestPlugin getInstance(){
+		return testPlugin;
+	}
 	
 	public void test(Class<?> class_)
 	{
@@ -22,9 +31,11 @@ public class TestPlugin implements IPlugin{
 		Result result = runner.run(class_);
 		int nbFail = result.getFailureCount();
 		
+		resultat += class_ + "\n";
+		
 		if(nbFail == 0)
 		{
-			resultat = "Pas d'erreur concernant la "+class_;
+			resultat += "Pas d'erreur concernant la "+class_;
 		}
 		else
 		{
@@ -35,6 +46,7 @@ public class TestPlugin implements IPlugin{
 				resultat +="\n\t - Méthode "+f.getTestHeader();
 			}
 		}
+		resultat += "\n\n";
 	}
 	
 	public String getResultTest(){return resultat;}
