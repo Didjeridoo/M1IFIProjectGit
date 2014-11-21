@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import plug.test.TestPlugin;
+import data.test.plugins.TestPlugin;
 
 /*
  * Non Generic Class Loader (PluginLoader<P> would be a pain, see why?)

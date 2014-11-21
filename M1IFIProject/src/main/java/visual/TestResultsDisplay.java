@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import plug.test.TestPlugin;
+import data.test.plugins.TestPlugin;
 
 @SuppressWarnings("serial")
 public class TestResultsDisplay extends JFrame {

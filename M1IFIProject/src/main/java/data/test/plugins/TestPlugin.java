@@ -1,4 +1,4 @@
-package plug.test;
+package data.test.plugins;
 
 import java.util.List;
 
