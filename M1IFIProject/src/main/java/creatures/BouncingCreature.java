@@ -9,10 +9,13 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
 
-public class BouncingCreature extends AbstractCreature implements IDeplacementHasard{
+import deplacement.HasardDeplacement;
+
+public class BouncingCreature extends AbstractCreature{
 
 	private static final double MIN_SPEED = 3;
 	private static final double MAX_SPEED = 10;
+	private HasardDeplacement deplacement;
 
 	/**
 	 * Number of cycles after which we apply some random noise.
@@ -25,7 +28,7 @@ public class BouncingCreature extends AbstractCreature implements IDeplacementHa
 	protected int currCycle;
 
 	public BouncingCreature(IEnvironment environment, Point2D position, double speed,
-			double direction, Color color, IDeplacementHasard dep) {
+			double direction, Color color) {
 		super(environment, position);
 
 		this.speed = speed;
