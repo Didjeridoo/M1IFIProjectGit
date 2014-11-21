@@ -272,7 +272,7 @@ public class PluginLoader {
 		return null;
 	}
 	
-	@SuppressWarnings("unchecked")
+	/*@SuppressWarnings("unchecked")
 	private ArrayList<Class<IPlugin>> loadSeveralPluginClass(String[] className){
 		ArrayList<Class<IPlugin>> tabLoader = new ArrayList<Class<IPlugin>>();
 		for(String s : className){
@@ -296,7 +296,7 @@ public class PluginLoader {
 			}
 		}
 		return tabLoader;
-	}
+	}*/
 
 	public Class<? extends IPlugin> getPtype() {
 		return ptype;
