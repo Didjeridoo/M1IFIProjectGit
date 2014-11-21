@@ -16,8 +16,10 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+
 import plug.creatures.CreaturePluginFactory;
 import plug.creatures.PluginMenuItemBuilder;
+import visual.FormDesiredQuantity;
 import visual.TestResultsDisplay;
 import creatures.ICreature;
 import creatures.visual.ColorCube;
@@ -32,6 +34,7 @@ import creatures.visual.CreatureVisualizer;
 @SuppressWarnings("serial")
 public class Launcher extends JFrame {
 	private TestResultsDisplay testResultsDisplay;
+	private int quantity;
 
 	private final CreaturePluginFactory factory;
 
@@ -44,6 +47,7 @@ public class Launcher extends JFrame {
 	private Constructor<? extends ICreature> currentConstructor = null;
 
 	public Launcher() {
+		quantity = 0;
 		factory = CreaturePluginFactory.getInstance();
 
 		setName("Creature Simulator Plugin Version");
@@ -79,7 +83,7 @@ public class Launcher extends JFrame {
 					}
 					simulator.clearCreatures();
 					Collection<? extends ICreature> creatures = factory
-							.createCreatures(simulator, 30, new ColorCube(50),
+							.createCreatures(simulator, quantity, new ColorCube(50),
 									currentConstructor);
 					simulator.addAllCreatures(creatures);
 					simulator.start();
@@ -133,6 +137,31 @@ public class Launcher extends JFrame {
 		ActionListener listener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// the name of the plugin is in the ActionCommand
+				
+				String[] labels = { "Enter the desired quantity" };
+			    char[] mnemonics = { 'Q' };
+			    int[] widths = { 4 };
+			    String[] descs = { "Enter the desired quantity" };
+
+			    final FormDesiredQuantity form = new FormDesiredQuantity(labels, mnemonics, widths, descs);
+
+			    JButton submit = new JButton("Submit");
+
+			    final JFrame f = new JFrame("Configuration");
+			    f.getContentPane().add(form, BorderLayout.NORTH);
+			    JPanel p = new JPanel();
+			    p.add(submit);
+			    f.getContentPane().add(p, BorderLayout.SOUTH);
+			    f.pack();
+			    f.setVisible(true);
+			    
+			    submit.addActionListener(new ActionListener() {
+			      public void actionPerformed(ActionEvent e) {
+			        quantity = Integer.parseInt(form.getText(0));
+			        f.dispose();
+			      }
+			    });
+				
 				currentConstructor = factory.getConstructorMap().get(
 						((JMenuItem) e.getSource()).getActionCommand());
 			}
