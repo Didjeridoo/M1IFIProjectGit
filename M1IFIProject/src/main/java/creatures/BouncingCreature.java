@@ -80,7 +80,7 @@ public class BouncingCreature extends AbstractCreature {
 
 		// newX and newY were just put on the border of the envt. It's not a bug
 		// as long as the tests passed. Now, the mirroring position is computed.
-		
+/*		
 		if (newX < -hw) {
 			newX = - 2*hw - newX;
 			// ERROR #2 direction is badly managed 
@@ -103,6 +103,7 @@ public class BouncingCreature extends AbstractCreature {
 		}
 		
 		setPosition(newX, newY);
+ */
 	}
 	
 	private void setDirectionBounceX() {
@@ -115,5 +116,4 @@ public class BouncingCreature extends AbstractCreature {
 	private void setDirectionBounceY() {
 		setDirection(PI * 2 - direction);
 	}
-	
 }

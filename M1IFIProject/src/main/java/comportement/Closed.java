@@ -7,4 +7,8 @@ public class Closed implements IComportement{
 		
 	}
 
+	public String getName() {
+		return getClass().getName();
+	}
+
 }
