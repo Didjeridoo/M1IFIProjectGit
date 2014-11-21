@@ -9,7 +9,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
 
-public class BouncingCreature extends AbstractCreature {
+public class BouncingCreature extends AbstractCreature implements IDeplacementHasard{
 
 	private static final double MIN_SPEED = 3;
 	private static final double MAX_SPEED = 10;
@@ -25,7 +25,7 @@ public class BouncingCreature extends AbstractCreature {
 	protected int currCycle;
 
 	public BouncingCreature(IEnvironment environment, Point2D position, double speed,
-			double direction, Color color) {
+			double direction, Color color, IDeplacementHasard dep) {
 		super(environment, position);
 
 		this.speed = speed;
@@ -105,14 +105,14 @@ public class BouncingCreature extends AbstractCreature {
 		setPosition(newX, newY);
 	}
 	
-	private void setDirectionBounceX() {
+	public void setDirectionBounceX() {
 		if (direction >= PI)
 			setDirection(3*PI - direction);
 		else
 			setDirection(PI - direction);
 	}
 
-	private void setDirectionBounceY() {
+	public void setDirectionBounceY() {
 		setDirection(PI * 2 - direction);
 	}
 	
