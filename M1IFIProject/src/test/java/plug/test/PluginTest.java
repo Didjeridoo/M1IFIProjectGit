@@ -1,20 +1,21 @@
-package plug;
+package plug.test;
 
 import java.util.List;
 
-import javax.swing.JFrame;
+
 
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
-import org.junit.runner.Runner;
 import org.junit.runner.notification.Failure;
+
+import plug.IPlugin;
 
 public class PluginTest implements IPlugin{
 
 	JUnitCore runner;
 	String resultat;
 	
-	public String getStringTestResult(Class class_)
+	public void test(Class<?> class_)
 	{
 		runner = new JUnitCore();
 
@@ -28,14 +29,15 @@ public class PluginTest implements IPlugin{
 		else
 		{
 			List<Failure> testFailed = result.getFailures();
-			
+			resultat +="Erreur dans la classe " +class_+ ":";
+
 			for (Failure f : testFailed) {
-				resultat +="Erreur dans la classe " +class_+ ":";
 				resultat +="\n\t - Méthode "+f.getTestHeader();
 			}
 		}
-		return resultat;
 	}
+	
+	public String getResultTest(){return resultat;}
 	
 	public String getName() {
 		return getClass().getName();

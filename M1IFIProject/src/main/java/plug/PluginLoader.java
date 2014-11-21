@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
+import plug.test.PluginTest;
+
 /*
  * Non Generic Class Loader (PluginLoader<P> would be a pain, see why?)
  */
@@ -160,7 +162,8 @@ public class PluginLoader {
 						// TODO IL NE ME TROUVE PAS LA CLASSE JUNITCORE
 						loadedClassTest = loader.loadClass(plugin.getName()
 								+ "Test");
-						System.out.println(plugTest.getStringTestResult(loadedClassTest));
+						plugTest.test(loadedClassTest);
+						System.out.println(plugTest.getResultTest());
 					} catch (ClassNotFoundException e) {
 						e.printStackTrace();
 					}
