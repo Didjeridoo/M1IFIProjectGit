@@ -10,10 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import org.junit.runner.JUnitCore;
-import org.junit.runner.Result;
-import org.junit.runner.notification.Failure;
-
 /*
  * Non Generic Class Loader (PluginLoader<P> would be a pain, see why?)
  */
@@ -29,7 +25,6 @@ public class PluginLoader {
 	 */
 	private String pluginDirectory;
 
-	private JUnitCore runner;
 	/**
 	 * plugin cache (loaded plugin)
 	 */
@@ -155,6 +150,7 @@ public class PluginLoader {
 				// TODO
 				System.out.println(qualifiedClassName);
 				Class<IPlugin> plugin = loadOnePluginClass(qualifiedClassName);
+				PluginTest plugTest = new PluginTest();
 				if (plugin != null) {
 					// debut lancement test plugins
 					Class loadedClassTest;
@@ -164,20 +160,7 @@ public class PluginLoader {
 						// TODO IL NE ME TROUVE PAS LA CLASSE JUNITCORE
 						loadedClassTest = loader.loadClass(plugin.getName()
 								+ "Test");
-						System.out
-								.println("++++++++++++++++ ici ++++++++++++++++");
-
-						runner = new org.junit.runner.JUnitCore();
-
-						Result result = runner.run(loadedClassTest);
-						int nb = result.getFailureCount();
-						System.out.println(loadedClassTest + " : " + nb
-								+ " erreurs");
-						List<Failure> test = result.getFailures();
-
-						for (Failure f : test) {
-							System.out.println(f.getException());
-						}
+						System.out.println(plugTest.getStringTestResult(loadedClassTest));
 					} catch (ClassNotFoundException e) {
 						e.printStackTrace();
 					}
