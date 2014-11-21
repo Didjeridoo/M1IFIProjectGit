@@ -15,25 +15,34 @@ public class TestPlugin implements IPlugin{
 	JUnitCore runner;
 	String resultat;
 	
-	public void test(Class<?> class_)
+	private static TestPlugin testplugin = new TestPlugin();
+	public static TestPlugin getInstance(){return testplugin;}
+	
+	private TestPlugin()
 	{
 		runner = new JUnitCore();
-
+		resultat="";
+	}
+	
+	public boolean test(Class<?> class_)
+	{
 		Result result = runner.run(class_);
 		int nbFail = result.getFailureCount();
 		
 		if(nbFail == 0)
 		{
-			resultat = "Pas d'erreur concernant la "+class_;
+			resultat += "Pas d'erreur concernant "+class_+"\n";
+			return true;
 		}
 		else
 		{
 			List<Failure> testFailed = result.getFailures();
-			resultat +="Erreur dans la classe " +class_+ ":";
+			resultat +="Erreur dans " +class_+ ":\n";
 
 			for (Failure f : testFailed) {
-				resultat +="\n\t - Méthode "+f.getTestHeader();
+				resultat +="\t - Méthode "+f.getTestHeader()+"\n";
 			}
+			return false;
 		}
 	}
 	

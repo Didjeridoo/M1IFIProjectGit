@@ -152,12 +152,11 @@ public class PluginLoader {
 				// TODO
 				System.out.println(qualifiedClassName);
 				Class<IPlugin> plugin = loadOnePluginClass(qualifiedClassName);
-				TestPlugin plugTest = new TestPlugin();
+				TestPlugin plugTest = TestPlugin.getInstance();
 				if (plugin != null) {
 					// debut lancement test plugins
 					Class loadedClassTest;
 					try {
-						// TODO ICIIIIIIIII TESTER LES AUTRES SI RUNNER PASSE, L
 						// IDEE EST LA MAIS
 						// TODO IL NE ME TROUVE PAS LA CLASSE JUNITCORE
 						loadedClassTest = loader.loadClass(plugin.getName()
