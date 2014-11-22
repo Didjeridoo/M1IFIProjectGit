@@ -1,7 +1,6 @@
 package deplacements;
 
-import comportement.IComportement;
-
+import comportements.IComportement;
 import creatures.AbstractCreature;
 import creatures.BouncingCreature;
 import creatures.CustomCreature;

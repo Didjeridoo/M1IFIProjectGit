@@ -1,4 +1,4 @@
-package comportement;
+package comportements;
 
 import creatures.AbstractCreature;
 import creatures.CustomCreature;
