@@ -6,13 +6,14 @@ import static java.lang.Math.sin;
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
 
-import plug.comportement.IComportement;
+import comportement.IComportement;
+
 import creatures.AbstractCreature;
 import creatures.CustomCreature;
 
 public class Stupid implements IDeplacement {
 
-	private CustomCreature creature;
+	private AbstractCreature creature;
 	private IComportement comportement;
 
 	public String getName() {
@@ -20,7 +21,7 @@ public class Stupid implements IDeplacement {
 		return getClass().getName();
 	}
 
-	public void act(CustomCreature creature, IComportement comportement) {
+	public void act(AbstractCreature creature, IComportement comportement) {
 		this.creature = creature;
 		this.comportement = comportement;
 		move();

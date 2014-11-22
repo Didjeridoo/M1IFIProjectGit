@@ -1,20 +1,21 @@
-package plug.comportement;
+package comportement;
 
 import static java.lang.Math.PI;
 
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
 
+import creatures.AbstractCreature;
 import creatures.CustomCreature;
 
 public class Circular implements IComportement {
 
 	
-	private CustomCreature creature;
+	private AbstractCreature creature;
 	
 	private static Circular instance = new Circular();
 
-	public void behaviour(CustomCreature creature, double x, double y) {
+	public void behaviour(AbstractCreature creature, double x, double y) {
 		this.creature = creature;
 		Dimension s = creature.getEnvironment().getSize();
 		double hh = s.getHeight() / 2;

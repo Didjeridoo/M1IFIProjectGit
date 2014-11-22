@@ -1,4 +1,4 @@
-package plug.comportement;
+package comportement;
 
 import static java.lang.Math.PI;
 
@@ -10,11 +10,11 @@ import creatures.CustomCreature;
 public class Closed implements IComportement{
 
 	
-	private static CustomCreature creature;
+	private static AbstractCreature creature;
 	
 	private static Closed instance = new Closed();
 	
-	public void behaviour(CustomCreature creature, double x, double y) {
+	public void behaviour(AbstractCreature creature, double x, double y) {
 		this.creature = creature;
 		Dimension s = creature.getEnvironment().getSize();
 

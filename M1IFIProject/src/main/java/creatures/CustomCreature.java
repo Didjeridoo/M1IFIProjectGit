@@ -6,7 +6,8 @@ import static java.lang.Math.random;
 import java.awt.Color;
 import java.awt.geom.Point2D;
 
-import plug.comportement.IComportement;
+import comportement.IComportement;
+
 import deplacements.IDeplacement;
 
 public class CustomCreature extends AbstractCreature{
@@ -40,7 +41,7 @@ public class CustomCreature extends AbstractCreature{
 		currCycle = 0;
 	}
 
-	public void applyNoise() {
+	/*public void applyNoise() {
 		currCycle++;
 		currCycle %= NUMBER_OF_CYCLES_PER_CHANGE;
 
@@ -58,7 +59,7 @@ public class CustomCreature extends AbstractCreature{
 			setDirection(this.direction
 					+ ((random() * PI / 2) - (PI / 4)));
 		}
-	}
+	}*/
 	
 	
 	public void act() {
