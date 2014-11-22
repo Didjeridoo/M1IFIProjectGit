@@ -2,16 +2,31 @@ package deplacements;
 
 import static commons.Utils.filter;
 import static java.lang.Math.abs;
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
+
+import java.awt.Dimension;
+import java.awt.geom.Point2D;
+
 import commons.Utils.Predicate;
 import creatures.AbstractCreature;
 import creatures.BouncingCreature;
 import creatures.Creature;
+import creatures.CustomCreature;
 import creatures.ICreature;
 import creatures.SmartCreature;
 import creatures.SmartCreature.CreaturesAroundCreature;
 
 public class Troupeau implements IDeplacement{
-	AbstractCreature abs;
+	
+	private CustomCreature creature;
+
+
+	public Troupeau(CustomCreature creature){
+		this.creature = creature;
+	}
+		
+		
 	/** Minimal distance between this creature and the ones around. */
 	private final static double MIN_DIST = 10d;
 
@@ -19,7 +34,7 @@ public class Troupeau implements IDeplacement{
 	private final static double MIN_SPEED = 3d;
 	
 	
-	public void act(AbstractCreature creature) {
+	public void act() {
 		// speed - will be used to compute the average speed of the nearby
 		// creatures including this instance
 		double avgSpeed = creature.getSpeed();
@@ -54,12 +69,20 @@ public class Troupeau implements IDeplacement{
 		
 		// if we are not too close move closer
 		if (minDist > MIN_DIST) {
+			move();
 			// we move always the maximum
-			double incX = creature.getSpeed() * Math.cos(avgDir);
-			double incY = - creature.getSpeed() * Math.sin(avgDir);
+			Dimension s = creature.getEnvironment().getSize();
+			double hw = s.getWidth() / 2;
+			double hh = s.getHeight() / 2;
+			double newX = creature.getPosition().getX() + (creature.getSpeed() * Math.cos(avgDir));
+			double newY = creature.getPosition().getY() + (- creature.getSpeed() * Math.sin(avgDir));
 
-			// we should not moved closer than a dist - MIN_DIST
-			move(incX, incY);
+			
+			if((newX < -hw)||(newX > hw)||(newY < -hh)||(newY > hh)){
+				creature.getMonde().behaviour(newX, newY);
+			}else{
+				creature.setPosition(new Point2D.Double(newX, newY));
+			}
 		}
 	}
 
@@ -68,19 +91,18 @@ public class Troupeau implements IDeplacement{
 		return getClass().getName();
 	}
 
-	public void move(double incX, double incY) {
-		// TODO Auto-generated method stub
+	public void move() {
 		
 	}
 	public Iterable<ICreature> creaturesAround(
-			AbstractCreature abstractCreature) {
-		return filter(abs.getEnvironment().getCreatures(), new CreaturesAroundCreature(abs));
+			CustomCreature customCreature) {
+		return filter(creature.getEnvironment().getCreatures(), new CreaturesAroundCreature(creature));
 	}
 	
 	public static class CreaturesAroundCreature implements Predicate<ICreature> {
-		private final AbstractCreature observer;
+		private final CustomCreature observer;
 
-		public CreaturesAroundCreature(AbstractCreature observer) {
+		public CreaturesAroundCreature(CustomCreature observer) {
 			this.observer = observer;
 		}
 
@@ -96,16 +118,6 @@ public class Troupeau implements IDeplacement{
 							.getLengthOfView();
 
 		}
-	}
-
-	public double hasardX(AbstractCreature creature) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public double hasardY(AbstractCreature creature) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 }

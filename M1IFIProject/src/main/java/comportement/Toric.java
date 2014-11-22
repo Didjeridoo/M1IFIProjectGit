@@ -5,49 +5,38 @@ import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 
 import java.awt.Dimension;
+import java.awt.geom.Point2D;
 
 import creatures.AbstractCreature;
 
 public class Toric implements IComportement{
 
-	private AbstractCreature creature;
-	private static Toric instance = new Toric();
+	private static AbstractCreature creature;
+
+	public Toric(AbstractCreature creature){
+		this.creature = creature;
+	}
+	private static Toric instance = new Toric(creature);
 	
 	private Toric(){}
 	
-	public void behaviour() {
+	public void behaviour(double x, double y) {
 		
-		/*Dimension s = creature.getEnvironment().getSize();
-		double newX = creature.getPosition().getX() + creature.getSpeed()* cos(creature.getDirection());
-		// the reason there is a minus instead of a plus is that in our plane
-		// Y coordinates rises downwards
-		double newY = creature.getPosition().getY() - creature.getSpeed()* sin(creature.getDirection());
-
-		double hw = s.getWidth() / 2;
-		double hh = s.getHeight() / 2;
-		// newX and newY were just put on the border of the env. It's not a bug
-		// as long as the tests passed. Now, the mirroring position is computed.
-		if (newX < -hw) {
-			newX = - 2*hw - newX;
-			// ERROR #2 direction is badly managed 
-			setDirectionBounceX();	
-		} else if (newX > hw) {
-			newX = 2*hw - newX;
-			// ERROR #2 direction is badly managed 
-			setDirectionBounceX();
-		} // else // ERROR #1 (NO ELSE, we need to check X and Y independently)
+		Dimension s = creature.getEnvironment().getSize();
 		
-		if (newY < -hh) {
-			newY = - 2*hh - newY;
-			// ERROR #2 direction is badly managed 
-			setDirectionBounceY();
-		} else if (newY > hh) {
-			// ERROR #3 (cut and paste led to "hw" instead of "hh")
-			newY = 2*hh - newY;
-			// ERROR #2 direction is badly managed 
-			setDirectionBounceY();
+		if (x > s.getWidth() / 2) {
+			x = -s.getWidth() / 2;
+		} else if (x < -s.getWidth() / 2) {
+			x = s.getWidth() / 2;
 		}
-		creature.setPosition(newX, newY);*/
+
+		if (y > s.getHeight() / 2) {
+			y = -s.getHeight() / 2;
+		} else if (y < -s.getHeight() / 2) {
+			y = s.getHeight() / 2;
+		}
+
+		creature.changePosition(new Point2D.Double(x, y));
 	}
 
 	public static Toric getInstance(){return instance;}
@@ -58,14 +47,8 @@ public class Toric implements IComportement{
 		return getClass().getName();
 	}
 
-	private void setDirectionBounceX() {
-		if (creature.getDirection()>= PI)
-			creature.setDirection(3*PI - creature.getDirection());
-		else
-			creature.setDirection(PI - creature.getDirection());
-	}
-
-	private void setDirectionBounceY() {
-		creature.setDirection(PI * 2 - creature.getDirection());
+	public void behaviour() {
+		// TODO Auto-generated method stub
+		
 	}
 }

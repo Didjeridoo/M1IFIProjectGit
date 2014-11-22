@@ -10,10 +10,13 @@ import creatures.AbstractCreature;
 
 public class Closed implements IComportement{
 
-	private AbstractCreature creature;
-	private static Closed instance = new Closed();
 	
-	private Closed(){}
+	private static AbstractCreature creature;
+	
+	public Closed(AbstractCreature creature){
+		this.creature = creature;
+	}
+	private static Closed instance = new Closed(creature);
 	
 	public void behaviour() {
 		
@@ -67,5 +70,10 @@ public class Closed implements IComportement{
 
 	private void setDirectionBounceY() {
 		creature.setDirection(PI * 2 - creature.getDirection());
+	}
+
+	public void behaviour(double x, double y) {
+		// TODO Auto-generated method stub
+		
 	}
 }

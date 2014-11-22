@@ -111,6 +111,10 @@ public abstract class AbstractCreature implements ICreature {
 	public void setPosition(Point2D position) {
 		setPosition(position.getX(), position.getY());
 	}
+	
+	public void changePosition(Point2D position){
+		this.position = position;
+	}
 
 	public void setPosition(double x, double y) {
 		Dimension s = environment.getSize();
