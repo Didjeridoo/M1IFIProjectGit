@@ -12,6 +12,7 @@ import java.awt.geom.Point2D;
  */
 public class StupidCreature extends AbstractCreature {
 
+	
 	public StupidCreature(IEnvironment environment, Point2D position,
 			double direction, double speed, Color color) {
 		super(environment, position);

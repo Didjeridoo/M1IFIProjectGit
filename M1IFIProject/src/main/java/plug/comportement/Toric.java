@@ -13,11 +13,11 @@ import creatures.CustomCreature;
 
 public class Toric implements IComportement{
 
-	private static CustomCreature creature;
+	private static AbstractCreature creature;
 
 	private static Toric instance = new Toric();
 	
-	public void behaviour(CustomCreature creature, double x, double y) {
+	public void behaviour(AbstractCreature creature, double x, double y) {
 		this.creature = creature;
 		Dimension s = creature.getEnvironment().getSize();
 		

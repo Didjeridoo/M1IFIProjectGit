@@ -15,19 +15,31 @@ import creatures.CustomCreature;
 
 public class Hasard implements IDeplacement{
 	
-	private CustomCreature creature;
+	private AbstractCreature creature;
 	private IComportement comportement;
 
+	private static final double MIN_SPEED = 3;
+	private static final double MAX_SPEED = 10;
+
+	/**
+	 * Number of cycles after which we apply some random noise.
+	 */
+	private static final int NUMBER_OF_CYCLES_PER_CHANGE = 30;
+	private int currCycle;
+	
+	public Hasard(){
+		currCycle = 0;
+	}
 	
 	public String getName() {
 		return getClass().getName();
 	}
 	
 
-	public void act(CustomCreature creature, IComportement comportement) {
+	public void act(AbstractCreature creature, IComportement comportement) {
 		this.creature = creature;
 		this.comportement = comportement;
-		creature.applyNoise();
+		applyNoise();
 		move();
 		
 	}
@@ -49,5 +61,26 @@ public class Hasard implements IDeplacement{
 			creature.setPosition(new Point2D.Double(newX, newY));
 		}
 	}
+	
+	public void applyNoise() {
+		currCycle++;
+		currCycle %= NUMBER_OF_CYCLES_PER_CHANGE;
+
+		// every NUMBER_OF_CYCLES_PER_CHANGE we do the change
+		if (currCycle == 0) {
+			creature.setSpeed(creature.getSpeed() + ((random() * 2) - 1));
+
+			// maintain the speed within some boundaries
+			if (creature.getSpeed() < MIN_SPEED) {
+				creature.setSpeed(MIN_SPEED);
+			} else if (creature.getSpeed() > MAX_SPEED) {
+				creature.setSpeed(MAX_SPEED);
+			}
+
+			creature.setDirection(creature.getDirection()
+					+ ((random() * PI / 2) - (PI / 4)));
+		}
+	}
+	
 	
 }

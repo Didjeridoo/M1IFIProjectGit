@@ -9,5 +9,5 @@ import plug.comportement.IComportement;
 public interface IDeplacement extends IPlugin{
 	public void move();
 	
-	public void act(CustomCreature creature, IComportement comportement);
+	public void act(AbstractCreature creature, IComportement comportement);
 }

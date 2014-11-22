@@ -20,7 +20,7 @@ import creatures.SmartCreature.CreaturesAroundCreature;
 
 public class Troupeau implements IDeplacement{
 	
-	private CustomCreature creature;
+	private AbstractCreature creature;
 	private IComportement comportement;
 		
 		
@@ -31,7 +31,7 @@ public class Troupeau implements IDeplacement{
 	private final static double MIN_SPEED = 3d;
 	
 	
-	public void act(CustomCreature creature, IComportement comportement) {
+	public void act(AbstractCreature creature, IComportement comportement) {
 		this.creature = creature;
 		this.comportement = comportement;
 		// speed - will be used to compute the average speed of the nearby
@@ -94,14 +94,14 @@ public class Troupeau implements IDeplacement{
 		
 	}
 	public Iterable<ICreature> creaturesAround(
-			CustomCreature customCreature) {
+			AbstractCreature AbstractCreature) {
 		return filter(creature.getEnvironment().getCreatures(), new CreaturesAroundCreature(creature));
 	}
 	
 	public static class CreaturesAroundCreature implements Predicate<ICreature> {
-		private final CustomCreature observer;
+		private final AbstractCreature observer;
 
-		public CreaturesAroundCreature(CustomCreature observer) {
+		public CreaturesAroundCreature(AbstractCreature observer) {
 			this.observer = observer;
 		}
 
