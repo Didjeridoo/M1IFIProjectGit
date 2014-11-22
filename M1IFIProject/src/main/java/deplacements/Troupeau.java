@@ -8,8 +8,8 @@ import static java.lang.Math.sin;
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
 
-import plug.comportement.IComportement;
 import commons.Utils.Predicate;
+import comportement.IComportement;
 import creatures.AbstractCreature;
 import creatures.BouncingCreature;
 import creatures.Creature;

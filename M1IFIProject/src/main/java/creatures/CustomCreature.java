@@ -6,7 +6,8 @@ import static java.lang.Math.random;
 import java.awt.Color;
 import java.awt.geom.Point2D;
 
-import plug.comportement.IComportement;
+import comportement.IComportement;
+
 import deplacements.IDeplacement;
 
 public class CustomCreature extends AbstractCreature{

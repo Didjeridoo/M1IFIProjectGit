@@ -1,4 +1,4 @@
-package plug.comportement;
+package comportement;
 
 import creatures.AbstractCreature;
 import creatures.CustomCreature;

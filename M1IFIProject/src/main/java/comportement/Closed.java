@@ -1,4 +1,4 @@
-package plug.comportement;
+package comportement;
 
 import static java.lang.Math.PI;
 

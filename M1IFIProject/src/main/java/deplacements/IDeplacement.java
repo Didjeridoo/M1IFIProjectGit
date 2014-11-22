@@ -1,10 +1,11 @@
 package deplacements;
 
+import comportement.IComportement;
+
 import creatures.AbstractCreature;
 import creatures.BouncingCreature;
 import creatures.CustomCreature;
 import plug.IPlugin;
-import plug.comportement.IComportement;
 
 public interface IDeplacement extends IPlugin{
 	public void move();
