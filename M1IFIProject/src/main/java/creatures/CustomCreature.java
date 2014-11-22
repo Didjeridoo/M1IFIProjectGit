@@ -6,6 +6,10 @@ import static java.lang.Math.random;
 import java.awt.Color;
 import java.awt.geom.Point2D;
 
+import comportement.IComportement;
+
+import deplacements.IDeplacement;
+
 public class CustomCreature extends AbstractCreature{
 
 	private static final double MIN_SPEED = 3;
@@ -20,20 +24,24 @@ public class CustomCreature extends AbstractCreature{
 	 * Current step number from the last noise application.
 	 */
 	protected int currCycle;
+	private IDeplacement deplacement;
+	private IComportement comportement;
 	
 	
 	public CustomCreature(IEnvironment environment, Point2D position, double speed,
-			double direction, Color color) {
+			double direction, Color color, IDeplacement deplacement, IComportement comportement) {
 		super(environment, position);
 
 		this.speed = speed;
 		this.direction = direction;
 		this.color = color;
+		this.deplacement = deplacement;
+		this.comportement = comportement;
 		
 		currCycle = 0;
 	}
 
-	public void applyNoise() {
+	/*public void applyNoise() {
 		currCycle++;
 		currCycle %= NUMBER_OF_CYCLES_PER_CHANGE;
 
@@ -51,11 +59,11 @@ public class CustomCreature extends AbstractCreature{
 			setDirection(this.direction
 					+ ((random() * PI / 2) - (PI / 4)));
 		}
-	}
+	}*/
 	
 	
 	public void act() {
-		// TODO Auto-generated method stub
+		deplacement.act(this, comportement);
 		
 	}
 	

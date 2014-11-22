@@ -1,4 +1,4 @@
-package plug.comportement;
+package comportement;
 
 import static java.lang.Math.PI;
 import static java.lang.Math.cos;
@@ -6,22 +6,19 @@ import static java.lang.Math.sin;
 
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
+import java.awt.geom.Point2D.Double;
 
 import creatures.AbstractCreature;
+import creatures.CustomCreature;
 
 public class Toric implements IComportement{
 
 	private static AbstractCreature creature;
 
-	public Toric(AbstractCreature creature){
+	private static Toric instance = new Toric();
+	
+	public void behaviour(AbstractCreature creature, double x, double y) {
 		this.creature = creature;
-	}
-	private static Toric instance = new Toric(creature);
-	
-	private Toric(){}
-	
-	public void behaviour(double x, double y) {
-		
 		Dimension s = creature.getEnvironment().getSize();
 		
 		if (x > s.getWidth() / 2) {
@@ -36,19 +33,14 @@ public class Toric implements IComportement{
 			y = s.getHeight() / 2;
 		}
 
-		creature.changePosition(new Point2D.Double(x, y));
+		creature.setPosition(new Point2D.Double(x, y));
 	}
 
 	public static Toric getInstance(){return instance;}
 	
-	public void setCreature(AbstractCreature creature){this.creature = creature;}
+	public void setCreature(CustomCreature creature){this.creature = creature;}
 	
 	public String getName() {
 		return getClass().getName();
-	}
-
-	public void behaviour() {
-		// TODO Auto-generated method stub
-		
 	}
 }

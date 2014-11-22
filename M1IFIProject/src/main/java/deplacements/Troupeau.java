@@ -9,6 +9,7 @@ import java.awt.Dimension;
 import java.awt.geom.Point2D;
 
 import commons.Utils.Predicate;
+import comportement.IComportement;
 import creatures.AbstractCreature;
 import creatures.BouncingCreature;
 import creatures.Creature;
@@ -19,12 +20,8 @@ import creatures.SmartCreature.CreaturesAroundCreature;
 
 public class Troupeau implements IDeplacement{
 	
-	private CustomCreature creature;
-
-
-	public Troupeau(CustomCreature creature){
-		this.creature = creature;
-	}
+	private AbstractCreature creature;
+	private IComportement comportement;
 		
 		
 	/** Minimal distance between this creature and the ones around. */
@@ -34,7 +31,9 @@ public class Troupeau implements IDeplacement{
 	private final static double MIN_SPEED = 3d;
 	
 	
-	public void act() {
+	public void act(AbstractCreature creature, IComportement comportement) {
+		this.creature = creature;
+		this.comportement = comportement;
 		// speed - will be used to compute the average speed of the nearby
 		// creatures including this instance
 		double avgSpeed = creature.getSpeed();
@@ -79,7 +78,7 @@ public class Troupeau implements IDeplacement{
 
 			
 			if((newX < -hw)||(newX > hw)||(newY < -hh)||(newY > hh)){
-				creature.getMonde().behaviour(newX, newY);
+				comportement.behaviour(creature, newX, newY);
 			}else{
 				creature.setPosition(new Point2D.Double(newX, newY));
 			}
@@ -95,14 +94,14 @@ public class Troupeau implements IDeplacement{
 		
 	}
 	public Iterable<ICreature> creaturesAround(
-			CustomCreature customCreature) {
+			AbstractCreature AbstractCreature) {
 		return filter(creature.getEnvironment().getCreatures(), new CreaturesAroundCreature(creature));
 	}
 	
 	public static class CreaturesAroundCreature implements Predicate<ICreature> {
-		private final CustomCreature observer;
+		private final AbstractCreature observer;
 
-		public CreaturesAroundCreature(CustomCreature observer) {
+		public CreaturesAroundCreature(AbstractCreature observer) {
 			this.observer = observer;
 		}
 
