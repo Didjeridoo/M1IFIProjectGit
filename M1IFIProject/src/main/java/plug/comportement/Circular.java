@@ -1,4 +1,4 @@
-package comportement;
+package plug.comportement;
 
 public class Circular implements IComportement {
 

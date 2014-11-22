@@ -1,8 +1,6 @@
-package comportement;
+package plug.comportement;
 
 import static java.lang.Math.PI;
-import static java.lang.Math.cos;
-import static java.lang.Math.sin;
 
 import java.awt.Dimension;
 
@@ -21,10 +19,10 @@ public class Closed implements IComportement{
 	public void behaviour() {
 		
 		Dimension s = creature.getEnvironment().getSize();
-		double newX = creature.getPosition().getX() + creature.getSpeed()* cos(creature.getDirection());
+		double newX = creature.getPosition().getX();
 		// the reason there is a minus instead of a plus is that in our plane
 		// Y coordinates rises downwards
-		double newY = creature.getPosition().getY() - creature.getSpeed()* sin(creature.getDirection());
+		double newY = creature.getPosition().getY();
 
 		double hw = s.getWidth() / 2;
 		double hh = s.getHeight() / 2;
