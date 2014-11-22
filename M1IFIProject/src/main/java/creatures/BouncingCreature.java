@@ -104,7 +104,6 @@ public class BouncingCreature extends AbstractCreature{
 		}
 		
 		setPosition(newX, newY);
- 
 	}
 	
 	public void setDirectionBounceX() {

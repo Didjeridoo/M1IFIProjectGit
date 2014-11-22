@@ -5,15 +5,14 @@ import static java.lang.Math.sin;
 import creatures.AbstractCreature;
 import creatures.BouncingCreature;
 
-public class Hasard {
+public class Hasard implements IDeplacement{
 	
-	private AbstractCreature creature;
 	
 	public String getName() {
 		return getClass().getName();
 	}
 	
-	public double hasardX(BouncingCreature creature){
+	public double hasardX(AbstractCreature creature){
 		
 		double newX = creature.getPosition().getX() + creature.getSpeed() * cos(creature.getDirection());
 		double hw = creature.getEnvironment().getSize().getWidth() / 2;
@@ -26,7 +25,7 @@ public class Hasard {
 		return newX;
 	}
 	
-	public double hasardY(BouncingCreature creature){
+	public double hasardY(AbstractCreature creature){
 		
 		double newY = creature.getPosition().getY() - creature.getSpeed() * sin(creature.getDirection());
 		
@@ -39,5 +38,15 @@ public class Hasard {
 			newY = 2*hh - newY;
 		}
 		return newY;
+	}
+
+	public void move(double incX, double incY) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void act(AbstractCreature creature) {
+		// TODO Auto-generated method stub
+		
 	}
 }
