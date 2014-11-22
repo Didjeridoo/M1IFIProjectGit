@@ -18,14 +18,13 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 import comportements.Circular;
-
 import creatures.ICreature;
 import creatures.visual.ColorCube;
 import creatures.visual.CreatureInspector;
 import creatures.visual.CreatureSimulator;
 import creatures.visual.CreatureVisualizer;
-import plug.comportement.ComportementPluginFactory;
-import plug.comportement.PluginMenuItemBuilderComportement;
+import plug.comportements.ComportementPluginFactory;
+import plug.comportements.PluginMenuItemBuilderComportement;
 import plug.creatures.CreaturePluginFactory;
 import plug.creatures.PluginMenuItemBuilder;
 import visual.FormDesiredQuantity;

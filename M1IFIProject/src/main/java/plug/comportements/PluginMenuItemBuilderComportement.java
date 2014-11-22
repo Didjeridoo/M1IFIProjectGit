@@ -1,4 +1,4 @@
-package plug.comportement;
+package plug.comportements;
 
 import java.awt.event.ActionListener;
 import java.lang.reflect.Constructor;

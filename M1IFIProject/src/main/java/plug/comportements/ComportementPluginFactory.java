@@ -1,4 +1,4 @@
-package plug.comportement;
+package plug.comportements;
 
 import java.lang.reflect.Constructor;
 import java.net.MalformedURLException;
