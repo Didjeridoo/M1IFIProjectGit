@@ -6,14 +6,16 @@ import static java.lang.Math.sin;
 
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
+import java.awt.geom.Point2D.Double;
 
 import creatures.AbstractCreature;
+import creatures.CustomCreature;
 
 public class Toric implements IComportement{
 
-	private static AbstractCreature creature;
+	private static CustomCreature creature;
 
-	public Toric(AbstractCreature creature){
+	public Toric(CustomCreature creature){
 		this.creature = creature;
 	}
 	private static Toric instance = new Toric(creature);
@@ -36,12 +38,12 @@ public class Toric implements IComportement{
 			y = s.getHeight() / 2;
 		}
 
-		creature.changePosition(new Point2D.Double(x, y));
+		creature.setPosition(new Point2D.Double(x, y));
 	}
 
 	public static Toric getInstance(){return instance;}
 	
-	public void setCreature(AbstractCreature creature){this.creature = creature;}
+	public void setCreature(CustomCreature creature){this.creature = creature;}
 	
 	public String getName() {
 		return getClass().getName();
