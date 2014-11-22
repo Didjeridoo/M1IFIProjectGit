@@ -91,6 +91,10 @@ public abstract class AbstractCreature implements ICreature {
 	public void setDirection(double direction) {
 		this.direction = direction % (PI * 2);
 	}
+	
+	public void changeDirection(double direction){
+		this.direction = direction;
+	}
 
 	public Color getColor() {
 		return color;

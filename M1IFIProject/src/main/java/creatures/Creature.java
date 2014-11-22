@@ -8,26 +8,15 @@ import plug.comportement.Closed;
 import creatures.visual.CreatureSimulator;
 import deplacements.Stupid;
 
-public class Creature{
+public class Creature extends AbstractCreature{
 
-	public Creature(CreatureSimulator environment, Double double1, int i,
-			double radians, Color red, Closed closed, Stupid stupid) {
+	public Creature(IEnvironment environment, Point2D position) {
+		super(environment, position);
 		// TODO Auto-generated constructor stub
 	}
 
-	public void move() {
+	public void act() {
 		// TODO Auto-generated method stub
 		
 	}
-
-	public double getDirection() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public Point2D getPosition() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
