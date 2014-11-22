@@ -15,15 +15,10 @@ public class Toric implements IComportement{
 
 	private static CustomCreature creature;
 
-	public Toric(CustomCreature creature){
+	private static Toric instance = new Toric();
+	
+	public void behaviour(CustomCreature creature, double x, double y) {
 		this.creature = creature;
-	}
-	private static Toric instance = new Toric(creature);
-	
-	private Toric(){}
-	
-	public void behaviour(double x, double y) {
-		
 		Dimension s = creature.getEnvironment().getSize();
 		
 		if (x > s.getWidth() / 2) {
@@ -47,10 +42,5 @@ public class Toric implements IComportement{
 	
 	public String getName() {
 		return getClass().getName();
-	}
-
-	public void behaviour() {
-		// TODO Auto-generated method stub
-		
 	}
 }

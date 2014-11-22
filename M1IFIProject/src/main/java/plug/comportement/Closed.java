@@ -12,13 +12,10 @@ public class Closed implements IComportement{
 	
 	private static CustomCreature creature;
 	
-	public Closed(CustomCreature creature){
-		this.creature = creature;
-	}
-	private static Closed instance = new Closed(creature);
+	private static Closed instance = new Closed();
 	
-	public void behaviour(double x, double y) {
-		
+	public void behaviour(CustomCreature creature, double x, double y) {
+		this.creature = creature;
 		Dimension s = creature.getEnvironment().getSize();
 
 		double hw = s.getWidth() / 2;
