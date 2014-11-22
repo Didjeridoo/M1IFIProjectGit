@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
-import comportement.IComportement;
+import comportements.IComportement;
 
 import creatures.ICreature;
 

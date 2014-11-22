@@ -1,4 +1,4 @@
-package comportement;
+package comportements;
 
 import static java.lang.Math.PI;
 
@@ -13,10 +13,12 @@ public class Circular implements IComportement {
 	
 	private AbstractCreature creature;
 	
+	private Circular(){};
+	
 	private static Circular instance = new Circular();
 
 	public void behaviour(AbstractCreature creature, double x, double y) {
-		this.creature = creature;
+		setCreature(creature);
 		Dimension s = creature.getEnvironment().getSize();
 		double hh = s.getHeight() / 2;
 		
@@ -43,7 +45,7 @@ public class Circular implements IComportement {
 	
 	public static Circular getInstance(){return instance;}
 	
-	public void setCreature(CustomCreature creature){this.creature = creature;}
+	public void setCreature(AbstractCreature creature){this.creature = creature;}
 	
 	public String getName() {
 		return getClass().getName();

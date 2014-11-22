@@ -17,7 +17,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-import comportement.Circular;
+import comportements.Circular;
 
 import creatures.ICreature;
 import creatures.visual.ColorCube;
@@ -209,7 +209,7 @@ public class Launcher extends JFrame {
 		Logger.getLogger("plug").setLevel(Level.INFO);
 		double myMaxSpeed = 5;
 		CreaturePluginFactory.init(myMaxSpeed);
-		ComportementPluginFactory.init(new Circular());
+		ComportementPluginFactory.init(Circular.getInstance());
 		Launcher launcher = new Launcher();
 		launcher.setVisible(true);
 	}

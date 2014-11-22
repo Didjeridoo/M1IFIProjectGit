@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 import plug.IPlugin;
 import plug.PluginLoader;
 
-import comportement.IComportement;
+import comportements.IComportement;
 
 import creatures.AbstractCreature;
 

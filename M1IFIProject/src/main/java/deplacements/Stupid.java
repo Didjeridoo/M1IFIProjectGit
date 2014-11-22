@@ -6,8 +6,8 @@ import static java.lang.Math.sin;
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
 
-import comportement.IComportement;
 
+import comportements.IComportement;
 import creatures.AbstractCreature;
 import creatures.CustomCreature;
 
@@ -22,8 +22,8 @@ public class Stupid implements IDeplacement {
 	}
 
 	public void act(AbstractCreature creature, IComportement comportement) {
-		this.creature = creature;
-		this.comportement = comportement;
+		setCreature(creature);
+		setComportement(comportement);
 		move();
 	}
 
@@ -39,6 +39,14 @@ public class Stupid implements IDeplacement {
 		}else{
 			creature.setPosition(new Point2D.Double(newX, newY));
 		}
+	}
+	
+	public void setCreature(AbstractCreature creature){
+		this.creature = creature;
+	}
+	
+	public void setComportement(IComportement comportement){
+		this.comportement = comportement;
 	}
 
 }

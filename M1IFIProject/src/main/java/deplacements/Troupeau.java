@@ -9,7 +9,8 @@ import java.awt.Dimension;
 import java.awt.geom.Point2D;
 
 import commons.Utils.Predicate;
-import comportement.IComportement;
+
+import comportements.IComportement;
 import creatures.AbstractCreature;
 import creatures.BouncingCreature;
 import creatures.Creature;
@@ -32,9 +33,8 @@ public class Troupeau implements IDeplacement{
 	
 	
 	public void act(AbstractCreature creature, IComportement comportement) {
-		this.creature = creature;
-		this.comportement = comportement;
-		// speed - will be used to compute the average speed of the nearby
+		setCreature(creature);
+		setComportement(comportement);		// speed - will be used to compute the average speed of the nearby
 		// creatures including this instance
 		double avgSpeed = creature.getSpeed();
 		// direction - will be used to compute the average direction of the
@@ -117,6 +117,14 @@ public class Troupeau implements IDeplacement{
 							.getLengthOfView();
 
 		}
+	}
+	
+	public void setCreature(AbstractCreature creature){
+		this.creature = creature;
+	}
+	
+	public void setComportement(IComportement comportement){
+		this.comportement = comportement;
 	}
 
 }

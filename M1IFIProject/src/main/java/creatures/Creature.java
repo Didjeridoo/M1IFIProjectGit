@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Double;
 
-import comportement.Closed;
 
+import comportements.Closed;
 import creatures.visual.CreatureSimulator;
 import deplacements.Stupid;
 
