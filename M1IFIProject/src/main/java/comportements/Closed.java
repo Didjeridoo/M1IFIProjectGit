@@ -1,4 +1,4 @@
-package comportement;
+package comportements;
 
 import static java.lang.Math.PI;
 
@@ -10,12 +10,14 @@ import creatures.CustomCreature;
 public class Closed implements IComportement{
 
 	
-	private static AbstractCreature creature;
+	private AbstractCreature creature;
+	
+	private Closed(){};
 	
 	private static Closed instance = new Closed();
 	
 	public void behaviour(AbstractCreature creature, double x, double y) {
-		this.creature = creature;
+		setCreature(creature);
 		Dimension s = creature.getEnvironment().getSize();
 
 		double hw = s.getWidth() / 2;
@@ -56,5 +58,9 @@ public class Closed implements IComportement{
 
 	private void setDirectionBounceY() {
 		creature.setDirection(PI * 2 - creature.getDirection());
+	}
+	
+	public void setCreature(AbstractCreature creature){
+		this.creature = creature;
 	}
 }

@@ -1,4 +1,4 @@
-package comportement;
+package comportements;
 
 import static java.lang.Math.PI;
 import static java.lang.Math.cos;
@@ -13,12 +13,14 @@ import creatures.CustomCreature;
 
 public class Toric implements IComportement{
 
-	private static AbstractCreature creature;
+	private AbstractCreature creature;
+	
+	private Toric(){};
 
 	private static Toric instance = new Toric();
 	
 	public void behaviour(AbstractCreature creature, double x, double y) {
-		this.creature = creature;
+		setCreature(creature);
 		Dimension s = creature.getEnvironment().getSize();
 		
 		if (x > s.getWidth() / 2) {
@@ -42,5 +44,9 @@ public class Toric implements IComportement{
 	
 	public String getName() {
 		return getClass().getName();
+	}
+	
+	public void setCreature(AbstractCreature creature){
+		this.creature = creature;
 	}
 }

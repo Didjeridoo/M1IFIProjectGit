@@ -8,8 +8,7 @@ import static java.lang.Math.sin;
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
 
-import comportement.IComportement;
-
+import comportements.IComportement;
 import creatures.AbstractCreature;
 import creatures.BouncingCreature;
 import creatures.CustomCreature;
@@ -38,8 +37,8 @@ public class Hasard implements IDeplacement{
 	
 
 	public void act(AbstractCreature creature, IComportement comportement) {
-		this.creature = creature;
-		this.comportement = comportement;
+		setCreature(creature);
+		setComportement(comportement);
 		applyNoise();
 		move();
 		
@@ -81,6 +80,14 @@ public class Hasard implements IDeplacement{
 			creature.setDirection(creature.getDirection()
 					+ ((random() * PI / 2) - (PI / 4)));
 		}
+	}
+	
+	public void setCreature(AbstractCreature creature){
+		this.creature = creature;
+	}
+	
+	public void setComportement(IComportement comportement){
+		this.comportement = comportement;
 	}
 	
 	
