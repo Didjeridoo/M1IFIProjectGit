@@ -269,6 +269,32 @@ public class PluginLoader {
 		}
 		return null;
 	}
+	
+	/*@SuppressWarnings("unchecked")
+	private ArrayList<Class<IPlugin>> loadSeveralPluginClass(String[] className){
+		ArrayList<Class<IPlugin>> tabLoader = new ArrayList<Class<IPlugin>>();
+		for(String s : className){
+			try {
+				logger.info("Request for loading class " + s + " by "
+						+ this);
+				Class<?> loadedClass = loader.loadClass(s);
+				// check that the class is of the right type
+				if (ptype.isAssignableFrom(loadedClass)) {
+					tabLoader.add((Class<IPlugin>)loadedClass);
+				} else {
+					logger.warning("Class " + s
+							+ " is not from the expected type" + ptype.getName());
+				}
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				logger.warning("Plugin " + s + " not found");
+			} catch (NoClassDefFoundError e) {
+				e.printStackTrace();
+				logger.warning("Class " + s + " not defined");
+			}
+		}
+		return tabLoader;
+	}*/
 
 	public Class<? extends IPlugin> getPtype() {
 		return ptype;

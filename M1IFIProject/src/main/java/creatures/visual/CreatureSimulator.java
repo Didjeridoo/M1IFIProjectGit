@@ -53,6 +53,7 @@ public class CreatureSimulator extends Simulator<ICreature> implements IEnvironm
 		this.size = size;
 	}
 	
+	
 	/**
 	 * @return a copy of the current creature list.
 	 */
