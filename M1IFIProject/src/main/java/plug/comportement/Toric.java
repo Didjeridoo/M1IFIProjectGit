@@ -1,4 +1,4 @@
-package comportement;
+package plug.comportement;
 
 import static java.lang.Math.PI;
 import static java.lang.Math.cos;
