@@ -1,8 +1,8 @@
-package plug.comportement;
+package comportement;
 
 import creatures.AbstractCreature;
 import plug.IPlugin;
 
 public interface IComportement extends IPlugin{
-	public void behaviour(double x, double y);
+	public void behaviour(AbstractCreature creature, double x, double y);
 }

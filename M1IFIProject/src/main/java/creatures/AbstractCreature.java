@@ -17,6 +17,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import commons.Utils.Predicate;
+import comportement.IComportement;
+import deplacements.IDeplacement;
 
 
 public abstract class AbstractCreature implements ICreature {
@@ -53,10 +55,14 @@ public abstract class AbstractCreature implements ICreature {
 
 	/** Size of the creature in pixels */
 	protected final int size = DEFAULT_SIZE;
+	
+	protected final IComportement comport;
+	protected final IDeplacement move;
 
-	public AbstractCreature(IEnvironment environment, Point2D position) {
+	public AbstractCreature(IEnvironment environment, IComportement comportement, IDeplacement deplacement, Point2D position) {
 		this.environment = environment;
-
+		comport = comportement;
+		move = deplacement;
 		setPosition(position);
 	}
 

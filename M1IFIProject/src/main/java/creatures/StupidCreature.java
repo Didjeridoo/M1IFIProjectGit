@@ -6,15 +6,19 @@ import static java.lang.Math.sin;
 import java.awt.Color;
 import java.awt.geom.Point2D;
 
+import comportement.IComportement;
+
+import deplacements.IDeplacement;
+
 
 /**
  * Sample creature
  */
 public class StupidCreature extends AbstractCreature {
 
-	public StupidCreature(IEnvironment environment, Point2D position,
+	public StupidCreature(IEnvironment environment, IComportement comportement, IDeplacement deplacement, Point2D position,
 			double direction, double speed, Color color) {
-		super(environment, position);
+		super(environment,comportement, deplacement, position);
 		
 		this.direction = direction;
 		this.speed = speed;
@@ -22,9 +26,6 @@ public class StupidCreature extends AbstractCreature {
 	}
 
 	public void act() {
-		double incX = speed * cos(direction);
-		double incY = speed * sin(direction);
-		
-		move(incX, incY);
+		move.act(this, comport);
 	}
 }

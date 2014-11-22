@@ -7,6 +7,8 @@ import java.awt.Color;
 import java.awt.geom.Point2D;
 
 import commons.Utils.Predicate;
+import comportement.IComportement;
+import deplacements.IDeplacement;
 
 
 /**
@@ -54,56 +56,16 @@ public class SmartCreature extends AbstractCreature {
 	/** Minimal speed in pixels per loop. */
 	private final static double MIN_SPEED = 3d;
 
-	public SmartCreature(IEnvironment environment, Point2D position, double direction, double speed,
+	public SmartCreature(IEnvironment environment,IComportement comportement, IDeplacement move, Point2D position, double direction, double speed,
 			Color color) {
-		super(environment, position);
+		super(environment, comportement, move, position);
 		this.direction = direction;
 		this.speed = speed;
 		this.color = color;
 	}
 
 	public void act() {
-		// speed - will be used to compute the average speed of the nearby
-		// creatures including this instance
-		double avgSpeed = speed;
-		// direction - will be used to compute the average direction of the
-		// nearby creatures including this instance
-		double avgDir = direction;
-		// distance - used to find the closest nearby creature
-		double minDist = Double.MAX_VALUE;
-
-		// iterate over all nearby creatures
-		Iterable<ICreature> creatures = creaturesAround(this);
-		int count = 0;
-		for (ICreature c : creatures) {
-			avgSpeed += c.getSpeed();
-			avgDir += c.getDirection();
-			minDist = Math.min(minDist, c.distanceFromAPoint(getPosition()));
-			count++;
-		}
-		
-		// average
-		avgSpeed = avgSpeed / (count + 1);
-		// min speed check
-		if (avgSpeed < MIN_SPEED) {
-			avgSpeed = MIN_SPEED;
-		}
-		// average
-		avgDir = avgDir / (count + 1);
-
-		// apply - change this creature state
-		this.direction = avgDir;
-		this.speed = avgSpeed;
-		
-		// if we are not too close move closer
-		if (minDist > MIN_DIST) {
-			// we move always the maximum
-			double incX = speed * Math.cos(avgDir);
-			double incY = - speed * Math.sin(avgDir);
-
-			// we should not moved closer than a dist - MIN_DIST
-			move(incX, incY);
-		}
+		move.act(this, comport);
 	}
 
 	public Iterable<ICreature> creaturesAround(
