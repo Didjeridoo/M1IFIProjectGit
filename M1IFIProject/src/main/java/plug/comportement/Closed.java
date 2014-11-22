@@ -1,27 +1,28 @@
-package comportement;
+package plug.comportement;
 
 import static java.lang.Math.PI;
-import static java.lang.Math.cos;
-import static java.lang.Math.sin;
 
 import java.awt.Dimension;
 
 import creatures.AbstractCreature;
 
-public class Toric implements IComportement{
+public class Closed implements IComportement{
 
-	private AbstractCreature creature;
-	private static Toric instance = new Toric();
 	
-	private Toric(){}
+	private static AbstractCreature creature;
+	
+	public Closed(AbstractCreature creature){
+		this.creature = creature;
+	}
+	private static Closed instance = new Closed(creature);
 	
 	public void behaviour() {
 		
-		/*Dimension s = creature.getEnvironment().getSize();
-		double newX = creature.getPosition().getX() + creature.getSpeed()* cos(creature.getDirection());
+		Dimension s = creature.getEnvironment().getSize();
+		double newX = creature.getPosition().getX();
 		// the reason there is a minus instead of a plus is that in our plane
 		// Y coordinates rises downwards
-		double newY = creature.getPosition().getY() - creature.getSpeed()* sin(creature.getDirection());
+		double newY = creature.getPosition().getY();
 
 		double hw = s.getWidth() / 2;
 		double hh = s.getHeight() / 2;
@@ -47,10 +48,10 @@ public class Toric implements IComportement{
 			// ERROR #2 direction is badly managed 
 			setDirectionBounceY();
 		}
-		creature.setPosition(newX, newY);*/
+		creature.setPosition(newX, newY);
 	}
 
-	public static Toric getInstance(){return instance;}
+	public static Closed getInstance(){return instance;}
 	
 	public void setCreature(AbstractCreature creature){this.creature = creature;}
 	
@@ -67,5 +68,10 @@ public class Toric implements IComportement{
 
 	private void setDirectionBounceY() {
 		creature.setDirection(PI * 2 - creature.getDirection());
+	}
+
+	public void behaviour(double x, double y) {
+		// TODO Auto-generated method stub
+		
 	}
 }

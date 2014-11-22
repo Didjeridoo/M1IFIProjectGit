@@ -1,43 +1,52 @@
 package deplacements;
 
+import static java.lang.Math.PI;
 import static java.lang.Math.cos;
+import static java.lang.Math.random;
 import static java.lang.Math.sin;
+
+import java.awt.Dimension;
+import java.awt.geom.Point2D;
+
 import creatures.AbstractCreature;
 import creatures.BouncingCreature;
+import creatures.CustomCreature;
 
-public class Hasard {
+public class Hasard implements IDeplacement{
 	
-	private AbstractCreature creature;
+	private CustomCreature creature;
+
+	public Hasard(CustomCreature creature){
+		this.creature = creature;
+	}
 	
 	public String getName() {
 		return getClass().getName();
 	}
 	
-	public double hasardX(BouncingCreature creature){
+
+	public void act() {
+		creature.applyNoise();
+		move();
 		
-		double newX = creature.getPosition().getX() + creature.getSpeed() * cos(creature.getDirection());
-		double hw = creature.getEnvironment().getSize().getWidth() / 2;
-		if (newX < -hw) {
-			newX = - 2*hw - newX;;	
-		} else if (newX > hw) {
-			newX = 2*hw - newX;
-		}
-		
-		return newX;
 	}
 	
-	public double hasardY(BouncingCreature creature){
+
+	public void move() {
+		Dimension s = creature.getEnvironment().getSize();
 		
+		double newX = creature.getPosition().getX() + creature.getSpeed() * cos(creature.getDirection());
+		// the reason there is a minus instead of a plus is that in our plane
+		// Y coordinates rises downwards
 		double newY = creature.getPosition().getY() - creature.getSpeed() * sin(creature.getDirection());
-		
-		double hh = creature.getEnvironment().getSize().getHeight() / 2;
-		
-		
-		if (newY < -hh) {
-			newY = - 2*hh - newY;
-		} else if (newY > hh) {
-			newY = 2*hh - newY;
+
+		double hw = s.getWidth() / 2;
+		double hh = s.getHeight() / 2;
+		if((newX < -hw)||(newX > hw)||(newY < -hh)||(newY > hh)){
+			creature.getMonde().behaviour(newX, newY);
+		}else{
+			creature.setPosition(new Point2D.Double(newX, newY));
 		}
-		return newY;
 	}
+	
 }

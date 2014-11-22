@@ -91,6 +91,10 @@ public abstract class AbstractCreature implements ICreature {
 	public void setDirection(double direction) {
 		this.direction = direction % (PI * 2);
 	}
+	
+	public void changeDirection(double direction){
+		this.direction = direction;
+	}
 
 	public Color getColor() {
 		return color;
@@ -106,6 +110,10 @@ public abstract class AbstractCreature implements ICreature {
 
 	public void setPosition(Point2D position) {
 		setPosition(position.getX(), position.getY());
+	}
+	
+	public void changePosition(Point2D position){
+		this.position = position;
 	}
 
 	public void setPosition(double x, double y) {
