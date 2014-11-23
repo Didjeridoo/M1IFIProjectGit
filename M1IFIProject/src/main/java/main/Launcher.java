@@ -18,16 +18,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-import org.mockito.cglib.reflect.ConstructorDelegate;
-
-import comportements.Closed;
-import comportements.IComportement;
-import creatures.ICreature;
-import creatures.visual.ColorCube;
-import creatures.visual.CreatureInspector;
-import creatures.visual.CreatureSimulator;
-import creatures.visual.CreatureVisualizer;
-import deplacements.IDeplacement;
 import plug.comportements.ComportementPluginFactory;
 import plug.comportements.PluginMenuItemBuilderComportement;
 import plug.creatures.CreaturePluginFactory;
@@ -36,6 +26,15 @@ import plug.deplacements.DeplacementPluginFactory;
 import plug.deplacements.PluginMenuItemBuilderDeplacement;
 import visual.FormDesiredQuantity;
 import visual.TestResultsDisplay;
+
+import comportements.IComportement;
+
+import creatures.ICreature;
+import creatures.visual.ColorCube;
+import creatures.visual.CreatureInspector;
+import creatures.visual.CreatureSimulator;
+import creatures.visual.CreatureVisualizer;
+import deplacements.IDeplacement;
 
 /**
  * Just a simple test of the simulator.
