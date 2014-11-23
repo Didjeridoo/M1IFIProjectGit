@@ -62,11 +62,13 @@ public class Hasard implements IDeplacement{
 	}
 	
 	public void applyNoise() {
+		
 		currCycle++;
 		currCycle %= NUMBER_OF_CYCLES_PER_CHANGE;
 
 		// every NUMBER_OF_CYCLES_PER_CHANGE we do the change
 		if (currCycle == 0) {
+			System.out.println(creature.getColor() + " cycle :  " +  currCycle);
 			creature.setSpeed(creature.getSpeed() + ((random() * 2) - 1));
 
 			// maintain the speed within some boundaries

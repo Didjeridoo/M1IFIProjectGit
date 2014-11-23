@@ -79,6 +79,8 @@ public class Launcher extends JFrame {
 		loader.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				factory.load();
+				comportementFactory.load();
+				deplacementFactory.load();
 				//buildPluginMenus();
 			}
 		});
