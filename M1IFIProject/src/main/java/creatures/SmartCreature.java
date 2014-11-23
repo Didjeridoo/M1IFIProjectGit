@@ -28,26 +28,6 @@ import deplacements.IDeplacement;
  */
 public class SmartCreature extends AbstractCreature {
 	
-	public static class CreaturesAroundCreature implements Predicate<ICreature> {
-		private final SmartCreature observer;
-
-		public CreaturesAroundCreature(SmartCreature observer) {
-			this.observer = observer;
-		}
-
-		public boolean apply(ICreature input) {
-			if (input == observer) {
-				return false;
-			}
-			double dirAngle = input.directionFormAPoint(observer.getPosition(),
-					observer.getDirection());
-
-			return abs(dirAngle) < (observer.getFieldOfView() / 2)
-					&& observer.distanceFromAPoint(input.getPosition()) <= observer
-							.getLengthOfView();
-
-		}
-	}
 
 
 	/** Minimal distance between this creature and the ones around. */
@@ -68,9 +48,5 @@ public class SmartCreature extends AbstractCreature {
 		move.act(this, comport);
 	}
 
-	public Iterable<ICreature> creaturesAround(
-			SmartCreature smartCreature) {
-		return filter(environment.getCreatures(), new CreaturesAroundCreature(this));
-	}
 	
 }
