@@ -58,12 +58,17 @@ public abstract class AbstractCreature implements ICreature {
 	
 	protected final IComportement comport;
 	protected final IDeplacement move;
+	protected int currCycle;
+	
 
 	public AbstractCreature(IEnvironment environment, IComportement comportement, IDeplacement deplacement, Point2D position) {
 		this.environment = environment;
 		comport = comportement;
 		move = deplacement;
 		setPosition(position);
+		
+		currCycle = 0;
+		
 	}
 
 	// ----------------------------------------------------------------------------
@@ -292,6 +297,14 @@ public abstract class AbstractCreature implements ICreature {
 	
 	public String getName() {
 		return getClass().getName();
+	}
+	
+	public int getCurrCycle(){
+		return currCycle;
+	}
+	
+	public void incrCurrCycle(){
+		currCycle++;
 	}
 	
 }

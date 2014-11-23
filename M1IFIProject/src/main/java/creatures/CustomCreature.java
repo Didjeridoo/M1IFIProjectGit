@@ -22,4 +22,5 @@ public class CustomCreature extends AbstractCreature{
 		move.act(this, comport);
 	}
 	
+	
 }

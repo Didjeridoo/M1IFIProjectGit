@@ -11,6 +11,7 @@ import deplacements.IDeplacement;
 
 public class BouncingCreature extends AbstractCreature{
 
+	
 	public BouncingCreature(IEnvironment environment,IComportement behaviour, IDeplacement move, Point2D position, double speed,
 			double direction, Color color) {
 		super(environment, Closed.getInstance(), new Hasard(), position);
@@ -18,9 +19,12 @@ public class BouncingCreature extends AbstractCreature{
 		this.speed = speed;
 		this.direction = direction;
 		this.color = color;
+		
 	}
 
 	public void act() {
 		move.act(this, comport);
 	}
+	
+
 }

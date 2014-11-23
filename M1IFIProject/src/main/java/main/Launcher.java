@@ -97,7 +97,7 @@ public class Launcher extends JFrame {
 		});
 		buttons.add(reloader);
 		
-		JButton add = new JButton("Add creatures");
+		final JButton add = new JButton("Add creatures");
 		add.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (currentConstructor != null) {
@@ -111,6 +111,7 @@ public class Launcher extends JFrame {
 			}
 		});
 		buttons.add(add);
+		add.setEnabled(false);
 
 		JButton restart = new JButton("(Re-)start simulation");
 		restart.addActionListener(new ActionListener() {
@@ -127,6 +128,7 @@ public class Launcher extends JFrame {
 									currentConstructor);
 					simulator.addAllCreatures(creatures);
 					simulator.start();
+					add.setEnabled(true);
 				}
 			}
 		});
@@ -205,6 +207,8 @@ public class Launcher extends JFrame {
 			        quantity = Integer.parseInt(form.getText(0));
 			        if(res.equals("creatures.CustomCreature")){
 			        	menuBuilderDeplacement.getMenu().setEnabled(true);
+			        } else {
+			        	menuBuilderDeplacement.getMenu().setEnabled(false);
 			        }
 			        f.dispose();
 			      }
@@ -264,17 +268,18 @@ public class Launcher extends JFrame {
 			}
 		};
 		
+		menuBuilderComportement = new PluginMenuItemBuilderComportement(comportementFactory.getConstructorMap(), listenerComportement);
+		menuBuilderComportement.setMenuTitle("Comportements");
+		menuBuilderComportement.buildMenu();
+		mb.add(menuBuilderComportement.getMenu());
+		
 		menuBuilderCreature = new PluginMenuItemBuilderCreature(factory.getConstructorMap(),
 				listener);
 		menuBuilderCreature.setMenuTitle("Creatures");
 		menuBuilderCreature.buildMenu();
 		mb.add(menuBuilderCreature.getMenu());
 		
-		menuBuilderComportement = new PluginMenuItemBuilderComportement(comportementFactory.getConstructorMap(), listenerComportement);
-		menuBuilderComportement.setMenuTitle("Comportements");
-		menuBuilderComportement.buildMenu();
-		mb.add(menuBuilderComportement.getMenu());
-
+		
 		menuBuilderDeplacement = new PluginMenuItemBuilderDeplacement(deplacementFactory.getConstructorMap(), listenerDeplacement);
 		menuBuilderDeplacement.setMenuTitle("Deplacements");
 		menuBuilderDeplacement.buildMenu();
