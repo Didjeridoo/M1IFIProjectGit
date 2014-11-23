@@ -63,10 +63,7 @@ public class Launcher extends JFrame {
 	private Constructor<? extends ICreature> currentConstructor = null;
 	private Constructor<? extends IComportement> constructorComportement = null;
 	private Constructor<? extends IDeplacement> constructorDeplacement = null;
-<<<<<<< HEAD
-=======
-	
->>>>>>> ee13d68545f1c0be4dc5b45eda18081870ad8b1d
+
 
 	public Launcher() {
 		quantity = 0;
@@ -106,11 +103,7 @@ public class Launcher extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				factory.reload();
 				comportementFactory.reload();
-<<<<<<< HEAD
-				deplacementFactory.load();
-=======
 				deplacementFactory.reload();
->>>>>>> ee13d68545f1c0be4dc5b45eda18081870ad8b1d
 				buildPluginMenus();
 			}
 		});
@@ -218,25 +211,16 @@ public class Launcher extends JFrame {
 				menuBuilderComportement.getMenu().setEnabled(false);
 			}
 		};
-<<<<<<< HEAD
-=======
-		
->>>>>>> ee13d68545f1c0be4dc5b45eda18081870ad8b1d
+
 		ActionListener listenerDeplacement = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				constructorDeplacement = deplacementFactory.getConstructorMap().get(
 						((JMenuItem) e.getSource()).getActionCommand());
 			    
-<<<<<<< HEAD
 				menuBuilderDeplacement.getMenu().setEnabled(false);
 			}
 		};
-=======
-				System.out.println(constructorDeplacement);
-			}
-		};
 		
->>>>>>> ee13d68545f1c0be4dc5b45eda18081870ad8b1d
 		menuBuilderCreature = new PluginMenuItemBuilderCreature(factory.getConstructorMap(),
 				listener);
 		menuBuilderCreature.setMenuTitle("Creatures");
@@ -247,18 +231,12 @@ public class Launcher extends JFrame {
 		menuBuilderComportement.setMenuTitle("Comportements");
 		menuBuilderComportement.buildMenu();
 		mb.add(menuBuilderComportement.getMenu());
-<<<<<<< HEAD
-		
-=======
->>>>>>> ee13d68545f1c0be4dc5b45eda18081870ad8b1d
+
 		menuBuilderDeplacement = new PluginMenuItemBuilderDeplacement(deplacementFactory.getConstructorMap(), listenerDeplacement);
 		menuBuilderDeplacement.setMenuTitle("Deplacements");
 		menuBuilderDeplacement.buildMenu();
 		mb.add(menuBuilderDeplacement.getMenu());
-<<<<<<< HEAD
-		
-=======
->>>>>>> ee13d68545f1c0be4dc5b45eda18081870ad8b1d
+
 		setJMenuBar(mb);
 	}
 
