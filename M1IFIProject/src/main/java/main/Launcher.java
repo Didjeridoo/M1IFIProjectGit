@@ -76,28 +76,14 @@ public class Launcher extends JFrame {
 
 		JPanel buttons = new JPanel();
 		JButton loader = new JButton("Load plugins");
-		/*loader.addActionListener(new ActionListener() {
+		loader.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				factory.load();
 				buildPluginMenus();
 			}
 		});
-		buttons.add(loader);*/
-		loader.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (currentConstructor != null) {
-					Collection<? extends ICreature> creatures = factory
-							.createCreatures(simulator,comportement,move, quantity, new ColorCube(50),
-									currentConstructor);
-					simulator.addAllCreatures(creatures);
-				}
-				factory.load();
-				comportementFactory.load();
-				deplacementFactory.load();
-			}
-		});
 		buttons.add(loader);
-
+		
 		JButton reloader = new JButton("Reload plugins");
 		reloader.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -108,6 +94,21 @@ public class Launcher extends JFrame {
 			}
 		});
 		buttons.add(reloader);
+		
+		JButton add = new JButton("Add creatures");
+		add.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (currentConstructor != null) {
+					Collection<? extends ICreature> creatures = factory
+							.createCreatures(simulator,comportement,move, quantity, new ColorCube(50),
+									currentConstructor);
+					simulator.addAllCreatures(creatures);
+					currentConstructor = null;
+				}
+				
+			}
+		});
+		buttons.add(add);
 
 		JButton restart = new JButton("(Re-)start simulation");
 		restart.addActionListener(new ActionListener() {
