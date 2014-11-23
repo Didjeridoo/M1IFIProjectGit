@@ -1,5 +1,6 @@
 package deplacements;
 
+import static commons.Utils.filter;
 import static java.lang.Math.toRadians;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
@@ -15,11 +16,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import comportements.Toric;
-
+import creatures.AbstractCreature;
 import creatures.CustomCreature;
 import creatures.ICreature;
 import creatures.StupidCreature;
 import creatures.visual.CreatureSimulator;
+import deplacements.Troupeau.CreaturesAroundCreature;
 
 public class TroupeauTest {
 
@@ -168,7 +170,10 @@ public class TroupeauTest {
 	public void testFollow() throws Exception {
 		CustomCreature creature = new CustomCreature(environment, Toric.getInstance(),
 				new Troupeau(), new Point2D.Double(
-				0, 0), 10, toRadians(270), Color.RED);
+				0, 0), 10, toRadians(158), Color.RED);
+		double avgSpeed = creature.getSpeed();
+		double avgDir = creature.getDirection();
+		int count = 0;
 		List listCrea = new ArrayList();
 		listCrea.add(creature);
 		listCrea.add(cuscrea1);
@@ -178,10 +183,16 @@ public class TroupeauTest {
 		listCrea.add(cuscrea5);
 		when(environment.getCreatures()).thenReturn(listCrea);
 		creature.act();
+		Iterable<ICreature> creatures = filter(environment.getCreatures(), new CreaturesAroundCreature(creature));
+		for (ICreature c : creatures) {
+			avgSpeed += c.getSpeed();
+			avgDir += c.getDirection();
+			count++;
+		}
+		avgSpeed = avgSpeed / (count + 1);
+		avgDir = avgDir / (count + 1);
 		
-		assertNotEquals(toRadians(270), creature.getDirection(), 0);
-		assertEquals((toRadians(270) + cuscrea1.getDirection() + cuscrea2.getDirection() + cuscrea3.getDirection() + cuscrea4.getDirection()+ cuscrea5.getDirection())/6,
-				creature.getDirection(), 0.01);
-		assertEquals(50/6, creature.getSpeed(), 0.01);
+		assertEquals(avgDir,creature.getDirection(), 0.01);
+		assertEquals(avgSpeed, creature.getSpeed(), 0.01);
 	}
 }
