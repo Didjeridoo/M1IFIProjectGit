@@ -19,4 +19,25 @@
 			<version>1.10.8</version>
 		</dependency>
 	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.2</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>main.Launcher</mainClass>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+		</plugins>
+	</build>
 </project>
