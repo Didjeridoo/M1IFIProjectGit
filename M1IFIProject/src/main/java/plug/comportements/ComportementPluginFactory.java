@@ -11,8 +11,6 @@ import plug.PluginLoader;
 
 import comportements.IComportement;
 
-import creatures.AbstractCreature;
-
 public class ComportementPluginFactory {
 	/**
 	 * singleton for the abstract factory
