@@ -12,10 +12,8 @@ import java.awt.geom.Point2D;
 import org.junit.Before;
 import org.junit.Test;
 
-import comportements.Closed;
 import comportements.Toric;
 import creatures.visual.CreatureSimulator;
-import deplacements.Hasard;
 import deplacements.Stupid;
 import plug.IPlugin;
 
@@ -78,77 +76,88 @@ public class StupidCreatureTest implements IPlugin{
 	}
 
 	@Test
-	public void testDirectTopLeft() throws Exception {
-		StupidCreature creature = new StupidCreature(environment,Toric.getInstance(),
-		new Stupid(), new Point2D.Double(0, h / 2 - 1), 10, toRadians(150), Color.RED);
-		creature.act();
-
-		assertEquals(toRadians(150), creature.getDirection(), 0.01);
-		assertEquals(-h / 2, creature.getPosition().getY(), 2);
-		assertEquals(-6, creature.getPosition().getX(), 3);
-	}
-	
-	@Test
-	public void testDirectTopRight() throws Exception {
-		StupidCreature creature = new StupidCreature(environment,Toric.getInstance(),
-		new Stupid(), new Point2D.Double(0, h / 2 - 1), 10, toRadians(30), Color.RED);
-		creature.act();
-
-		assertEquals(toRadians(30), creature.getDirection(), 0.01);
-		assertEquals(-h / 2, creature.getPosition().getY(), 2);
-		assertEquals(6, creature.getPosition().getX(), 3);
-	}
-	
-	@Test
 	public void testDirectDownLeft() throws Exception {
 		StupidCreature creature = new StupidCreature(environment,Toric.getInstance(),
-		new Stupid(), new Point2D.Double(0, -h / 2 + 1), 10, toRadians(210), Color.RED);
+		new Stupid(), new Point2D.Double(0, h / 2 - 1), 10, toRadians(210), Color.RED);
 		creature.act();
 
 		assertEquals(toRadians(210), creature.getDirection(), 0.01);
-		assertEquals(h / 2, creature.getPosition().getY(), 2);
+		assertEquals(h / 2 - 5, creature.getPosition().getY(), 2);
 		assertEquals(-6, creature.getPosition().getX(), 3);
 	}
 	
 	@Test
 	public void testDirectDownRight() throws Exception {
 		StupidCreature creature = new StupidCreature(environment,Toric.getInstance(),
-		new Stupid(), new Point2D.Double(0, -h / 2 + 1), 10, toRadians(330), Color.RED);
+		new Stupid(), new Point2D.Double(0, h / 2 - 1), 10, toRadians(330), Color.RED);
 		creature.act();
 
 		assertEquals(toRadians(330), creature.getDirection(), 0.01);
-		assertEquals(h / 2, creature.getPosition().getY(), 2);
+		assertEquals(h / 2 - 5, creature.getPosition().getY(), 2);
+		assertEquals(6, creature.getPosition().getX(), 3);
+	}
+	
+	@Test
+	public void testDirectTopLeft() throws Exception {
+		StupidCreature creature = new StupidCreature(environment,Toric.getInstance(),
+		new Stupid(), new Point2D.Double(0, -h / 2 + 1), 10, toRadians(150), Color.RED);
+		creature.act();
+
+		assertEquals(toRadians(150), creature.getDirection(), 0.01);
+		assertEquals(-h / 2 + 5, creature.getPosition().getY(), 2);
+		assertEquals(-6, creature.getPosition().getX(), 3);
+	}
+	
+	@Test
+	public void testDirectTopRight() throws Exception {
+		StupidCreature creature = new StupidCreature(environment,Toric.getInstance(),
+		new Stupid(), new Point2D.Double(0, -h / 2 + 1), 10, toRadians(30), Color.RED);
+		creature.act();
+
+		assertEquals(toRadians(30), creature.getDirection(), 0.01);
+		assertEquals(-h / 2 + 5, creature.getPosition().getY(), 2);
 		assertEquals(6, creature.getPosition().getX(), 3);
 	}
 
 	@Test
 	public void testUpperRightCorner45() throws Exception {
-		StupidCreature creature = new StupidCreature(environment,Toric.getInstance(),new Stupid(), new Point2D.Double(w/2, -h/2), 1, toRadians(45), Color.RED);
+		StupidCreature creature = new StupidCreature(environment,Toric.getInstance(),new Stupid(), new Point2D.Double(w/2, -h/2), 10, toRadians(45), Color.RED);
 		creature.act();
 		
 		assertEquals(toRadians(45), creature.getDirection(), 0.01);
 		assertEquals(-w/2, creature.getPosition().getX(), 1);
-		assertEquals(h/2, creature.getPosition().getY(), 1);
+		assertEquals(-h/2, creature.getPosition().getY(), 10);
     }	
 	
 	@Test
 	public void testUpperRightCorner30() throws Exception {
-		StupidCreature creature = new StupidCreature(environment,Toric.getInstance(),new Stupid(), new Point2D.Double(w/2, -h/2), 1, toRadians(30), Color.RED);
+		StupidCreature creature = new StupidCreature(environment,Toric.getInstance(),new Stupid(), new Point2D.Double(w/2, -h/2), 10, toRadians(30), Color.RED);
 		creature.act();
 		
 		assertEquals(toRadians(30), creature.getDirection(), 0.01);
-		assertEquals(w/2, creature.getPosition().getX(), 1);
-		assertEquals(-h/2, creature.getPosition().getY(), 1);
+		assertEquals(-w/2, creature.getPosition().getX(), 1);
+		assertEquals(-h/2, creature.getPosition().getY(), 10);
     }	
 	
 	@Test
 	public void testDirectBottom() throws Exception {
-		StupidCreature creature = new StupidCreature(environment,Toric.getInstance(),new Stupid(), new Point2D.Double(0, h/2), 1, toRadians(270), Color.RED);
+		StupidCreature creature = new StupidCreature(environment,Toric.getInstance(),new Stupid(), new Point2D.Double(0, h/2), 10, toRadians(270), Color.RED);
 		creature.act();
 
 		assertEquals(toRadians(270), creature.getDirection(), 0.01);
 		assertEquals(0, creature.getPosition().getX(), 1);
-		assertEquals(h/2, creature.getPosition().getY(), 1);
+		assertEquals(h/2 - 10, creature.getPosition().getY(), 1);
+		
+	}
+	
+	@Test
+	public void testDirectTop() throws Exception {
+		StupidCreature creature = new StupidCreature(environment,Toric.getInstance(),new Stupid(), new Point2D.Double(0, -h/2), 10, toRadians(90), Color.RED);
+		creature.act();
+
+		assertEquals(toRadians(90), creature.getDirection(), 0.01);
+		assertEquals(0, creature.getPosition().getX(), 1);
+		assertEquals(-h/2 +  10, creature.getPosition().getY(), 1);
 		
 	}
 
@@ -158,7 +167,7 @@ public class StupidCreatureTest implements IPlugin{
 		StupidCreature creature = new StupidCreature(environment,Toric.getInstance(),new Stupid(), new Point2D.Double(w/2, h/2), 1, toRadians(210), Color.RED);
 		creature.act();
 
-		assertEquals(toRadians(150), creature.getDirection(), 0.01);
+		assertEquals(toRadians(210), creature.getDirection(), 0.01);
 		assertEquals(h/2, creature.getPosition().getY(), 1);		
 	}
 	public String getName() {

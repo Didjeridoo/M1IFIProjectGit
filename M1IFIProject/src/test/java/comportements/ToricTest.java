@@ -14,7 +14,7 @@ import org.junit.Test;
 
 import creatures.CustomCreature;
 import creatures.visual.CreatureSimulator;
-import deplacements.Stupid;
+import deplacements.Hasard;
 
 public class ToricTest {
 
@@ -30,7 +30,7 @@ public class ToricTest {
 	@Test
 	public void testDirectLeftUp() throws Exception {
 		CustomCreature creature = new CustomCreature(environment, Toric.getInstance(),
-				new Stupid(), new Point2D.Double(
+				new Hasard(), new Point2D.Double(
 				-w / 2 + 1, 0), 10, toRadians(150), Color.RED);
 		creature.act();
 
@@ -41,7 +41,7 @@ public class ToricTest {
 	@Test
 	public void testDirectLeftDown() throws Exception {
 		CustomCreature creature = new CustomCreature(environment, Toric.getInstance(),
-				new Stupid(), new Point2D.Double(
+				new Hasard(), new Point2D.Double(
 				-w / 2 + 1, 0), 10, toRadians(210), Color.RED);
 		creature.act();
 
@@ -52,7 +52,7 @@ public class ToricTest {
 	@Test
 	public void testDirectRightUp() throws Exception {
 		CustomCreature creature = new CustomCreature(environment,Toric.getInstance(),
-		new Stupid(), new Point2D.Double(w / 2 - 1, 0), 10, toRadians(30), Color.RED);
+		new Hasard(), new Point2D.Double(w / 2 - 1, 0), 10, toRadians(30), Color.RED);
 		creature.act();
 
 		assertEquals(toRadians(30), creature.getDirection(), 0.01);
@@ -62,7 +62,7 @@ public class ToricTest {
 	@Test
 	public void testDirectRightDown() throws Exception {
 		CustomCreature creature = new CustomCreature(environment,Toric.getInstance(),
-		new Stupid(), new Point2D.Double(w / 2 - 1, 0), 10, toRadians(330), Color.RED);
+		new Hasard(), new Point2D.Double(w / 2 - 1, 0), 10, toRadians(330), Color.RED);
 		creature.act();
 
 		assertEquals(toRadians(330), creature.getDirection(), 0.01);
@@ -70,42 +70,42 @@ public class ToricTest {
 	}
 
 	@Test
-	public void testDirectTopLeft() throws Exception {
-		CustomCreature creature = new CustomCreature(environment,Toric.getInstance(),
-		new Stupid(), new Point2D.Double(0, h / 2 - 1), 10, toRadians(150), Color.RED);
-		creature.act();
-
-		assertEquals(toRadians(150), creature.getDirection(), 0.01);
-		assertEquals(-h / 2, creature.getPosition().getY(), 2);
-	}
-	
-	@Test
-	public void testDirectTopRight() throws Exception {
-		CustomCreature creature = new CustomCreature(environment,Toric.getInstance(),
-		new Stupid(), new Point2D.Double(0, h / 2 - 1), 10, toRadians(30), Color.RED);
-		creature.act();
-
-		assertEquals(toRadians(30), creature.getDirection(), 0.01);
-		assertEquals(-h / 2, creature.getPosition().getY(), 2);
-	}
-	
-	@Test
 	public void testDirectDownLeft() throws Exception {
 		CustomCreature creature = new CustomCreature(environment,Toric.getInstance(),
-		new Stupid(), new Point2D.Double(0, -h / 2 + 1), 10, toRadians(210), Color.RED);
+		new Hasard(), new Point2D.Double(0, h / 2 - 1), 10, toRadians(210), Color.RED);
 		creature.act();
 
 		assertEquals(toRadians(210), creature.getDirection(), 0.01);
-		assertEquals(h / 2, creature.getPosition().getY(), 2);
+		assertEquals(-h / 2, creature.getPosition().getY(), 2);
 	}
 	
 	@Test
 	public void testDirectDownRight() throws Exception {
 		CustomCreature creature = new CustomCreature(environment,Toric.getInstance(),
-		new Stupid(), new Point2D.Double(0, -h / 2 + 1), 10, toRadians(330), Color.RED);
+		new Hasard(), new Point2D.Double(0, h / 2 - 1), 10, toRadians(330), Color.RED);
 		creature.act();
 
 		assertEquals(toRadians(330), creature.getDirection(), 0.01);
+		assertEquals(-h / 2, creature.getPosition().getY(), 2);
+	}
+	
+	@Test
+	public void testDirectTopLeft() throws Exception {
+		CustomCreature creature = new CustomCreature(environment,Toric.getInstance(),
+		new Hasard(), new Point2D.Double(0, -h / 2 + 1), 10, toRadians(150), Color.RED);
+		creature.act();
+
+		assertEquals(toRadians(150), creature.getDirection(), 0.01);
+		assertEquals(h / 2, creature.getPosition().getY(), 2);
+	}
+	
+	@Test
+	public void testDirectTopRight() throws Exception {
+		CustomCreature creature = new CustomCreature(environment,Toric.getInstance(),
+		new Hasard(), new Point2D.Double(0, -h / 2 + 1), 10, toRadians(30), Color.RED);
+		creature.act();
+
+		assertEquals(toRadians(30), creature.getDirection(), 0.01);
 		assertEquals(h / 2, creature.getPosition().getY(), 2);
 	}
 

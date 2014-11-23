@@ -1,25 +1,27 @@
 package creatures;
 
+import static java.lang.Math.toRadians;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.geom.Point2D;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import comportements.IComportement;
-
+import comportements.Closed;
 import creatures.visual.CreatureSimulator;
-import deplacements.IDeplacement;
+import deplacements.Troupeau;
 
 public class SmartCreatureTest {
 
-	CreatureSimulator environment = mock(CreatureSimulator.class);
-	IDeplacement deplacement;
-	IComportement comportement;
-	final double w = 100;
+CreatureSimulator environment = mock(CreatureSimulator.class);
+	
+	final double w = 200;
 	final double h = 100;
 	
 	@Before
@@ -27,35 +29,142 @@ public class SmartCreatureTest {
 		when(environment.getSize()).thenReturn(new Dimension((int)w, (int)h));
 	}
 
+	
 	@Test
-	public void testEmerginBehavior() throws Exception {
-//		SmartCreature main = new SmartCreature(environment,comportement,deplacement, new Point2D.Double(0, 0), toRadians(0), 5, Color.RED);
-//
-//		SmartCreature other = mock(SmartCreature.class);
-//		when(other.getDirection()).thenReturn(toRadians(270));
-//		when(other.getSpeed()).thenReturn(10.0);
-//		when(other.getPosition()).thenReturn(new Point2D.Double(1,0));
-//		when(other.distanceFromAPoint(eq(main.getPosition()))).thenReturn(1.0);
-//		when(other.directionFormAPoint(eq(main.getPosition()), eq(main.direction))).thenReturn(0.0);
-//
-//		ArrayList<ICreature> creaturesAround = new ArrayList<ICreature>();
-//		creaturesAround.add(other);
-//		
-//		when(environment.getCreatures()).thenReturn(creaturesAround);
-//		
-//		main.act();
-//		
-//		assertEquals(toRadians((270+0)/2), main.getDirection(), .01);
-//		assertEquals((10.0+5.0)/2, main.getSpeed(), .01);
-//		
-//		verify(other).getPosition();
-//		verify(other).getDirection();
-//		verify(other).getSpeed();
-//		verify(other).directionFormAPoint(eq(main.getPosition()),eq(0.0));
-//		verify(other).distanceFromAPoint(eq(main.getPosition()));
-//		verifyNoMoreInteractions(other);
-//		assertTrue(true);
-		assertTrue(true);
+	public void testDirectLeftUp() throws Exception {
+		SmartCreature creature = new SmartCreature(environment,Closed.getInstance(),new Troupeau(), new Point2D.Double(-w/2+1, 0), 10, toRadians(150), Color.RED);
+
+		creature.act();
+		
+		assertEquals(toRadians(30), creature.getDirection(), 0.01);
+		assertEquals(-w/2+6, creature.getPosition().getX(), 2);
+		assertEquals(-6, creature.getPosition().getY(), 2);
+    }	
+	
+	@Test
+	public void testDirectLeftDown() throws Exception {
+		SmartCreature creature = new SmartCreature(environment, Closed.getInstance(),new Troupeau(), new Point2D.Double(-w/2+1, 0), 10, toRadians(210), Color.RED);
+
+		creature.act();
+		
+		assertEquals(toRadians(330), creature.getDirection(), 0.01);
+		assertEquals(-w/2+6, creature.getPosition().getX(), 2);
+		assertEquals(6, creature.getPosition().getY(), 2);
+    }	
+	
+	
+	@Test 
+	public void testDirectRightUp() throws Exception {
+		SmartCreature creature = new SmartCreature(environment,Closed.getInstance(),new Troupeau(), new Point2D.Double(w/2-1, 0), 10, toRadians(30), Color.RED);
+		creature.act();
+		
+		assertEquals(toRadians(150), creature.getDirection(), 0.01);
+		assertEquals(w/2-6, creature.getPosition().getX(), 2);
+		assertEquals(-6, creature.getPosition().getY(), 2);
+    }	
+	
+	@Test 
+	public void testDirectRightDown() throws Exception {
+		SmartCreature creature = new SmartCreature(environment,Closed.getInstance(),new Troupeau(), new Point2D.Double(w/2-1, 0), 10, toRadians(330), Color.RED);
+		creature.act();
+		
+		assertEquals(toRadians(210), creature.getDirection(), 0.01);
+		assertEquals(w/2-6, creature.getPosition().getX(), 2);
+		assertEquals(6, creature.getPosition().getY(), 2);
+    }	
+	
+	
+	@Test
+	public void testDirectUpRight() throws Exception {
+		SmartCreature creature = new SmartCreature(environment,Closed.getInstance(),new Troupeau(), new Point2D.Double(0, -h/2+1), 10, toRadians(30), Color.RED);
+		creature.act();
+		
+		assertEquals(toRadians(330), creature.getDirection(), 0.01);
+		assertEquals(8, creature.getPosition().getX(), 2);
+		assertEquals(-h/2+4, creature.getPosition().getY(), 2);
+    }	
+	
+	@Test
+	public void testDirectUpLeft() throws Exception {
+		SmartCreature creature = new SmartCreature(environment,Closed.getInstance(),new Troupeau(), new Point2D.Double(0, -h/2+1), 10, toRadians(150), Color.RED);
+		creature.act();
+		
+		assertEquals(toRadians(210), creature.getDirection(), 0.01);
+		assertEquals(-8, creature.getPosition().getX(), 2);
+		assertEquals(-h/2+4, creature.getPosition().getY(), 2);
+    }
+	
+	@Test
+	public void testDirectDownRight() throws Exception {
+		SmartCreature creature = new SmartCreature(environment,Closed.getInstance(),new Troupeau(), new Point2D.Double(0, h/2-1), 10, toRadians(330), Color.RED);
+		creature.act();
+		
+		assertEquals(toRadians(30), creature.getDirection(), 0.01);
+		assertEquals(8, creature.getPosition().getX(), 2);
+		assertEquals(h/2-4, creature.getPosition().getY(), 2);
+    }	
+	
+	@Test
+	public void testDirectDownLeft() throws Exception {
+		SmartCreature creature = new SmartCreature(environment,Closed.getInstance(),new Troupeau(), new Point2D.Double(0, h/2-1), 10, toRadians(210), Color.RED);
+		creature.act();
+		
+		assertEquals(toRadians(150), creature.getDirection(), 0.01);
+		assertEquals(-8, creature.getPosition().getX(), 2);
+		assertEquals(h/2-4, creature.getPosition().getY(), 2);
+    }
+	
+	
+	@Test
+	public void testUpperRightCorner45() throws Exception {
+		SmartCreature creature = new SmartCreature(environment,Closed.getInstance(),new Troupeau(), new Point2D.Double(w/2, -h/2), 1, toRadians(45), Color.RED);
+		creature.act();
+		
+		assertEquals(toRadians(225), creature.getDirection(), 0.01);
+		assertEquals(w/2, creature.getPosition().getX(), 1);
+		assertEquals(-h/2, creature.getPosition().getY(), 1);
+    }	
+	
+	@Test
+	public void testUpperRightCorner30() throws Exception {
+		SmartCreature creature = new SmartCreature(environment,Closed.getInstance(),new Troupeau(), new Point2D.Double(w/2, -h/2), 1, toRadians(30), Color.RED);
+		creature.act();
+		
+		assertEquals(toRadians(210), creature.getDirection(), 0.01);
+		assertEquals(w/2, creature.getPosition().getX(), 1);
+		assertEquals(-h/2, creature.getPosition().getY(), 1);
+    }	
+	
+	@Test
+	public void testDirectBottom() throws Exception {
+		SmartCreature creature = new SmartCreature(environment,Closed.getInstance(),new Troupeau(), new Point2D.Double(0, h/2), 1, toRadians(270), Color.RED);
+		creature.act();
+
+		assertEquals(toRadians(90), creature.getDirection(), 0.01);
+		assertEquals(0, creature.getPosition().getX(), 1);
+		assertEquals(h/2, creature.getPosition().getY(), 1);
+		
+	}
+	
+	@Test
+	public void testDirectTop() throws Exception {
+		SmartCreature creature = new SmartCreature(environment,Closed.getInstance(),new Troupeau(), new Point2D.Double(0, -h/2), 1, toRadians(90), Color.RED);
+		creature.act();
+
+		assertEquals(toRadians(270), creature.getDirection(), 0.01);
+		assertEquals(0, creature.getPosition().getX(), 1);
+		assertEquals(-h/2, creature.getPosition().getY(), 1);
+		
+	}
+
+	// Special case: in a corner but not really facing both sides
+	@Test
+	public void testSpecialCorner() throws Exception {
+		SmartCreature creature = new SmartCreature(environment,Closed.getInstance(),new Troupeau(), new Point2D.Double(w/2, h/2), 1, toRadians(210), Color.RED);
+		creature.act();
+
+		assertEquals(toRadians(150), creature.getDirection(), 0.01);
+		assertEquals(h/2, creature.getPosition().getY(), 1);		
 	}
 
 	public String getName() {

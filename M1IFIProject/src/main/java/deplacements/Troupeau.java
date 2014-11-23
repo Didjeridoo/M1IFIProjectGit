@@ -45,7 +45,7 @@ public class Troupeau implements IDeplacement{
 		double minDist = Double.MAX_VALUE;
 
 		// iterate over all nearby creatures
-		Iterable<ICreature> creatures = creaturesAround(creature);
+		Iterable<ICreature> creatures = creaturesAround();
 		int count = 0;
 		for (ICreature c : creatures) {
 			avgSpeed += c.getSpeed();
@@ -74,7 +74,7 @@ public class Troupeau implements IDeplacement{
 			double hw = s.getWidth() / 2;
 			double hh = s.getHeight() / 2;
 			double newX = creature.getPosition().getX() + (creature.getSpeed() * Math.cos(avgDir));
-			double newY = creature.getPosition().getY() + (- creature.getSpeed() * Math.sin(avgDir));
+			double newY = creature.getPosition().getY() - creature.getSpeed() * Math.sin(avgDir);
 
 			
 			if((newX < -hw)||(newX > hw)||(newY < -hh)||(newY > hh)){
@@ -84,8 +84,7 @@ public class Troupeau implements IDeplacement{
 			}
 		}
 	}
-	public Iterable<ICreature> creaturesAround(
-			AbstractCreature creature) {
+	public Iterable<ICreature> creaturesAround() {
 		return filter(creature.getEnvironment().getCreatures(), new CreaturesAroundCreature(creature));
 	}
 	
