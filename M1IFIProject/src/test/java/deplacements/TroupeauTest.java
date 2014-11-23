@@ -36,7 +36,7 @@ public class TroupeauTest {
 	@Before
 	public void setup() {
 		when(environment.getSize()).thenReturn(new Dimension((int) w, (int) h));
-		cuscrea1 = new CustomCreature(environment, Toric.getInstance(), new Stupid(), new Point2D.Double(0, 3), 10, toRadians(10), Color.RED);
+		cuscrea1 = new CustomCreature(environment, Toric.getInstance(), new Stupid(), new Point2D.Double(2, 3), 10, toRadians(10), Color.RED);
 		cuscrea2 = new CustomCreature(environment, Toric.getInstance(), new Stupid(), new Point2D.Double(0, 10), 5, toRadians(280), Color.RED);
 		cuscrea3 = new CustomCreature(environment, Toric.getInstance(), new Stupid(), new Point2D.Double(0, 25), 10, toRadians(56), Color.RED);
 		cuscrea4 = new CustomCreature(environment, Toric.getInstance(), new Stupid(), new Point2D.Double(0, 45), 5, toRadians(95), Color.RED);
@@ -168,7 +168,7 @@ public class TroupeauTest {
 	public void testFollow() throws Exception {
 		CustomCreature creature = new CustomCreature(environment, Toric.getInstance(),
 				new Troupeau(), new Point2D.Double(
-				0, 0), 10, toRadians(270), Color.RED);
+				0, 0), 10, toRadians(90), Color.RED);
 		List listCrea = new ArrayList();
 		listCrea.add(creature);
 		listCrea.add(cuscrea1);
@@ -179,8 +179,8 @@ public class TroupeauTest {
 		when(environment.getCreatures()).thenReturn(listCrea);
 		creature.act();
 		
-		assertNotEquals(toRadians(270), creature.getDirection(), 0);
-		assertEquals((toRadians(270) + cuscrea1.getDirection() + cuscrea2.getDirection() + cuscrea3.getDirection() + cuscrea4.getDirection()+ cuscrea5.getDirection())/6,
+		assertNotEquals(toRadians(90), creature.getDirection(), 0);
+		assertEquals((toRadians(90) + cuscrea1.getDirection() + cuscrea2.getDirection() + cuscrea3.getDirection() + cuscrea4.getDirection()+ cuscrea5.getDirection())/6,
 				creature.getDirection(), 0.01);
 		assertEquals(50/6, creature.getSpeed(), 0.01);
 	}

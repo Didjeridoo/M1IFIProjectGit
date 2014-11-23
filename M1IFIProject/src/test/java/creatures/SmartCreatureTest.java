@@ -40,7 +40,7 @@ final double h = 100;
 		cuscrea2 = new CustomCreature(environment, Toric.getInstance(), new Stupid(), new Point2D.Double(0, 10), 10, toRadians(20), Color.RED);
 		cuscrea3 = new CustomCreature(environment, Toric.getInstance(), new Stupid(), new Point2D.Double(0, 25), 10, toRadians(56), Color.RED);
 		cuscrea4 = new CustomCreature(environment, Toric.getInstance(), new Stupid(), new Point2D.Double(0, 45), 10, toRadians(95), Color.RED);
-		cuscrea5 = new CustomCreature(environment, Toric.getInstance(), new Stupid(), new Point2D.Double(0, 55), 10, toRadians(180), Color.RED);
+		cuscrea5 = new CustomCreature(environment, Toric.getInstance(), new Stupid(), new Point2D.Double(0, 35), 10, toRadians(180), Color.RED);
 	}
 
 	@Test
@@ -241,7 +241,7 @@ final double h = 100;
 
 		assertEquals(toRadians(90), creature.getDirection(), 0.01);
 		assertEquals(0, creature.getPosition().getX(), 1);
-		assertEquals(h/2, creature.getPosition().getY(), 1);
+		assertEquals(h/2 -(51/6)*((toRadians(90) + cuscrea1.getDirection() + cuscrea2.getDirection() + cuscrea3.getDirection() + cuscrea4.getDirection()+ cuscrea5.getDirection())/6), creature.getPosition().getY(), 1);
 		
 	}
 	
