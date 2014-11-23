@@ -79,7 +79,7 @@ public class Launcher extends JFrame {
 		loader.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				factory.load();
-				buildPluginMenus();
+				//buildPluginMenus();
 			}
 		});
 		buttons.add(loader);
@@ -90,7 +90,7 @@ public class Launcher extends JFrame {
 				factory.reload();
 				comportementFactory.reload();
 				deplacementFactory.reload();
-				buildPluginMenus();
+				//buildPluginMenus();
 			}
 		});
 		buttons.add(reloader);
@@ -197,7 +197,6 @@ public class Launcher extends JFrame {
 			    f.setVisible(true);
 			    
 			    final String res = ((JMenuItem) e.getSource()).getActionCommand();
-			    System.out.println(res);
 			    
 			    submit.addActionListener(new ActionListener() {
 			      public void actionPerformed(ActionEvent e) {
