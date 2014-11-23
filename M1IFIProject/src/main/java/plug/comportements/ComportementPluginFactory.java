@@ -33,12 +33,12 @@ public class ComportementPluginFactory {
 	private static Logger logger = Logger
 			.getLogger("plug.ComportementPluginFactory");
 
-	public static void init(IComportement comportement) {
+	public static void init() {
 		if (_singleton != null) {
 			throw new RuntimeException("ComportementFactory already created by "
 					+ _singleton.getClass().getName());
 		} else {
-			_singleton = new ComportementPluginFactory(comportement);
+			_singleton = new ComportementPluginFactory();
 		}
 	}
 
@@ -46,12 +46,11 @@ public class ComportementPluginFactory {
 		return _singleton;
 	}
 
-	private ComportementPluginFactory(IComportement comportement) {
+	private ComportementPluginFactory() {
 		try {
 			pluginLoader = new PluginLoader(pluginDir, IComportement.class);
 		} catch (MalformedURLException ex) {
 		}
-		this.comportement = comportement;
 		constructorMap = new HashMap<String, Constructor<? extends IComportement>>();
 		load();
 	}
@@ -69,13 +68,11 @@ public class ComportementPluginFactory {
 
 	@SuppressWarnings("unchecked")
 	private void buildConstructorMap() {
-		System.out.println("1");
 		for (Class<? extends IPlugin> p : pluginLoader.getPluginClasses()) {
 			Constructor<? extends IComportement> c = null;
 			try {
 				c = (Constructor<? extends IComportement>) p
-						.getDeclaredConstructor(AbstractCreature.class,
-								double.class, double.class);
+						.getDeclaredConstructor();
 				c.setAccessible(true);
 			} catch (SecurityException e) {
 				logger.info("Cannot access (security) constructor for plugin"

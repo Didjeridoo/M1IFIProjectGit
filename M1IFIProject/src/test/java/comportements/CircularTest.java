@@ -1,10 +1,10 @@
-package deplacements;
+package comportements;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class TroupeauDeplacementTest {
+public class CircularTest {
 
 	@Test
 	public void test() {

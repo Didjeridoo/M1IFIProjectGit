@@ -1,4 +1,4 @@
-package deplacements;
+package plug.deplacements;
 
 import java.lang.reflect.Constructor;
 import java.net.MalformedURLException;
@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
+import deplacements.IDeplacement;
 import plug.IPlugin;
 import plug.PluginLoader;
 

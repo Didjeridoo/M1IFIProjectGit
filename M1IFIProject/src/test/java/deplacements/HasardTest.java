@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class StupidDeplacementTest {
+public class HasardTest {
 
 	@Test
 	public void test() {
