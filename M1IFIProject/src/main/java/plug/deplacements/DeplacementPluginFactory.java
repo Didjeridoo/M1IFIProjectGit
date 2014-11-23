@@ -31,7 +31,7 @@ public class DeplacementPluginFactory {
 
 	public static void init() {
 		if (_singleton != null) {
-			throw new RuntimeException("CreatureFactory already created by "
+			throw new RuntimeException("DeplacementFactory already created by "
 					+ _singleton.getClass().getName());
 		} else {
 			_singleton = new DeplacementPluginFactory();

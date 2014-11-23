@@ -208,7 +208,7 @@ public class Launcher extends JFrame {
 				constructorComportement = comportementFactory.getConstructorMap().get(
 						((JMenuItem) e.getSource()).getActionCommand());
 			    
-				System.out.println(constructorComportement);
+				menuBuilderComportement.getMenu().setEnabled(false);
 			}
 		};
 		
