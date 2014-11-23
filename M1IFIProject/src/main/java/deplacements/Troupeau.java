@@ -27,8 +27,7 @@ public class Troupeau implements IDeplacement{
 	
 	public void act(AbstractCreature creature, IComportement comportement) {
 		setCreature(creature);
-		setComportement(comportement);		// speed - will be used to compute the average speed of the nearby
-		// creatures including this instance
+		setComportement(comportement);
 		move();
 	}
 
@@ -86,7 +85,7 @@ public class Troupeau implements IDeplacement{
 		}
 	}
 	public Iterable<ICreature> creaturesAround(
-			AbstractCreature AbstractCreature) {
+			AbstractCreature creature) {
 		return filter(creature.getEnvironment().getCreatures(), new CreaturesAroundCreature(creature));
 	}
 	
