@@ -37,7 +37,6 @@ public class PluginMenuItemBuilderComportement {
 		logger.info("Building plugin menu");
 		menu.removeAll();
 		for (String name : constructors.keySet()) {
-			System.out.println(name);
 			JMenuItem mi = new JMenuItem(name);
 			// ActionCommand contains the name of the plugin = key in the map
 			mi.setActionCommand(name);
