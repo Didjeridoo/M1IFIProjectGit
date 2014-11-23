@@ -131,7 +131,8 @@ public class Launcher extends JFrame {
 					simulator.addAllCreatures(creatures);
 					simulator.start();
 					add.setEnabled(true);
-					menuBuilderCreature.getMenu().setEnabled(true);;
+					menuBuilderCreature.getMenu().setEnabled(true);
+					currentConstructor = null;
 				}
 			}
 		});
