@@ -15,7 +15,7 @@ import deplacements.Stupid;
 public class StupidCreature extends AbstractCreature {
 
 	public StupidCreature(IEnvironment environment, IComportement comportement, IDeplacement deplacement, Point2D position,
-			double direction, double speed, Color color) {
+			double speed, double direction, Color color) {
 		super(environment,comportement, new Stupid(), position);
 		
 		this.direction = direction;

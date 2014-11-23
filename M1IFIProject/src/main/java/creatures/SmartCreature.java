@@ -3,7 +3,6 @@ package creatures;
 import java.awt.Color;
 import java.awt.geom.Point2D;
 
-import comportements.Circular;
 import comportements.IComportement;
 
 import deplacements.IDeplacement;
@@ -27,8 +26,8 @@ import deplacements.Troupeau;
  */
 public class SmartCreature extends AbstractCreature {
 	
-	public SmartCreature(IEnvironment environment,IComportement comportement, IDeplacement move, Point2D position, double direction, double speed,
-			Color color) {
+	public SmartCreature(IEnvironment environment,IComportement comportement, IDeplacement move, Point2D position,
+			double speed , double direction ,Color color) {
 		super(environment, comportement, new Troupeau(), position);
 		this.direction = direction;
 		this.speed = speed;
