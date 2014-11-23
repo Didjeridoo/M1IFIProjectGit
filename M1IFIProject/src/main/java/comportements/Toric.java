@@ -8,8 +8,6 @@ import creatures.CustomCreature;
 
 public class Toric implements IComportement{
 
-	private AbstractCreature creature;
-	
 	private Toric(){};
 
 	private static Toric instance = new Toric();
@@ -35,13 +33,12 @@ public class Toric implements IComportement{
 
 	public static Toric getInstance(){return instance;}
 	
-	public void setCreature(CustomCreature creature){this.creature = creature;}
+	public void setCreature(CustomCreature creature){}
 	
 	public String getName() {
 		return getClass().getName();
 	}
 	
 	public void setCreature(AbstractCreature creature){
-		this.creature = creature;
 	}
 }

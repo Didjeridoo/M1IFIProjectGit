@@ -186,7 +186,7 @@ public class Launcher extends JFrame {
 		};
 		menuBuilder = new PluginMenuItemBuilder(factory.getConstructorMap(),
 				listener);
-		menuBuilder.setMenuTitle("Deplacement");
+		menuBuilder.setMenuTitle("Creatures");
 		menuBuilder.buildMenu();
 		mb.add(menuBuilder.getMenu());
 		setJMenuBar(mb);

@@ -1,14 +1,13 @@
 package creatures;
 
-import static commons.Utils.filter;
-import static java.lang.Math.abs;
-
 import java.awt.Color;
 import java.awt.geom.Point2D;
 
-import commons.Utils.Predicate;
+import comportements.Circular;
 import comportements.IComportement;
+
 import deplacements.IDeplacement;
+import deplacements.Troupeau;
 
 
 /**
@@ -28,17 +27,9 @@ import deplacements.IDeplacement;
  */
 public class SmartCreature extends AbstractCreature {
 	
-
-
-	/** Minimal distance between this creature and the ones around. */
-	private final static double MIN_DIST = 10d;
-
-	/** Minimal speed in pixels per loop. */
-	private final static double MIN_SPEED = 3d;
-
 	public SmartCreature(IEnvironment environment,IComportement comportement, IDeplacement move, Point2D position, double direction, double speed,
 			Color color) {
-		super(environment, comportement, move, position);
+		super(environment, Circular.getInstance(), new Troupeau(), position);
 		this.direction = direction;
 		this.speed = speed;
 		this.color = color;
