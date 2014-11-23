@@ -10,7 +10,7 @@ public class StupidCreatureTest implements IPlugin{
 
 	@Test
 	public void test() {
-		assertTrue(true);
+		assertTrue(false);
 	}
 
 	public String getName() {
