@@ -151,7 +151,9 @@ public class PluginLoader {
 			String qualifiedClassName = getQualifiedName(baseNameLength, path);
 			if (qualifiedClassName != null) {
 				//load plugins
+				System.out.println(qualifiedClassName);
 				Class<IPlugin> plugin = loadOnePluginClass(qualifiedClassName);
+				System.out.println(plugin);
 				if (plugin != null) {
 					//test plugins
 					Class<?> loadedClassTest;
@@ -200,7 +202,7 @@ public class PluginLoader {
 		logger.info("Computing fully qualified name from" + classPath
 				+ " by removing " + baseNameLength
 				+ " characters from the start");
-		// A plugin cannot be an internal class
+		// A plugin cannot be an internal class	
 		if ((!classPath.endsWith(".class")) || (classPath.indexOf('$') != -1)) {
 			return null;
 		}
