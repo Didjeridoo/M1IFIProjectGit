@@ -106,6 +106,7 @@ public class Launcher extends JFrame {
 									currentConstructor);
 					simulator.addAllCreatures(creatures);
 					currentConstructor = null;
+					menuBuilderCreature.getMenu().setEnabled(true);;
 				}
 				
 			}
@@ -129,6 +130,7 @@ public class Launcher extends JFrame {
 					simulator.addAllCreatures(creatures);
 					simulator.start();
 					add.setEnabled(true);
+					menuBuilderCreature.getMenu().setEnabled(true);;
 				}
 			}
 		});
@@ -210,6 +212,7 @@ public class Launcher extends JFrame {
 			        } else {
 			        	menuBuilderDeplacement.getMenu().setEnabled(false);
 			        }
+			        menuBuilderCreature.getMenu().setEnabled(false);
 			        f.dispose();
 			      }
 			    });
@@ -263,7 +266,7 @@ public class Launcher extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-			    
+			    menuBuilderCreature.getMenu().setEnabled(true);
 				menuBuilderDeplacement.getMenu().setEnabled(false);
 			}
 		};
