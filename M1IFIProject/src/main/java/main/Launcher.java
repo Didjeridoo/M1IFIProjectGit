@@ -196,15 +196,22 @@ public class Launcher extends JFrame {
 			    f.pack();
 			    f.setVisible(true);
 			    
+			    final String res = ((JMenuItem) e.getSource()).getActionCommand();
+			    System.out.println(res);
+			    
 			    submit.addActionListener(new ActionListener() {
 			      public void actionPerformed(ActionEvent e) {
 			        quantity = Integer.parseInt(form.getText(0));
+			        if(res.equals("creatures.CustomCreature")){
+			        	menuBuilderDeplacement.getMenu().setEnabled(true);
+			        }
 			        f.dispose();
 			      }
 			    });
 				
 				currentConstructor = factory.getConstructorMap().get(
 						((JMenuItem) e.getSource()).getActionCommand());
+				
 			}
 		};
 		ActionListener listenerComportement = new ActionListener() {
@@ -228,6 +235,7 @@ public class Launcher extends JFrame {
 				}
 				menuBuilderComportement.getMenu().setEnabled(false);
 				menuBuilderCreature.getMenu().setEnabled(true);
+				menuBuilderComportement.setMenuTitle(constructorComportement.getName());
 			}
 		};
 
