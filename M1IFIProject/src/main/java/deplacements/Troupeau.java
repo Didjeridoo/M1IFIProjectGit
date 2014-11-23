@@ -27,8 +27,16 @@ public class Troupeau implements IDeplacement{
 	
 	public void act(AbstractCreature creature, IComportement comportement) {
 		setCreature(creature);
-		setComportement(comportement);		// speed - will be used to compute the average speed of the nearby
-		// creatures including this instance
+		setComportement(comportement);
+		move();
+	}
+
+	public String getName() {
+		// TODO Auto-generated method stub
+		return getClass().getName();
+	}
+
+	public void move() {
 		double avgSpeed = creature.getSpeed();
 		// direction - will be used to compute the average direction of the
 		// nearby creatures including this instance
@@ -61,7 +69,6 @@ public class Troupeau implements IDeplacement{
 		
 		// if we are not too close move closer
 		if (minDist > MIN_DIST) {
-			move();
 			// we move always the maximum
 			Dimension s = creature.getEnvironment().getSize();
 			double hw = s.getWidth() / 2;
@@ -77,17 +84,8 @@ public class Troupeau implements IDeplacement{
 			}
 		}
 	}
-
-	public String getName() {
-		// TODO Auto-generated method stub
-		return getClass().getName();
-	}
-
-	public void move() {
-		
-	}
 	public Iterable<ICreature> creaturesAround(
-			AbstractCreature AbstractCreature) {
+			AbstractCreature creature) {
 		return filter(creature.getEnvironment().getCreatures(), new CreaturesAroundCreature(creature));
 	}
 	

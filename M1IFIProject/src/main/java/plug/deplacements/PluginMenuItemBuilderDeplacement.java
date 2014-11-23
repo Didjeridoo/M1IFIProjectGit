@@ -1,4 +1,4 @@
-package plug.comportements;
+package plug.deplacements;
 
 import java.awt.event.ActionListener;
 import java.lang.reflect.Constructor;
@@ -8,21 +8,19 @@ import java.util.logging.Logger;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
-import comportements.IComportement;
+import deplacements.IDeplacement;
 
-import creatures.ICreature;
-
-public class PluginMenuItemBuilderComportement {
+public class PluginMenuItemBuilderDeplacement {
 	private JMenu menu;
 
-	private Map<String, Constructor<? extends IComportement>> constructors;
+	private Map<String, Constructor<? extends IDeplacement>> constructors;
 
 	private ActionListener listener;
 
 	private static Logger logger = Logger.getLogger("plug.Menu");
 
-	public PluginMenuItemBuilderComportement(
-			Map<String, Constructor<? extends IComportement>> mc,
+	public PluginMenuItemBuilderDeplacement(
+			Map<String, Constructor<? extends IDeplacement>> mc,
 			ActionListener listener) {
 		menu = new JMenu();
 		this.constructors = mc;
@@ -37,6 +35,7 @@ public class PluginMenuItemBuilderComportement {
 		logger.info("Building plugin menu");
 		menu.removeAll();
 		for (String name : constructors.keySet()) {
+			System.out.println(name);
 			JMenuItem mi = new JMenuItem(name);
 			// ActionCommand contains the name of the plugin = key in the map
 			mi.setActionCommand(name);
