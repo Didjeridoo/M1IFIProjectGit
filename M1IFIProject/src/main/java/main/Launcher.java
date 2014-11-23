@@ -262,17 +262,18 @@ public class Launcher extends JFrame {
 			}
 		};
 		
+		menuBuilderComportement = new PluginMenuItemBuilderComportement(comportementFactory.getConstructorMap(), listenerComportement);
+		menuBuilderComportement.setMenuTitle("Comportements");
+		menuBuilderComportement.buildMenu();
+		mb.add(menuBuilderComportement.getMenu());
+		
 		menuBuilderCreature = new PluginMenuItemBuilderCreature(factory.getConstructorMap(),
 				listener);
 		menuBuilderCreature.setMenuTitle("Creatures");
 		menuBuilderCreature.buildMenu();
 		mb.add(menuBuilderCreature.getMenu());
 		
-		menuBuilderComportement = new PluginMenuItemBuilderComportement(comportementFactory.getConstructorMap(), listenerComportement);
-		menuBuilderComportement.setMenuTitle("Comportements");
-		menuBuilderComportement.buildMenu();
-		mb.add(menuBuilderComportement.getMenu());
-
+		
 		menuBuilderDeplacement = new PluginMenuItemBuilderDeplacement(deplacementFactory.getConstructorMap(), listenerDeplacement);
 		menuBuilderDeplacement.setMenuTitle("Deplacements");
 		menuBuilderDeplacement.buildMenu();
