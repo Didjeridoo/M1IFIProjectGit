@@ -18,7 +18,7 @@ public class Hasard implements IDeplacement{
 	private IComportement comportement;
 	private int currCycle;
 	
-	private Hasard(){
+	public Hasard(){
 		currCycle = 0;
 	};
 
