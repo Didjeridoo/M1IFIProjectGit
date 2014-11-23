@@ -29,6 +29,8 @@ import plug.comportements.ComportementPluginFactory;
 import plug.comportements.PluginMenuItemBuilderComportement;
 import plug.creatures.CreaturePluginFactory;
 import plug.creatures.PluginMenuItemBuilderCreature;
+import plug.deplacements.DeplacementPluginFactory;
+import plug.deplacements.PluginMenuItemBuilderDeplacement;
 import visual.FormDesiredQuantity;
 import visual.TestResultsDisplay;
 
@@ -46,6 +48,7 @@ public class Launcher extends JFrame {
 
 	private final CreaturePluginFactory factory;
 	private final ComportementPluginFactory comportementFactory;
+	private final DeplacementPluginFactory deplacementFactory;
 
 	private final CreatureInspector inspector;
 	private final CreatureVisualizer visualizer;
@@ -53,14 +56,17 @@ public class Launcher extends JFrame {
 
 	private PluginMenuItemBuilderCreature menuBuilderCreature;
 	private PluginMenuItemBuilderComportement menuBuilderComportement;
+	private PluginMenuItemBuilderDeplacement menuBuilderDeplacement;
 	private JMenuBar mb = new JMenuBar();
 	private Constructor<? extends ICreature> currentConstructor = null;
 	private Constructor<? extends IComportement> constructorComportement = null;
+	private Constructor<? extends IDeplacement> constructorDeplacement = null;
 
 	public Launcher() {
 		quantity = 0;
 		factory = CreaturePluginFactory.getInstance();
 		comportementFactory = ComportementPluginFactory.getInstance();
+		deplacementFactory = DeplacementPluginFactory.getInstance();
 
 		setName("Creature Simulator Plugin Version");
 		setLayout(new BorderLayout());
@@ -84,6 +90,7 @@ public class Launcher extends JFrame {
 				}
 				factory.load();
 				comportementFactory.load();
+				deplacementFactory.load();
 			}
 		});
 		buttons.add(loader);
@@ -93,6 +100,7 @@ public class Launcher extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				factory.reload();
 				comportementFactory.reload();
+				deplacementFactory.load();
 				buildPluginMenus();
 			}
 		});
@@ -200,15 +208,30 @@ public class Launcher extends JFrame {
 				menuBuilderComportement.getMenu().setEnabled(false);
 			}
 		};
+		ActionListener listenerDeplacement = new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				constructorDeplacement = deplacementFactory.getConstructorMap().get(
+						((JMenuItem) e.getSource()).getActionCommand());
+			    
+				menuBuilderDeplacement.getMenu().setEnabled(false);
+			}
+		};
 		menuBuilderCreature = new PluginMenuItemBuilderCreature(factory.getConstructorMap(),
 				listener);
 		menuBuilderCreature.setMenuTitle("Creatures");
 		menuBuilderCreature.buildMenu();
 		mb.add(menuBuilderCreature.getMenu());
+		
 		menuBuilderComportement = new PluginMenuItemBuilderComportement(comportementFactory.getConstructorMap(), listenerComportement);
 		menuBuilderComportement.setMenuTitle("Comportements");
 		menuBuilderComportement.buildMenu();
 		mb.add(menuBuilderComportement.getMenu());
+		
+		menuBuilderDeplacement = new PluginMenuItemBuilderDeplacement(deplacementFactory.getConstructorMap(), listenerDeplacement);
+		menuBuilderDeplacement.setMenuTitle("Deplacements");
+		menuBuilderDeplacement.buildMenu();
+		mb.add(menuBuilderDeplacement.getMenu());
+		
 		setJMenuBar(mb);
 	}
 
@@ -217,6 +240,7 @@ public class Launcher extends JFrame {
 		double myMaxSpeed = 5;
 		CreaturePluginFactory.init(myMaxSpeed);
 		ComportementPluginFactory.init();
+		DeplacementPluginFactory.init();
 		Launcher launcher = new Launcher();
 		launcher.setVisible(true);
 	}
