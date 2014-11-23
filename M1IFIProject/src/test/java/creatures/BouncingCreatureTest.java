@@ -1,7 +1,7 @@
 package creatures;
 
 import static java.lang.Math.toRadians;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -30,6 +30,10 @@ public class BouncingCreatureTest {
 		when(environment.getSize()).thenReturn(new Dimension((int)w, (int)h));
 	}
 
+	@Test
+	public void testTestFaux() throws Exception {
+		fail();
+	}
 	
 	@Test
 	public void testDirectLeftUp() throws Exception {
