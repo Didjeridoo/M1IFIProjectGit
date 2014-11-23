@@ -9,6 +9,7 @@ import java.awt.Dimension;
 import java.awt.geom.Point2D;
 
 import commons.Utils.Predicate;
+
 import comportements.IComportement;
 import creatures.AbstractCreature;
 import creatures.BouncingCreature;

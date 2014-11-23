@@ -2,7 +2,11 @@
 Test set: creatures.BouncingCreatureTest
 -------------------------------------------------------------------------------
 <<<<<<< HEAD
+<<<<<<< HEAD
 Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.153 sec
 =======
 Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.325 sec
 >>>>>>> 26beb248f3ac794d74ccc620bf18f8ed3128bb39
+=======
+Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.264 sec
+>>>>>>> d4c150c544264d954ee9f18a3953854d0fffe064

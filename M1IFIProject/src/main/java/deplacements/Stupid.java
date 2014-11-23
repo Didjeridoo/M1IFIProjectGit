@@ -6,6 +6,7 @@ import static java.lang.Math.sin;
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
 
+
 import comportements.IComportement;
 import creatures.AbstractCreature;
 import creatures.CustomCreature;
