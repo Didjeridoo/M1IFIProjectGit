@@ -17,16 +17,22 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-import comportements.IComportement;
+import org.mockito.cglib.reflect.ConstructorDelegate;
 
+import comportements.Closed;
+import comportements.IComportement;
 import creatures.ICreature;
 import creatures.visual.ColorCube;
 import creatures.visual.CreatureInspector;
 import creatures.visual.CreatureSimulator;
 import creatures.visual.CreatureVisualizer;
 import deplacements.IDeplacement;
+import plug.comportements.ComportementPluginFactory;
+import plug.comportements.PluginMenuItemBuilderComportement;
 import plug.creatures.CreaturePluginFactory;
-import plug.creatures.PluginMenuItemBuilder;
+import plug.creatures.PluginMenuItemBuilderCreature;
+import plug.deplacements.DeplacementPluginFactory;
+import plug.deplacements.PluginMenuItemBuilderDeplacement;
 import visual.FormDesiredQuantity;
 import visual.TestResultsDisplay;
 
@@ -43,18 +49,27 @@ public class Launcher extends JFrame {
 	private IDeplacement move;
 
 	private final CreaturePluginFactory factory;
+	private final ComportementPluginFactory comportementFactory;
+	private final DeplacementPluginFactory deplacementFactory;
 
 	private final CreatureInspector inspector;
 	private final CreatureVisualizer visualizer;
 	private final CreatureSimulator simulator;
 
-	private PluginMenuItemBuilder menuBuilder;
+	private PluginMenuItemBuilderCreature menuBuilderCreature;
+	private PluginMenuItemBuilderComportement menuBuilderComportement;
+	private PluginMenuItemBuilderDeplacement menuBuilderDeplacement;
 	private JMenuBar mb = new JMenuBar();
 	private Constructor<? extends ICreature> currentConstructor = null;
+	private Constructor<? extends IComportement> constructorComportement = null;
+	private Constructor<? extends IDeplacement> constructorDeplacement = null;
+	
 
 	public Launcher() {
 		quantity = 0;
 		factory = CreaturePluginFactory.getInstance();
+		comportementFactory = ComportementPluginFactory.getInstance();
+		deplacementFactory = DeplacementPluginFactory.getInstance();
 
 		setName("Creature Simulator Plugin Version");
 		setLayout(new BorderLayout());
@@ -77,6 +92,8 @@ public class Launcher extends JFrame {
 					simulator.addAllCreatures(creatures);
 				}
 				factory.load();
+				comportementFactory.load();
+				deplacementFactory.load();
 			}
 		});
 		buttons.add(loader);
@@ -85,6 +102,8 @@ public class Launcher extends JFrame {
 		reloader.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				factory.reload();
+				comportementFactory.reload();
+				deplacementFactory.reload();
 				buildPluginMenus();
 			}
 		});
@@ -184,11 +203,37 @@ public class Launcher extends JFrame {
 						((JMenuItem) e.getSource()).getActionCommand());
 			}
 		};
-		menuBuilder = new PluginMenuItemBuilder(factory.getConstructorMap(),
+		ActionListener listenerComportement = new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				constructorComportement = comportementFactory.getConstructorMap().get(
+						((JMenuItem) e.getSource()).getActionCommand());
+			    
+				menuBuilderComportement.getMenu().setEnabled(false);
+			}
+		};
+		
+		ActionListener listenerDeplacement = new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				constructorDeplacement = deplacementFactory.getConstructorMap().get(
+						((JMenuItem) e.getSource()).getActionCommand());
+			    
+				System.out.println(constructorDeplacement);
+			}
+		};
+		
+		menuBuilderCreature = new PluginMenuItemBuilderCreature(factory.getConstructorMap(),
 				listener);
-		menuBuilder.setMenuTitle("Creatures");
-		menuBuilder.buildMenu();
-		mb.add(menuBuilder.getMenu());
+		menuBuilderCreature.setMenuTitle("Creatures");
+		menuBuilderCreature.buildMenu();
+		mb.add(menuBuilderCreature.getMenu());
+		menuBuilderComportement = new PluginMenuItemBuilderComportement(comportementFactory.getConstructorMap(), listenerComportement);
+		menuBuilderComportement.setMenuTitle("Comportements");
+		menuBuilderComportement.buildMenu();
+		mb.add(menuBuilderComportement.getMenu());
+		menuBuilderDeplacement = new PluginMenuItemBuilderDeplacement(deplacementFactory.getConstructorMap(), listenerDeplacement);
+		menuBuilderDeplacement.setMenuTitle("Deplacements");
+		menuBuilderDeplacement.buildMenu();
+		mb.add(menuBuilderDeplacement.getMenu());
 		setJMenuBar(mb);
 	}
 
@@ -196,6 +241,8 @@ public class Launcher extends JFrame {
 		Logger.getLogger("plug").setLevel(Level.INFO);
 		double myMaxSpeed = 5;
 		CreaturePluginFactory.init(myMaxSpeed);
+		ComportementPluginFactory.init();
+		DeplacementPluginFactory.init();
 		Launcher launcher = new Launcher();
 		launcher.setVisible(true);
 	}

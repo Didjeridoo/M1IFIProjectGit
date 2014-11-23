@@ -36,6 +36,7 @@ public class BouncingCreatureTest {
 	@Test
 	public void testDirectLeftUp() throws Exception {
 		BouncingCreature creature = new BouncingCreature(environment,comportement,deplacement, new Point2D.Double(-w/2+1, 0), 10, toRadians(150), Color.RED);
+
 		creature.act();
 		
 		assertEquals(toRadians(30), creature.getDirection(), 0.01);
@@ -46,6 +47,7 @@ public class BouncingCreatureTest {
 	@Test
 	public void testDirectLeftDown() throws Exception {
 		BouncingCreature creature = new BouncingCreature(environment, comportement, deplacement, new Point2D.Double(-w/2+1, 0), 10, toRadians(210), Color.RED);
+
 		creature.act();
 		
 		assertEquals(toRadians(330), creature.getDirection(), 0.01);

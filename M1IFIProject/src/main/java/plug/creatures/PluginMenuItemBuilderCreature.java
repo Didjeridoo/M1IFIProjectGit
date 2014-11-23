@@ -9,7 +9,7 @@ import javax.swing.*;
 
 import creatures.ICreature;
 
-public class PluginMenuItemBuilder {
+public class PluginMenuItemBuilderCreature {
 
 	private JMenu menu;
 
@@ -19,7 +19,7 @@ public class PluginMenuItemBuilder {
 
 	private static Logger logger = Logger.getLogger("plug.Menu");
 
-	public PluginMenuItemBuilder(
+	public PluginMenuItemBuilderCreature(
 			Map<String, Constructor<? extends ICreature>> mc,
 			ActionListener listener) {
 		menu = new JMenu();

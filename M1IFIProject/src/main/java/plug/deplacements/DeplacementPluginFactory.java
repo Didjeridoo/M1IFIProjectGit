@@ -1,4 +1,4 @@
-package deplacements;
+package plug.deplacements;
 
 import java.lang.reflect.Constructor;
 import java.net.MalformedURLException;
@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
+import deplacements.IDeplacement;
 import plug.IPlugin;
 import plug.PluginLoader;
 
@@ -28,9 +29,9 @@ public class DeplacementPluginFactory {
 	private static Logger logger = Logger
 			.getLogger("plug.DeplacementPluginFactory");
 
-	public static void init(double inMaxSpeed) {
+	public static void init() {
 		if (_singleton != null) {
-			throw new RuntimeException("CreatureFactory already created by "
+			throw new RuntimeException("DeplacementFactory already created by "
 					+ _singleton.getClass().getName());
 		} else {
 			_singleton = new DeplacementPluginFactory();

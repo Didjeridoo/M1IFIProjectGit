@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import creatures.visual.CreatureSimulator;
 
-public class ToricComportementTest {
+public class ToricTest {
 
 	CreatureSimulator environment = mock(CreatureSimulator.class);
 	final double w = 200;
