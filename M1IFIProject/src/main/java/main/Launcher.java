@@ -62,7 +62,7 @@ public class Launcher extends JFrame {
 	private Constructor<? extends ICreature> currentConstructor = null;
 	private Constructor<? extends IComportement> constructorComportement = null;
 	private Constructor<? extends IDeplacement> constructorDeplacement = null;
-	
+
 
 	public Launcher() {
 		quantity = 0;
@@ -210,13 +210,13 @@ public class Launcher extends JFrame {
 				menuBuilderComportement.getMenu().setEnabled(false);
 			}
 		};
-		
+
 		ActionListener listenerDeplacement = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				constructorDeplacement = deplacementFactory.getConstructorMap().get(
 						((JMenuItem) e.getSource()).getActionCommand());
 			    
-				System.out.println(constructorDeplacement);
+				menuBuilderDeplacement.getMenu().setEnabled(false);
 			}
 		};
 		
@@ -225,14 +225,17 @@ public class Launcher extends JFrame {
 		menuBuilderCreature.setMenuTitle("Creatures");
 		menuBuilderCreature.buildMenu();
 		mb.add(menuBuilderCreature.getMenu());
+		
 		menuBuilderComportement = new PluginMenuItemBuilderComportement(comportementFactory.getConstructorMap(), listenerComportement);
 		menuBuilderComportement.setMenuTitle("Comportements");
 		menuBuilderComportement.buildMenu();
 		mb.add(menuBuilderComportement.getMenu());
+
 		menuBuilderDeplacement = new PluginMenuItemBuilderDeplacement(deplacementFactory.getConstructorMap(), listenerDeplacement);
 		menuBuilderDeplacement.setMenuTitle("Deplacements");
 		menuBuilderDeplacement.buildMenu();
 		mb.add(menuBuilderDeplacement.getMenu());
+
 		setJMenuBar(mb);
 	}
 

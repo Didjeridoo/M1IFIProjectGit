@@ -19,8 +19,6 @@ public class ComportementPluginFactory {
 	 */
 	protected static ComportementPluginFactory _singleton;
 
-	private IComportement comportement;
-
 	protected PluginLoader pluginLoader;
 
 	private final String pluginDir = "myplugins/repository";
@@ -81,7 +79,6 @@ public class ComportementPluginFactory {
 			} catch (NoSuchMethodException e) {
 				logger.info("No constructor in plugin " + p.getName()
 						+ " with the correct signature");
-				System.out.println("ooooo"+p.getName());
 				e.printStackTrace();
 			}
 			if (c != null)
