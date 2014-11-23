@@ -8,16 +8,12 @@ import java.awt.geom.Point2D;
 import creatures.AbstractCreature;
 
 public class Circular implements IComportement {
-
-	
-	private AbstractCreature creature;
 	
 	private Circular(){};
 	
 	private static Circular instance = new Circular();
 
 	public void behaviour(AbstractCreature creature, double x, double y) {
-		setCreature(creature);
 		Dimension s = creature.getEnvironment().getSize();
 		double hh = s.getHeight() / 2;
 		
@@ -29,22 +25,20 @@ public class Circular implements IComportement {
 		
 		if (y < -hh) {
 			y = - 2*hh - y;
-			setDirectionBounceY();
+			setDirectionBounceY(creature);
 		} else if (y > hh) {
 			y = 2*hh - y;
-			setDirectionBounceY();
+			setDirectionBounceY(creature);
 		}
 		
 		creature.setPosition(new Point2D.Double(x, y));
 	}
 
-	private void setDirectionBounceY() {
+	private void setDirectionBounceY(AbstractCreature creature) {
 		creature.setDirection(PI * 2 - creature.getDirection());
 	}
 	
 	public static Circular getInstance(){return instance;}
-	
-	public void setCreature(AbstractCreature creature){this.creature = creature;}
 	
 	public String getName() {
 		return getClass().getName();
