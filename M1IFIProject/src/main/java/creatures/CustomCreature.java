@@ -27,15 +27,13 @@ public class CustomCreature extends AbstractCreature{
 	private IComportement comportement;
 	
 	
-	public CustomCreature(IEnvironment environment, Point2D position, double speed,
-			double direction, Color color, IDeplacement deplacement, IComportement comportement) {
-		super(environment, position);
+	public CustomCreature(IEnvironment environment, IComportement behaviour, IDeplacement move, Point2D position, double speed,
+			double direction, Color color) {
+		super(environment, behaviour, move, position);
 
 		this.speed = speed;
 		this.direction = direction;
 		this.color = color;
-		this.deplacement = deplacement;
-		this.comportement = comportement;
 		
 		currCycle = 0;
 	}
@@ -60,10 +58,8 @@ public class CustomCreature extends AbstractCreature{
 		}
 	}*/
 	
-	
 	public void act() {
-		deplacement.act(this, comportement);
-		
+		move.act(this, comport);
 	}
 	
 }

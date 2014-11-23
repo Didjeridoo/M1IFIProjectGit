@@ -1,12 +1,7 @@
 package comportements;
 
-import static java.lang.Math.PI;
-import static java.lang.Math.cos;
-import static java.lang.Math.sin;
-
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
-import java.awt.geom.Point2D.Double;
 
 import creatures.AbstractCreature;
 import creatures.CustomCreature;

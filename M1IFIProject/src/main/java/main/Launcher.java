@@ -17,11 +17,14 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import comportements.IComportement;
+
 import creatures.ICreature;
 import creatures.visual.ColorCube;
 import creatures.visual.CreatureInspector;
 import creatures.visual.CreatureSimulator;
 import creatures.visual.CreatureVisualizer;
+import deplacements.IDeplacement;
 import plug.creatures.CreaturePluginFactory;
 import plug.creatures.PluginMenuItemBuilder;
 import visual.FormDesiredQuantity;
@@ -35,6 +38,9 @@ import visual.TestResultsDisplay;
 public class Launcher extends JFrame {
 	private TestResultsDisplay testResultsDisplay;
 	private int quantity;
+	
+	private IComportement comportement;
+	private IDeplacement move;
 
 	private final CreaturePluginFactory factory;
 
@@ -66,7 +72,7 @@ public class Launcher extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (currentConstructor != null) {
 					Collection<? extends ICreature> creatures = factory
-							.createCreatures(simulator, quantity, new ColorCube(50),
+							.createCreatures(simulator,comportement,move, quantity, new ColorCube(50),
 									currentConstructor);
 					simulator.addAllCreatures(creatures);
 				}
@@ -95,7 +101,7 @@ public class Launcher extends JFrame {
 					}
 					simulator.clearCreatures();
 					Collection<? extends ICreature> creatures = factory
-							.createCreatures(simulator, quantity, new ColorCube(50),
+							.createCreatures(simulator, comportement, move, quantity, new ColorCube(50),
 									currentConstructor);
 					simulator.addAllCreatures(creatures);
 					simulator.start();
@@ -180,7 +186,7 @@ public class Launcher extends JFrame {
 		};
 		menuBuilder = new PluginMenuItemBuilder(factory.getConstructorMap(),
 				listener);
-		menuBuilder.setMenuTitle("Creatures");
+		menuBuilder.setMenuTitle("Deplacement");
 		menuBuilder.buildMenu();
 		mb.add(menuBuilder.getMenu());
 		setJMenuBar(mb);

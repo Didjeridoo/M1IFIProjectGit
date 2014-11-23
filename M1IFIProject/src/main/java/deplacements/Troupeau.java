@@ -2,21 +2,15 @@ package deplacements;
 
 import static commons.Utils.filter;
 import static java.lang.Math.abs;
-import static java.lang.Math.cos;
-import static java.lang.Math.sin;
 
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
 
 import commons.Utils.Predicate;
 import comportements.IComportement;
+
 import creatures.AbstractCreature;
-import creatures.BouncingCreature;
-import creatures.Creature;
-import creatures.CustomCreature;
 import creatures.ICreature;
-import creatures.SmartCreature;
-import creatures.SmartCreature.CreaturesAroundCreature;
 
 public class Troupeau implements IDeplacement{
 	
