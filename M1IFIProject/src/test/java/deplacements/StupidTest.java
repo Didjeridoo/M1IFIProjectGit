@@ -122,5 +122,53 @@ public class StupidTest {
 		assertEquals(5, creature.getPosition().getX(), 3);
 		assertEquals(-5, creature.getPosition().getY(), 3);
 	}
+	
+	@Test
+	public void testExtremeRight() throws Exception {
+		CustomCreature creature = new CustomCreature(environment, Toric.getInstance(),
+				new Stupid(), new Point2D.Double(
+				w / 2 - 1, 0), 10, toRadians(0), Color.RED);
+		creature.act();
+
+		assertEquals(toRadians(0), creature.getDirection(), 0.01);
+		assertEquals(-w/2, creature.getPosition().getX(), 3);
+		assertEquals(0, creature.getPosition().getY(), 3);
+	}
+	
+	@Test
+	public void testExtremeLeft() throws Exception {
+		CustomCreature creature = new CustomCreature(environment, Toric.getInstance(),
+				new Stupid(), new Point2D.Double(
+				-w / 2 + 1, 0), 10, toRadians(180), Color.RED);
+		creature.act();
+
+		assertEquals(toRadians(180), creature.getDirection(), 0.01);
+		assertEquals(w/2, creature.getPosition().getX(), 3);
+		assertEquals(0, creature.getPosition().getY(), 3);
+	}
+	
+	@Test
+	public void testExtremeTop() throws Exception {
+		CustomCreature creature = new CustomCreature(environment, Toric.getInstance(),
+				new Stupid(), new Point2D.Double(
+				0, -h/2 + 1), 10, toRadians(270), Color.RED);
+		creature.act();
+
+		assertEquals(toRadians(270), creature.getDirection(), 0.01);
+		assertEquals(0, creature.getPosition().getX(), 3);
+		assertEquals(h/2, creature.getPosition().getY(), 3);
+	}
+	
+	@Test
+	public void testExtremeDown() throws Exception {
+		CustomCreature creature = new CustomCreature(environment, Toric.getInstance(),
+				new Stupid(), new Point2D.Double(
+				0, h/2 - 1), 10, toRadians(90), Color.RED);
+		creature.act();
+
+		assertEquals(toRadians(90), creature.getDirection(), 0.01);
+		assertEquals(0, creature.getPosition().getX(), 3);
+		assertEquals(-h/2, creature.getPosition().getY(), 3);
+	}
 
 }
