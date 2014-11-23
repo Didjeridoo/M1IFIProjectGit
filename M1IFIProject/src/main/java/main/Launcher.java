@@ -63,6 +63,7 @@ public class Launcher extends JFrame {
 	private Constructor<? extends ICreature> currentConstructor = null;
 	private Constructor<? extends IComportement> constructorComportement = null;
 	private Constructor<? extends IDeplacement> constructorDeplacement = null;
+	final JButton restart;
 
 
 	public Launcher() {
@@ -114,7 +115,7 @@ public class Launcher extends JFrame {
 		buttons.add(add);
 		add.setEnabled(false);
 
-		JButton restart = new JButton("(Re-)start simulation");
+		restart = new JButton("(Re-)start simulation");
 		restart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (currentConstructor != null) {
@@ -135,6 +136,7 @@ public class Launcher extends JFrame {
 			}
 		});
 		buttons.add(restart);
+		restart.setEnabled(false);
 
 		JButton rapportDeTests = new JButton("Rapport de tests");
 		rapportDeTests.addActionListener(new ActionListener() {
@@ -211,6 +213,7 @@ public class Launcher extends JFrame {
 			        	menuBuilderDeplacement.getMenu().setEnabled(true);
 			        } else {
 			        	menuBuilderDeplacement.getMenu().setEnabled(false);
+			        	restart.setEnabled(true);
 			        }
 			        menuBuilderCreature.getMenu().setEnabled(false);
 			        f.dispose();
@@ -268,6 +271,7 @@ public class Launcher extends JFrame {
 				}
 			    menuBuilderCreature.getMenu().setEnabled(true);
 				menuBuilderDeplacement.getMenu().setEnabled(false);
+				restart.setEnabled(true);
 			}
 		};
 		
