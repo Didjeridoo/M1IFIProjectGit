@@ -22,14 +22,14 @@ public class TroupeauTest {
 	CreatureSimulator environment = mock(CreatureSimulator.class);
 	final double w = 200;
 	final double h = 100;
-	Troupeau troup = mock(Troupeau.class);
+	//Troupeau troup = mock(Troupeau.class);
 
 	@Before
 	public void setup() {
 		when(environment.getSize()).thenReturn(new Dimension((int) w, (int) h));
-		when(troup.creaturesAround()).thenReturn(new Iterable<ICreature>(new CustomCreature(environment, Toric.getInstance(),
+		/*when(troup.creaturesAround()).thenReturn(new Iterable<ICreature>(new CustomCreature(environment, Toric.getInstance(),
 				new Troupeau(), new Point2D.Double(
-				0, 0), 10, toRadians(180), Color.RED)));
+				0, 0), 10, toRadians(180), Color.RED)));*/
 	}
 	
 	@Test
