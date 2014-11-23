@@ -12,11 +12,14 @@ import java.util.Map;
 import java.util.Random;
 import java.util.logging.Logger;
 
+import comportements.IComportement;
+
 import plug.IPlugin;
 import plug.PluginLoader;
 import creatures.IColorStrategy;
 import creatures.ICreature;
 import creatures.IEnvironment;
+import deplacements.IDeplacement;
 
 public class CreaturePluginFactory {
 
@@ -79,7 +82,7 @@ public class CreaturePluginFactory {
 			Constructor<? extends ICreature> c = null;
 			try {
 				c = (Constructor<? extends ICreature>) p
-						.getDeclaredConstructor(IEnvironment.class,
+						.getDeclaredConstructor(IEnvironment.class,IComportement.class,IDeplacement.class,
 								Point2D.class, double.class, double.class,
 								Color.class);
 				c.setAccessible(true);
@@ -104,7 +107,7 @@ public class CreaturePluginFactory {
 	private final Random rand = new Random();
 
 	public <T extends ICreature> Collection<T> createCreatures(
-			IEnvironment env, int count, IColorStrategy colorStrategy,
+			IEnvironment env,IComportement comportement, IDeplacement move, int count, IColorStrategy colorStrategy,
 			Constructor<T> constructor) {
 		Collection<T> creatures = new ArrayList<T>();
 		Dimension s = env.getSize();
@@ -119,7 +122,7 @@ public class CreaturePluginFactory {
 			int speed = (int) (rand.nextDouble() * maxSpeed);
 			T creature = null;
 			try {
-				creature = constructor.newInstance(env,
+				creature = constructor.newInstance(env,comportement,move,
 						new Point2D.Double(x, y), speed, direction,
 						colorStrategy.getColor());
 			} catch (Exception e) {

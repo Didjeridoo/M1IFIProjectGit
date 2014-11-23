@@ -9,6 +9,10 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
 
+import comportements.IComportement;
+
+import deplacements.IDeplacement;
+
 
 public class BouncingCreature extends AbstractCreature{
 
@@ -25,9 +29,9 @@ public class BouncingCreature extends AbstractCreature{
 	 */
 	protected int currCycle;
 
-	public BouncingCreature(IEnvironment environment, Point2D position, double speed,
+	public BouncingCreature(IEnvironment environment,IComportement behaviour, IDeplacement move, Point2D position, double speed,
 			double direction, Color color) {
-		super(environment, position);
+		super(environment, behaviour, move, position);
 
 		this.speed = speed;
 		this.direction = direction;
@@ -37,8 +41,7 @@ public class BouncingCreature extends AbstractCreature{
 	}
 
 	public void act() {
-		applyNoise();
-		move();
+		move.act(this, comport);
 	}
 
 	/**
