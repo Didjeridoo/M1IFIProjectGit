@@ -12,8 +12,8 @@ import java.util.Map;
 import java.util.Random;
 import java.util.logging.Logger;
 
+import comportements.Circular;
 import comportements.IComportement;
-
 import plug.IPlugin;
 import plug.PluginLoader;
 import creatures.IColorStrategy;
