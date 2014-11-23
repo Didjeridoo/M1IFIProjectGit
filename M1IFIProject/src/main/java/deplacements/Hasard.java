@@ -17,6 +17,10 @@ public class Hasard implements IDeplacement{
 	
 	private AbstractCreature creature;
 	private IComportement comportement;
+	
+	private Hasard(){
+		currCycle = 0;
+	};
 
 	private static final double MIN_SPEED = 3;
 	private static final double MAX_SPEED = 10;
@@ -26,10 +30,6 @@ public class Hasard implements IDeplacement{
 	 */
 	private static final int NUMBER_OF_CYCLES_PER_CHANGE = 30;
 	private int currCycle;
-	
-	public Hasard(){
-		currCycle = 0;
-	}
 	
 	public String getName() {
 		return getClass().getName();
