@@ -1,9 +1,8 @@
 package creatures;
 
+import static commons.Utils.filter;
 import static java.lang.Math.toRadians;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -21,6 +20,7 @@ import comportements.Toric;
 import creatures.visual.CreatureSimulator;
 import deplacements.Stupid;
 import deplacements.Troupeau;
+import deplacements.Troupeau.CreaturesAroundCreature;
 
 public class SmartCreatureTest {
 
@@ -204,8 +204,8 @@ final double h = 100;
 		creature.act();
 		
 		assertEquals(toRadians(225), creature.getDirection(), 0.01);
-		assertEquals(w/2, creature.getPosition().getX(), 1);
-		assertEquals(-h/2, creature.getPosition().getY(), 1);
+		assertEquals(w/2, creature.getPosition().getX(), 3);
+		assertEquals(-h/2, creature.getPosition().getY(), 3);
     }	
 	
 	@Test
@@ -222,13 +222,14 @@ final double h = 100;
 		creature.act();
 		
 		assertEquals(toRadians(210), creature.getDirection(), 0.01);
-		assertEquals(w/2, creature.getPosition().getX(), 1);
-		assertEquals(-h/2, creature.getPosition().getY(), 1);
+		assertEquals(w/2, creature.getPosition().getX(), 3);
+		assertEquals(-h/2, creature.getPosition().getY(), 3);
     }	
 	
 	@Test
 	public void testDirectBottom() throws Exception {
 		SmartCreature creature = new SmartCreature(environment,Closed.getInstance(),new Troupeau(), new Point2D.Double(0, h/2), 1, toRadians(270), Color.RED);
+		
 		List listCrea = new ArrayList();
 		listCrea.add(creature);
 		listCrea.add(cuscrea1);
@@ -239,9 +240,9 @@ final double h = 100;
 		when(environment.getCreatures()).thenReturn(listCrea);
 		creature.act();
 
-		assertEquals(toRadians(90), creature.getDirection(), 0.01);
+		assertEquals(toRadians(90), creature.getDirection(), 0.3);
 		assertEquals(0, creature.getPosition().getX(), 1);
-		assertEquals(h/2 -(51/6)*((toRadians(90) + cuscrea1.getDirection() + cuscrea2.getDirection() + cuscrea3.getDirection() + cuscrea4.getDirection()+ cuscrea5.getDirection())/6), creature.getPosition().getY(), 1);
+		assertEquals(h/2, creature.getPosition().getY(), 1);
 		
 	}
 	
@@ -260,7 +261,7 @@ final double h = 100;
 
 		assertEquals(toRadians(270), creature.getDirection(), 0.01);
 		assertEquals(0, creature.getPosition().getX(), 1);
-		assertEquals(-h/2, creature.getPosition().getY(), 1);
+		assertEquals(((-h/2) + Math.sin(toRadians(90))), creature.getPosition().getY(), 3);
 		
 	}
 
@@ -279,7 +280,36 @@ final double h = 100;
 		creature.act();
 
 		assertEquals(toRadians(150), creature.getDirection(), 0.01);
-		assertEquals(h/2, creature.getPosition().getY(), 1);		
+		assertEquals(h/2, creature.getPosition().getY(), 3);		
+	}
+	
+	public void testFollow() throws Exception {
+		CustomCreature creature = new CustomCreature(environment, Toric.getInstance(),
+				new Troupeau(), new Point2D.Double(
+				0, 0), 10, toRadians(180), Color.RED);
+		double avgSpeed = creature.getSpeed();
+		double avgDir = creature.getDirection();
+		int count = 0;
+		List listCrea = new ArrayList();
+		listCrea.add(creature);
+		listCrea.add(cuscrea1);
+		listCrea.add(cuscrea2);
+		listCrea.add(cuscrea3);
+		listCrea.add(cuscrea4);
+		listCrea.add(cuscrea5);
+		when(environment.getCreatures()).thenReturn(listCrea);
+		creature.act();
+		Iterable<ICreature> creatures = filter(environment.getCreatures(), new CreaturesAroundCreature(creature));
+		for (ICreature c : creatures) {
+			avgSpeed += c.getSpeed();
+			avgDir += c.getDirection();
+			count++;
+		}
+		avgSpeed = avgSpeed / (count + 1);
+		avgDir = avgDir / (count + 1);
+		
+		assertEquals(avgDir,creature.getDirection(), 0.01);
+		assertEquals(avgSpeed, creature.getSpeed(), 0.01);
 	}
 
 	public String getName() {

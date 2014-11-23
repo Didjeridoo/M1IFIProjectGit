@@ -170,7 +170,7 @@ public class TroupeauTest {
 	public void testFollow() throws Exception {
 		CustomCreature creature = new CustomCreature(environment, Toric.getInstance(),
 				new Troupeau(), new Point2D.Double(
-				0, 0), 10, toRadians(158), Color.RED);
+				0, 0), 10, toRadians(180), Color.RED);
 		double avgSpeed = creature.getSpeed();
 		double avgDir = creature.getDirection();
 		int count = 0;
@@ -192,7 +192,6 @@ public class TroupeauTest {
 		avgSpeed = avgSpeed / (count + 1);
 		avgDir = avgDir / (count + 1);
 		
-		assertNotEquals(toRadians(90), creature.getDirection(), 0);
 		assertEquals(avgDir,creature.getDirection(), 0.01);
 		assertEquals(avgSpeed, creature.getSpeed(), 0.01);
 	}
