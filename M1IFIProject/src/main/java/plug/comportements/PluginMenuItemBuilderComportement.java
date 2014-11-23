@@ -10,8 +10,6 @@ import javax.swing.JMenuItem;
 
 import comportements.IComportement;
 
-import creatures.ICreature;
-
 public class PluginMenuItemBuilderComportement {
 	private JMenu menu;
 

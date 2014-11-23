@@ -76,38 +76,42 @@ public class Launcher extends JFrame {
 
 		JPanel buttons = new JPanel();
 		JButton loader = new JButton("Load plugins");
-		/*loader.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				factory.load();
-				buildPluginMenus();
-			}
-		});
-		buttons.add(loader);*/
 		loader.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (currentConstructor != null) {
-					Collection<? extends ICreature> creatures = factory
-							.createCreatures(simulator,comportement,move, quantity, new ColorCube(50),
-									currentConstructor);
-					simulator.addAllCreatures(creatures);
-				}
 				factory.load();
 				comportementFactory.load();
 				deplacementFactory.load();
+				//buildPluginMenus();
 			}
 		});
 		buttons.add(loader);
-
+		
 		JButton reloader = new JButton("Reload plugins");
 		reloader.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				factory.reload();
 				comportementFactory.reload();
 				deplacementFactory.reload();
-				buildPluginMenus();
+				//buildPluginMenus();
 			}
 		});
 		buttons.add(reloader);
+		
+		final JButton add = new JButton("Add creatures");
+		add.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (currentConstructor != null) {
+					Collection<? extends ICreature> creatures = factory
+							.createCreatures(simulator,comportement,move, quantity, new ColorCube(50),
+									currentConstructor);
+					simulator.addAllCreatures(creatures);
+					currentConstructor = null;
+				}
+				
+			}
+		});
+		buttons.add(add);
+		add.setEnabled(false);
 
 		JButton restart = new JButton("(Re-)start simulation");
 		restart.addActionListener(new ActionListener() {
@@ -124,6 +128,7 @@ public class Launcher extends JFrame {
 									currentConstructor);
 					simulator.addAllCreatures(creatures);
 					simulator.start();
+					add.setEnabled(true);
 				}
 			}
 		});
@@ -162,6 +167,9 @@ public class Launcher extends JFrame {
 				exit(evt);
 			}
 		});
+		
+		menuBuilderDeplacement.getMenu().setEnabled(false);
+		menuBuilderCreature.getMenu().setEnabled(false);
 
 	}
 
@@ -192,15 +200,23 @@ public class Launcher extends JFrame {
 			    f.pack();
 			    f.setVisible(true);
 			    
+			    final String res = ((JMenuItem) e.getSource()).getActionCommand();
+			    
 			    submit.addActionListener(new ActionListener() {
 			      public void actionPerformed(ActionEvent e) {
 			        quantity = Integer.parseInt(form.getText(0));
+			        if(res.equals("creatures.CustomCreature")){
+			        	menuBuilderDeplacement.getMenu().setEnabled(true);
+			        } else {
+			        	menuBuilderDeplacement.getMenu().setEnabled(false);
+			        }
 			        f.dispose();
 			      }
 			    });
 				
 				currentConstructor = factory.getConstructorMap().get(
 						((JMenuItem) e.getSource()).getActionCommand());
+				
 			}
 		};
 		ActionListener listenerComportement = new ActionListener() {
@@ -223,6 +239,8 @@ public class Launcher extends JFrame {
 					e1.printStackTrace();
 				}
 				menuBuilderComportement.getMenu().setEnabled(false);
+				menuBuilderCreature.getMenu().setEnabled(true);
+				menuBuilderComportement.setMenuTitle(constructorComportement.getName());
 			}
 		};
 
@@ -250,17 +268,18 @@ public class Launcher extends JFrame {
 			}
 		};
 		
+		menuBuilderComportement = new PluginMenuItemBuilderComportement(comportementFactory.getConstructorMap(), listenerComportement);
+		menuBuilderComportement.setMenuTitle("Comportements");
+		menuBuilderComportement.buildMenu();
+		mb.add(menuBuilderComportement.getMenu());
+		
 		menuBuilderCreature = new PluginMenuItemBuilderCreature(factory.getConstructorMap(),
 				listener);
 		menuBuilderCreature.setMenuTitle("Creatures");
 		menuBuilderCreature.buildMenu();
 		mb.add(menuBuilderCreature.getMenu());
 		
-		menuBuilderComportement = new PluginMenuItemBuilderComportement(comportementFactory.getConstructorMap(), listenerComportement);
-		menuBuilderComportement.setMenuTitle("Comportements");
-		menuBuilderComportement.buildMenu();
-		mb.add(menuBuilderComportement.getMenu());
-
+		
 		menuBuilderDeplacement = new PluginMenuItemBuilderDeplacement(deplacementFactory.getConstructorMap(), listenerDeplacement);
 		menuBuilderDeplacement.setMenuTitle("Deplacements");
 		menuBuilderDeplacement.buildMenu();

@@ -41,6 +41,9 @@ public class FormDesiredQuantity extends JPanel {
 	}
 
 	public String getText(int i) {
+		if(fields[i].getText().isEmpty()){
+			return "1";
+		}
 		return (fields[i].getText());
 	}
 }

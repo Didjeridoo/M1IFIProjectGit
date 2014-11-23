@@ -151,9 +151,7 @@ public class PluginLoader {
 			String qualifiedClassName = getQualifiedName(baseNameLength, path);
 			if (qualifiedClassName != null) {
 				//load plugins
-				System.out.println(qualifiedClassName);
 				Class<IPlugin> plugin = loadOnePluginClass(qualifiedClassName);
-				System.out.println(plugin);
 				if (plugin != null) {
 					//test plugins
 					Class<?> loadedClassTest;

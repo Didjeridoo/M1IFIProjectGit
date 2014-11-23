@@ -16,10 +16,9 @@ public class Hasard implements IDeplacement{
 	
 	private AbstractCreature creature;
 	private IComportement comportement;
-	private int currCycle;
+	
 	
 	public Hasard(){
-		currCycle = 0;
 	};
 
 	private static final double MIN_SPEED = 3;
@@ -62,7 +61,8 @@ public class Hasard implements IDeplacement{
 	}
 	
 	public void applyNoise() {
-		currCycle++;
+		creature.incrCurrCycle();
+		int currCycle = creature.getCurrCycle();
 		currCycle %= NUMBER_OF_CYCLES_PER_CHANGE;
 
 		// every NUMBER_OF_CYCLES_PER_CHANGE we do the change

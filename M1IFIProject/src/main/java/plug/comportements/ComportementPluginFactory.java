@@ -11,14 +11,12 @@ import plug.PluginLoader;
 
 import comportements.IComportement;
 
-import creatures.AbstractCreature;
-
 public class ComportementPluginFactory {
 	/**
 	 * singleton for the abstract factory
 	 */
 	protected static ComportementPluginFactory _singleton;
-
+	
 	protected PluginLoader pluginLoader;
 
 	private final String pluginDir = "myplugins/repository";
