@@ -163,6 +163,9 @@ public class Launcher extends JFrame {
 				exit(evt);
 			}
 		});
+		
+		menuBuilderDeplacement.getMenu().setEnabled(false);
+		menuBuilderCreature.getMenu().setEnabled(false);
 
 	}
 
@@ -224,6 +227,7 @@ public class Launcher extends JFrame {
 					e1.printStackTrace();
 				}
 				menuBuilderComportement.getMenu().setEnabled(false);
+				menuBuilderCreature.getMenu().setEnabled(true);
 			}
 		};
 
