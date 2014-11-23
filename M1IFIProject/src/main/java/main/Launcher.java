@@ -55,6 +55,7 @@ public class Launcher extends JFrame {
 	private PluginMenuItemBuilderComportement menuBuilderComportement;
 	private JMenuBar mb = new JMenuBar();
 	private Constructor<? extends ICreature> currentConstructor = null;
+	private Constructor<? extends IComportement> constructorComportement = null;
 
 	public Launcher() {
 		quantity = 0;
@@ -191,12 +192,20 @@ public class Launcher extends JFrame {
 						((JMenuItem) e.getSource()).getActionCommand());
 			}
 		};
+		ActionListener listenerComportement = new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				constructorComportement = comportementFactory.getConstructorMap().get(
+						((JMenuItem) e.getSource()).getActionCommand());
+			    
+				System.out.println(constructorComportement);
+			}
+		};
 		menuBuilderCreature = new PluginMenuItemBuilderCreature(factory.getConstructorMap(),
 				listener);
 		menuBuilderCreature.setMenuTitle("Creatures");
 		menuBuilderCreature.buildMenu();
 		mb.add(menuBuilderCreature.getMenu());
-		menuBuilderComportement = new PluginMenuItemBuilderComportement(comportementFactory.getConstructorMap(), listener);
+		menuBuilderComportement = new PluginMenuItemBuilderComportement(comportementFactory.getConstructorMap(), listenerComportement);
 		menuBuilderComportement.setMenuTitle("Comportements");
 		menuBuilderComportement.buildMenu();
 		mb.add(menuBuilderComportement.getMenu());
