@@ -17,7 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import commons.Utils.Predicate;
-import comportement.IComportement;
+import comportements.IComportement;
 import deplacements.IDeplacement;
 
 

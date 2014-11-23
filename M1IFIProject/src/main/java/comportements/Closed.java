@@ -1,4 +1,4 @@
-package comportement;
+package comportements;
 
 import static java.lang.Math.PI;
 

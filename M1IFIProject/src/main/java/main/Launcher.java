@@ -17,7 +17,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-import comportement.IComportement;
+import comportements.IComportement;
 
 import creatures.ICreature;
 import creatures.visual.ColorCube;

@@ -1,12 +1,9 @@
 package creatures;
 
-import static java.lang.Math.cos;
-import static java.lang.Math.sin;
-
 import java.awt.Color;
 import java.awt.geom.Point2D;
 
-import comportement.IComportement;
+import comportements.IComportement;
 
 import deplacements.IDeplacement;
 

@@ -7,7 +7,7 @@ import java.awt.Color;
 import java.awt.geom.Point2D;
 
 import commons.Utils.Predicate;
-import comportement.IComportement;
+import comportements.IComportement;
 import deplacements.IDeplacement;
 
 

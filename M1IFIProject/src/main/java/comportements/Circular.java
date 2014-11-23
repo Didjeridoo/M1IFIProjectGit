@@ -1,10 +1,12 @@
-package comportement;
+package comportements;
 
 import static java.lang.Math.PI;
 
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
+
 import creatures.AbstractCreature;
+import creatures.CustomCreature;
 
 public class Circular implements IComportement {
 

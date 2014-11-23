@@ -1,22 +1,15 @@
 package comportements;
 
-import static java.lang.Math.toRadians;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.geom.Point2D;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import comportement.Circular;
-import comportement.Closed;
-import creatures.BouncingCreature;
 import creatures.visual.CreatureSimulator;
-import deplacements.Stupid;
 
 public class ToricComportementTest {
 

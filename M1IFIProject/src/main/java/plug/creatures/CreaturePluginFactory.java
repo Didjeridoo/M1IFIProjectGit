@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.logging.Logger;
 
-import comportement.IComportement;
+import comportements.IComportement;
 
 import plug.IPlugin;
 import plug.PluginLoader;

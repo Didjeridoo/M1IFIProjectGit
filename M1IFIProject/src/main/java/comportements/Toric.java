@@ -1,4 +1,4 @@
-package comportement;
+package comportements;
 
 import java.awt.Dimension;
 import java.awt.geom.Point2D;

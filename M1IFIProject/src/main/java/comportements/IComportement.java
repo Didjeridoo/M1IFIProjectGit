@@ -1,6 +1,7 @@
-package comportement;
+package comportements;
 
 import creatures.AbstractCreature;
+import creatures.CustomCreature;
 import plug.IPlugin;
 
 public interface IComportement extends IPlugin{

@@ -1,18 +1,15 @@
 package creatures;
 
-import static java.lang.Math.toRadians;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.geom.Point2D;
-import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import comportement.IComportement;
+import comportements.IComportement;
 
 import creatures.visual.CreatureSimulator;
 import deplacements.IDeplacement;
