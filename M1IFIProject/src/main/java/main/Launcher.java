@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -207,7 +208,21 @@ public class Launcher extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				constructorComportement = comportementFactory.getConstructorMap().get(
 						((JMenuItem) e.getSource()).getActionCommand());
-			    
+				try {
+					comportement = constructorComportement.newInstance();
+				} catch (InstantiationException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IllegalAccessException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IllegalArgumentException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (InvocationTargetException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				menuBuilderComportement.getMenu().setEnabled(false);
 			}
 		};
@@ -216,8 +231,22 @@ public class Launcher extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				constructorDeplacement = deplacementFactory.getConstructorMap().get(
 						((JMenuItem) e.getSource()).getActionCommand());
+				try {
+					move = constructorDeplacement.newInstance();
+				} catch (InstantiationException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IllegalAccessException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IllegalArgumentException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (InvocationTargetException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			    
-				System.out.println(constructorDeplacement);
 			}
 		};
 		
