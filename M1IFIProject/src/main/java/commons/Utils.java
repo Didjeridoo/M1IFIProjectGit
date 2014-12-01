@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.List;
 
 public class Utils {
-
 	public interface Predicate<T> {
 		public boolean apply(T input);
 	}

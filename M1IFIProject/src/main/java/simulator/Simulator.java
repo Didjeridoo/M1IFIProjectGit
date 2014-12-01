@@ -3,6 +3,8 @@ package simulator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import commons.Generate;
+
 public class Simulator<T extends IActionable> { 
 	
 	private final List<ISimulationListener> listeners = new CopyOnWriteArrayList<ISimulationListener>();
@@ -17,10 +19,13 @@ public class Simulator<T extends IActionable> {
 	private volatile boolean running = false;
 
 	protected final List<T> actionables;
+
+	private Generate generate;
 	
-	public Simulator(List<T> actionables, int initialExecutionDelay) {
+	public Simulator(List<T> actionables) {
 		this.actionables = actionables;
-		setExecutionDelay(initialExecutionDelay);
+		generate = Generate.getInstance();
+		setExecutionDelay(generate.getVitesseSimu());
 	}
 
 	public void start() {

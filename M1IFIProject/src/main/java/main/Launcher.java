@@ -26,11 +26,10 @@ import plug.deplacements.DeplacementPluginFactory;
 import plug.deplacements.PluginMenuItemBuilderDeplacement;
 import visual.FormDesiredQuantity;
 import visual.TestResultsDisplay;
-
+import commons.Config;
+import commons.Generate;
 import comportements.IComportement;
-
 import creatures.ICreature;
-import creatures.visual.ColorCube;
 import creatures.visual.CreatureInspector;
 import creatures.visual.CreatureSimulator;
 import creatures.visual.CreatureVisualizer;
@@ -42,6 +41,9 @@ import deplacements.IDeplacement;
  */
 @SuppressWarnings("serial")
 public class Launcher extends JFrame {
+	private Config config = Config.getInstance();
+	
+	private static Generate generate;
 	private TestResultsDisplay testResultsDisplay;
 	private int quantity;
 	
@@ -97,13 +99,12 @@ public class Launcher extends JFrame {
 			}
 		});
 		buttons.add(reloader);
-		
 		final JButton add = new JButton("Add creatures");
 		add.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (currentConstructor != null) {
 					Collection<? extends ICreature> creatures = factory
-							.createCreatures(simulator,comportement,move, quantity, new ColorCube(50),
+							.createCreatures(simulator,comportement,move, quantity, config.getColor(),
 									currentConstructor);
 					simulator.addAllCreatures(creatures);
 					currentConstructor = null;
@@ -126,7 +127,7 @@ public class Launcher extends JFrame {
 					}
 					simulator.clearCreatures();
 					Collection<? extends ICreature> creatures = factory
-							.createCreatures(simulator, comportement, move, quantity, new ColorCube(50),
+							.createCreatures(simulator, comportement, move, quantity, config.getColor(),
 									currentConstructor);
 					simulator.addAllCreatures(creatures);
 					simulator.start();
@@ -298,6 +299,8 @@ public class Launcher extends JFrame {
 
 	public static void main(String args[]) {
 		Logger.getLogger("plug").setLevel(Level.INFO);
+		generate = Generate.getInstance();
+		generate.generateConfig();
 		double myMaxSpeed = 5;
 		CreaturePluginFactory.init(myMaxSpeed);
 		ComportementPluginFactory.init();

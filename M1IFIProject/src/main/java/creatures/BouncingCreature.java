@@ -10,7 +10,6 @@ import deplacements.IDeplacement;
 
 
 public class BouncingCreature extends AbstractCreature{
-
 	
 	public BouncingCreature(IEnvironment environment,IComportement behaviour, IDeplacement move, Point2D position, double speed,
 			double direction, Color color) {
