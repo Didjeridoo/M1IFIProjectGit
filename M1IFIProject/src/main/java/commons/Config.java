@@ -6,10 +6,12 @@ public class Config {
 	private static Config config = new Config();
 	private int vitesseSimu;
 	private IColorStrategy couleur;
+	private int vitesse;
 	
 	private Config() {
 		// TODO Auto-generated constructor stub
 		vitesseSimu = 0;
+		vitesse = 0;
 	}
 	
 	public static Config getInstance(){
@@ -30,5 +32,13 @@ public class Config {
 	
 	public IColorStrategy getColor(){
 		return couleur;
+	}
+	
+	public void setVitesse(int vitesse){
+		this.vitesse = vitesse;
+	}
+	
+	public int getVitesse(){
+		return vitesse;
 	}
 }

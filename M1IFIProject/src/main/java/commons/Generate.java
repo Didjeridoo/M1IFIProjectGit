@@ -5,7 +5,7 @@ import creatures.visual.ColorCube;
 public class Generate {
 	private Config config;
 	private String[] features;
-	private static Generate instance = new Generate(new String[] {"moyen", "cube"});
+	private static Generate instance = new Generate(new String[] {"moyen", "cube", "VFixe"});
 
 	private Generate(String[] args) {
 		// TODO Auto-generated constructor stub
@@ -20,6 +20,7 @@ public class Generate {
 	public void generateConfig() {
 		generateMoteur(features[0]);
 		generateColor(features[1]);
+		//generateVitesse(features[2]);
 	}
 
 	public void generateMoteur(String vitesse) {
@@ -46,4 +47,12 @@ public class Generate {
 			config.setColor(new Group());
 		}*/
 	}
+	
+	/*private void generateVitesse(String vitesse){
+		if(vitesse.equalsIgnoreCase("VAleatoire")){
+			config.setVitesse();
+		} else if(vitesse.equalsIgnoreCase("VFixe")){
+			config.setVitesse());
+		}
+	}*/
 }
