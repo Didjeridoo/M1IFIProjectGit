@@ -12,6 +12,8 @@ import java.util.Map;
 import java.util.Random;
 import java.util.logging.Logger;
 
+import commons.Config;
+import commons.Generate;
 import comportements.Circular;
 import comportements.IComportement;
 import plug.IPlugin;
@@ -117,7 +119,7 @@ public class CreaturePluginFactory {
 			// Y coordinate
 			double y = (rand.nextDouble() * s.getHeight()) - s.getHeight() / 2;
 			// direction
-			double direction = (rand.nextDouble() * 2 * Math.PI);
+			double direction = Config.getInstance().getDirection();
 			// speed
 			int speed = (int) maxSpeed;
 			T creature = null;
