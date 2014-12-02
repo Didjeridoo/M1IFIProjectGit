@@ -53,8 +53,7 @@ public class Generate {
 	
 	public void generateVitesse(String vitesse){
 		if(vitesse.equalsIgnoreCase("VAleatoire")){
-			Random rand = new Random();
-			config.setVitesse((int)(rand.nextDouble() * 10));
+			config.setVitesse(-1);
 		} else if(vitesse.equalsIgnoreCase("VFixe")){
 			config.setVitesse(5);
 		}
@@ -62,8 +61,7 @@ public class Generate {
 	
 	public void generateDirection(String direction){
 		if(direction.equalsIgnoreCase("DAleatoire")){
-			Random rand = new Random();
-			config.setDirection(rand.nextDouble() * 2 * Math.PI);
+			config.setDirection(-1);
 		} else if(direction.equalsIgnoreCase("DFixe")){
 			config.setDirection(0.d);
 		}

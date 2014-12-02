@@ -120,8 +120,16 @@ public class CreaturePluginFactory {
 			double y = (rand.nextDouble() * s.getHeight()) - s.getHeight() / 2;
 			// direction
 			double direction = Config.getInstance().getDirection();
+			if(direction == -1){
+				Random rand = new Random();
+				direction = rand.nextDouble() * 2 * Math.PI;
+			}
 			// speed
-			int speed = (int) maxSpeed;
+			int speed = (int)maxSpeed;
+			if(maxSpeed == -1){
+				Random rand = new Random();
+				speed = (int)(rand.nextDouble() * 10);
+			}
 			T creature = null;
 			try {
 				creature = constructor.newInstance(env,comportement,move,
