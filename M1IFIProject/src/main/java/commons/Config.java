@@ -16,6 +16,14 @@ public class Config {
 		return config;
 	}
 	
+	public void setVitesseSimu(int vitesseSimu){
+		this.vitesseSimu = vitesseSimu;
+	}
+	
+	public int getVitesseSimu(){
+		return vitesseSimu;
+	}
+	
 	public void setColor(IColorStrategy couleur){
 		this.couleur = couleur;
 	}
