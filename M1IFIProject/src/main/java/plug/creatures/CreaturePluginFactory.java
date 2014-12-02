@@ -119,7 +119,7 @@ public class CreaturePluginFactory {
 			// direction
 			double direction = (rand.nextDouble() * 2 * Math.PI);
 			// speed
-			int speed = (int) (rand.nextDouble() * maxSpeed);
+			int speed = (int) maxSpeed;
 			T creature = null;
 			try {
 				creature = constructor.newInstance(env,comportement,move,
