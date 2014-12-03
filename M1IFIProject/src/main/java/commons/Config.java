@@ -1,5 +1,7 @@
 package commons;
 
+import comportements.IComportement;
+import comportements.Toric;
 import creatures.IColorStrategy;
 
 public class Config {
@@ -9,6 +11,7 @@ public class Config {
 	private int vitesse;
 	private double direction;
 	private int nombre;
+	private IComportement environnement;
 	
 	private Config() {
 		// TODO Auto-generated constructor stub
@@ -16,6 +19,7 @@ public class Config {
 		vitesse = 0;
 		direction = 0d;
 		nombre = 0;
+		environnement = Toric.getInstance();
 	}
 	
 	public static Config getInstance(){
@@ -60,5 +64,13 @@ public class Config {
 	
 	public int getNombre(){
 		return nombre;
+	}
+	
+	public void setEnvironnement(IComportement environnement){
+		this.environnement = environnement;
+	}
+	
+	public IComportement getEnvironnement(){
+		return environnement;
 	}
 }

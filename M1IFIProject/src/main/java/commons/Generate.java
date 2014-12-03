@@ -1,13 +1,15 @@
 package commons;
 
-import java.util.Random;
-
+import comportements.Circular;
+import comportements.Closed;
+import comportements.Toric;
 import creatures.visual.ColorCube;
 
 public class Generate {
 	private Config config;
 	private String[] features;
-	private static Generate instance = new Generate(new String[] {"moyen", "cube", "VAleatoire", "DAleatoire", "Fixe"});
+	private static Generate instance = new Generate(new String[] {"moyen", "cube", "VAleatoire", "DAleatoire", "Ferme", "Fixe"});
+
 
 	private Generate(String[] args) {
 		// TODO Auto-generated constructor stub
@@ -24,7 +26,8 @@ public class Generate {
 		generateColor(features[1]);
 		generateVitesse(features[2]);
 		generateDirection(features[3]);
-		generateNombre(features[4]);
+		generateEnvironnement(features[4]);
+		generateNombre(features[5]);
 	}
 
 	public void generateMoteur(String vitesse) {
@@ -68,6 +71,7 @@ public class Generate {
 		}
 	}
 	
+<<<<<<< HEAD
 	public void generateNombre(String nombre){
 		String[] nbTmp = nombre.split(" ");
 		if(nombre.equalsIgnoreCase("Fixe")){
@@ -86,6 +90,16 @@ public class Generate {
 				int i1 = (r.nextInt(10000 - 1000) + 1000);
 				config.setNombre(i1);
 			}
+=======
+	private void generateEnvironnement(String environnement) {
+		// TODO Auto-generated method stub
+		if(environnement.equalsIgnoreCase("torique")){
+			config.setEnvironnement(Toric.getInstance());
+		} else if(environnement.equalsIgnoreCase("ferme")){
+			config.setEnvironnement(Closed.getInstance());
+		} else if(environnement.equalsIgnoreCase("monde")){
+			config.setEnvironnement(Circular.getInstance());
+>>>>>>> 61a676b362a096e48ce367efda82255beecd332a
 		}
 	}
 }
