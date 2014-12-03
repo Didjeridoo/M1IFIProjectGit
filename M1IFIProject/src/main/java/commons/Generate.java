@@ -7,7 +7,7 @@ import creatures.visual.ColorCube;
 public class Generate {
 	private Config config;
 	private String[] features;
-	private static Generate instance = new Generate(new String[] {"moyen", "cube", "VAleatoire", "DAleatoire"});
+	private static Generate instance = new Generate(new String[] {"moyen", "cube", "VAleatoire", "DAleatoire", "Fixe"});
 
 	private Generate(String[] args) {
 		// TODO Auto-generated constructor stub
@@ -24,6 +24,7 @@ public class Generate {
 		generateColor(features[1]);
 		generateVitesse(features[2]);
 		generateDirection(features[3]);
+		generateNombre(features[4]);
 	}
 
 	public void generateMoteur(String vitesse) {
@@ -64,6 +65,27 @@ public class Generate {
 			config.setDirection(-1);
 		} else if(direction.equalsIgnoreCase("DFixe")){
 			config.setDirection(0.d);
+		}
+	}
+	
+	public void generateNombre(String nombre){
+		String[] nbTmp = nombre.split(" ");
+		if(nombre.equalsIgnoreCase("Fixe")){
+			config.setNombre(5);
+		} else if(nbTmp[0].equalsIgnoreCase("NAleatoire")){
+			if(nbTmp[1].equalsIgnoreCase("Dizaine")){
+				Random r = new Random();
+				int i1 = (r.nextInt(100 - 10) + 10);
+				config.setNombre(i1);
+			}else if(nbTmp[1].equalsIgnoreCase("Centaine")){
+				Random r = new Random();
+				int i1 = (r.nextInt(1000 - 100) + 100);
+				config.setNombre(i1);
+			}else if(nbTmp[1].equalsIgnoreCase("Millier")){
+				Random r = new Random();
+				int i1 = (r.nextInt(10000 - 1000) + 1000);
+				config.setNombre(i1);
+			}
 		}
 	}
 }

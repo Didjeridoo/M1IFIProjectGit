@@ -8,12 +8,14 @@ public class Config {
 	private IColorStrategy couleur;
 	private int vitesse;
 	private double direction;
+	private int nombre;
 	
 	private Config() {
 		// TODO Auto-generated constructor stub
 		vitesseSimu = 0;
 		vitesse = 0;
 		direction = 0d;
+		nombre = 0;
 	}
 	
 	public static Config getInstance(){
@@ -50,5 +52,13 @@ public class Config {
 	
 	public double getDirection(){
 		return direction;
+	}
+	
+	public void setNombre(int nombre){
+		this.nombre = nombre;
+	}
+	
+	public int getNombre(){
+		return nombre;
 	}
 }

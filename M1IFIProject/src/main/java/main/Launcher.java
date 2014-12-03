@@ -210,7 +210,8 @@ public class Launcher extends JFrame {
 			    
 			    submit.addActionListener(new ActionListener() {
 			      public void actionPerformed(ActionEvent e) {
-			        quantity = Integer.parseInt(form.getText(0));
+			    	  quantity = Integer.parseInt(form.getText(0));
+			    	  //quantity = config.getNombre();
 			        if(res.equals("creatures.CustomCreature")){
 			        	menuBuilderDeplacement.getMenu().setEnabled(true);
 			        } else {
