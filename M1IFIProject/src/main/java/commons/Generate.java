@@ -1,13 +1,14 @@
 package commons;
 
-import java.util.Random;
-
+import comportements.Circular;
+import comportements.Closed;
+import comportements.Toric;
 import creatures.visual.ColorCube;
 
 public class Generate {
 	private Config config;
 	private String[] features;
-	private static Generate instance = new Generate(new String[] {"moyen", "cube", "VAleatoire", "DAleatoire"});
+	private static Generate instance = new Generate(new String[] {"moyen", "cube", "VAleatoire", "DAleatoire", "Ferme"});
 
 	private Generate(String[] args) {
 		// TODO Auto-generated constructor stub
@@ -24,6 +25,7 @@ public class Generate {
 		generateColor(features[1]);
 		generateVitesse(features[2]);
 		generateDirection(features[3]);
+		generateEnvironnement(features[4]);
 	}
 
 	public void generateMoteur(String vitesse) {
@@ -64,6 +66,17 @@ public class Generate {
 			config.setDirection(-1);
 		} else if(direction.equalsIgnoreCase("DFixe")){
 			config.setDirection(0.d);
+		}
+	}
+	
+	private void generateEnvironnement(String environnement) {
+		// TODO Auto-generated method stub
+		if(environnement.equalsIgnoreCase("torique")){
+			config.setEnvironnement(Toric.getInstance());
+		} else if(environnement.equalsIgnoreCase("ferme")){
+			config.setEnvironnement(Closed.getInstance());
+		} else if(environnement.equalsIgnoreCase("monde")){
+			config.setEnvironnement(Circular.getInstance());
 		}
 	}
 }
