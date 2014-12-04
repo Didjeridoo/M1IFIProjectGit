@@ -1,8 +1,8 @@
 package commons;
 
+import color.IColorStrategy;
 import comportements.IComportement;
 import comportements.Toric;
-import creatures.IColorStrategy;
 
 public class Config {
 	private static Config config = new Config();

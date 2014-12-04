@@ -18,6 +18,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import color.IColorStrategy;
+import plug.color.ColorPluginFactory;
+import plug.color.PluginMenuItemBuilderColor;
 import plug.comportements.ComportementPluginFactory;
 import plug.comportements.PluginMenuItemBuilderComportement;
 import plug.creatures.CreaturePluginFactory;
@@ -49,10 +52,12 @@ public class Launcher extends JFrame {
 	
 	private IComportement comportement;
 	private IDeplacement move;
+	private IColorStrategy color;
 
 	private final CreaturePluginFactory factory;
 	private final ComportementPluginFactory comportementFactory;
 	private final DeplacementPluginFactory deplacementFactory;
+	private final ColorPluginFactory colorFactory;
 
 	private final CreatureInspector inspector;
 	private final CreatureVisualizer visualizer;
@@ -61,10 +66,12 @@ public class Launcher extends JFrame {
 	private PluginMenuItemBuilderCreature menuBuilderCreature;
 	private PluginMenuItemBuilderComportement menuBuilderComportement;
 	private PluginMenuItemBuilderDeplacement menuBuilderDeplacement;
+	private PluginMenuItemBuilderColor menuBuilderColor;
 	private JMenuBar mb = new JMenuBar();
 	private Constructor<? extends ICreature> currentConstructor = null;
 	private Constructor<? extends IComportement> constructorComportement = null;
 	private Constructor<? extends IDeplacement> constructorDeplacement = null;
+	private Constructor<? extends IColorStrategy> constructorColor = null;
 	final JButton restart;
 
 
@@ -73,6 +80,7 @@ public class Launcher extends JFrame {
 		factory = CreaturePluginFactory.getInstance();
 		comportementFactory = ComportementPluginFactory.getInstance();
 		deplacementFactory = DeplacementPluginFactory.getInstance();
+		colorFactory = ColorPluginFactory.getInstance();
 		
 		setName("Creature Simulator Plugin Version");
 		setLayout(new BorderLayout());
@@ -84,6 +92,7 @@ public class Launcher extends JFrame {
 				factory.load();
 				comportementFactory.load();
 				deplacementFactory.load();
+				colorFactory.load();
 				//buildPluginMenus();
 			}
 		});
@@ -95,6 +104,7 @@ public class Launcher extends JFrame {
 				factory.reload();
 				comportementFactory.reload();
 				deplacementFactory.reload();
+				colorFactory.reload();
 				//buildPluginMenus();
 			}
 		});
@@ -104,7 +114,7 @@ public class Launcher extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (currentConstructor != null) {
 					Collection<? extends ICreature> creatures = factory
-							.createCreatures(simulator,Config.getInstance().getEnvironnement(),move, quantity, config.getColor(),
+							.createCreatures(simulator,Config.getInstance().getEnvironnement(),move, quantity, color,
 									currentConstructor);
 					simulator.addAllCreatures(creatures);
 					currentConstructor = null;
@@ -127,7 +137,7 @@ public class Launcher extends JFrame {
 					}
 					simulator.clearCreatures();
 					Collection<? extends ICreature> creatures = factory
-							.createCreatures(simulator, Config.getInstance().getEnvironnement(), move, quantity, config.getColor(),
+							.createCreatures(simulator, Config.getInstance().getEnvironnement(), move, quantity, color,
 									currentConstructor);
 					simulator.addAllCreatures(creatures);
 					simulator.start();
@@ -281,6 +291,31 @@ public class Launcher extends JFrame {
 			}
 		};
 		
+		ActionListener listenerColor = new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				constructorColor = colorFactory.getConstructorMap().get(
+						((JMenuItem) e.getSource()).getActionCommand());
+				try {
+					color = constructorColor.newInstance();
+				} catch (InstantiationException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IllegalAccessException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IllegalArgumentException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (InvocationTargetException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+//			    menuBuilderCreature.getMenu().setEnabled(true);
+//				menuBuilderDeplacement.getMenu().setEnabled(false);
+//				restart.setEnabled(true);
+			}
+		};
+		
 		menuBuilderComportement = new PluginMenuItemBuilderComportement(comportementFactory.getConstructorMap(), listenerComportement);
 		menuBuilderComportement.setMenuTitle("Comportements");
 		menuBuilderComportement.buildMenu();
@@ -297,6 +332,11 @@ public class Launcher extends JFrame {
 		menuBuilderDeplacement.setMenuTitle("Deplacements");
 		menuBuilderDeplacement.buildMenu();
 		mb.add(menuBuilderDeplacement.getMenu());
+		
+		menuBuilderColor = new PluginMenuItemBuilderColor(colorFactory.getConstructorMap(), listenerColor);
+		menuBuilderColor.setMenuTitle("Color");
+		menuBuilderColor.buildMenu();
+		mb.add(menuBuilderColor.getMenu());
 
 		setJMenuBar(mb);
 	}
@@ -310,6 +350,7 @@ public class Launcher extends JFrame {
 		CreaturePluginFactory.init(myMaxSpeed);
 		ComportementPluginFactory.init();
 		DeplacementPluginFactory.init();
+		ColorPluginFactory.init();
 		Launcher launcher = new Launcher();
 		launcher.setVisible(true);
 	}

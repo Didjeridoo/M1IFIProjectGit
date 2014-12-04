@@ -28,7 +28,7 @@ public class SmartCreature extends AbstractCreature {
 	
 	public SmartCreature(IEnvironment environment,IComportement comportement, IDeplacement move, Point2D position,
 			double speed , double direction ,Color color) {
-		super(environment, comportement, new Troupeau(), position);
+		super(environment, comportement, new Troupeau(), color, position);
 		this.direction = direction;
 		this.speed = speed;
 		this.color = color;
