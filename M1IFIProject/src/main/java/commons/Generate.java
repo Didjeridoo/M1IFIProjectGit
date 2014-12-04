@@ -1,6 +1,7 @@
 package commons;
 
 import creatures.visual.ColorCube;
+import creatures.visual.ColorUnique;
 
 public class Generate {
 	private Config config;
@@ -41,9 +42,9 @@ public class Generate {
 	private void generateColor(String couleur){
 		if(couleur.equalsIgnoreCase("cube")){
 			config.setColor(new ColorCube(50)); 
-		} /*else if(couleur.equalsIgnoreCase("unique")){
-			config.setColor(new Unique());
-		} else if(couleur.equalsIgnoreCase("group")){
+		}else if(couleur.equalsIgnoreCase("unique")){
+			config.setColor(new ColorUnique());
+		}/* else if(couleur.equalsIgnoreCase("group")){
 			config.setColor(new Group());
 		}*/
 	}
