@@ -12,12 +12,12 @@ import java.util.Map;
 import java.util.Random;
 import java.util.logging.Logger;
 
-import commons.Config;
-import commons.Generate;
-import comportements.Circular;
-import comportements.IComportement;
 import plug.IPlugin;
 import plug.PluginLoader;
+
+import commons.Config;
+import comportements.IComportement;
+
 import creatures.IColorStrategy;
 import creatures.ICreature;
 import creatures.IEnvironment;

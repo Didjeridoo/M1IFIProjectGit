@@ -10,6 +10,7 @@ public class Config {
 	private IColorStrategy couleur;
 	private int vitesse;
 	private double direction;
+	private int nombre;
 	private IComportement environnement;
 	
 	private Config() {
@@ -17,6 +18,7 @@ public class Config {
 		vitesseSimu = 0;
 		vitesse = 0;
 		direction = 0d;
+		nombre = 0;
 		environnement = Toric.getInstance();
 	}
 	
@@ -54,6 +56,14 @@ public class Config {
 	
 	public double getDirection(){
 		return direction;
+	}
+	
+	public void setNombre(int nombre){
+		this.nombre = nombre;
+	}
+	
+	public int getNombre(){
+		return nombre;
 	}
 	
 	public void setEnvironnement(IComportement environnement){
