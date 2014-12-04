@@ -2,7 +2,7 @@ package color;
 
 import java.awt.Color;
 
-public class ColorUnique implements IColorStrategy{
+public class Unique implements IColorStrategy{
 
 	public Color getColor() {
 		return Color.RED;

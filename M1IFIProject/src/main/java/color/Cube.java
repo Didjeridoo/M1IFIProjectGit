@@ -2,14 +2,14 @@ package color;
 
 import java.awt.Color;
 
-public class ColorCube implements IColorStrategy {
+public class Cube implements IColorStrategy {
 
 	private final float colorPhase;
 	private float r = 0.0f;
 	private float g = 0.0f;
 	private float b = 0.0f;
 
-	public ColorCube() {
+	public Cube() {
 		float creaturesCountCubeRoot = (float) Math.pow(100, 1.0 / 3.0);
 		colorPhase = (float) (1.0 / creaturesCountCubeRoot);
 	}

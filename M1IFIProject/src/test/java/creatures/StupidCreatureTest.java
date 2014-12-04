@@ -12,7 +12,7 @@ import java.awt.geom.Point2D;
 import org.junit.Before;
 import org.junit.Test;
 
-import color.ColorUnique;
+import color.Unique;
 import color.IColorStrategy;
 import comportements.Toric;
 import creatures.visual.CreatureSimulator;
@@ -25,7 +25,7 @@ public class StupidCreatureTest implements IPlugin{
 	CreatureSimulator environment = mock(CreatureSimulator.class);
 	final double w = 200;
 	final double h = 100;
-	IColorStrategy color = new ColorUnique();
+	IColorStrategy color = new Unique();
 
 	
 	@Before

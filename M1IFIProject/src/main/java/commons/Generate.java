@@ -7,8 +7,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Random;
-import color.ColorCube;
-import color.ColorUnique;
+import color.Cube;
+import color.Unique;
 
 /**
  * Permet de génerer les plugins, et donc construire un produit à partir
@@ -24,8 +24,8 @@ public class Generate {
 	private String[] features;
 	private String path;
 	private static Generate instance = new Generate(new String[] { "moyen",
-			"cube", "VAleatoire", "DAleatoire", "Circular", "CustomCreature",
-			"Troupeau" });
+			"Unique", "VAleatoire", "DAleatoire", "Circular", "CustomCreature",
+			"Troupeau"});
 
 	private Generate(String[] args) {
 		// TODO Auto-generated constructor stub
@@ -86,13 +86,36 @@ public class Generate {
 	 * couleur voulu pour les créatures.
 	 */
 	private void generateColor(String couleur){
-		if(couleur.equalsIgnoreCase("cube")){
-			config.setColor(new ColorCube()); 
-		}else if(couleur.equalsIgnoreCase("unique")){
-			config.setColor(new ColorUnique());
-		}/* else if(couleur.equalsIgnoreCase("group")){
-			config.setColor(new Group());
-		}*/
+//		if(couleur.equalsIgnoreCase("cube")){
+//			config.setColor(new Cube()); 
+//		}else if(couleur.equalsIgnoreCase("unique")){
+//			config.setColor(new Unique());
+//		} else if(couleur.equalsIgnoreCase("group")){
+//			config.setColor(new Group());
+//		}
+		
+		Path pathSource = Paths.get(path + File.separator + "myPluginsList"
+				+ File.separator + "color" + File.separator
+				+ couleur + ".class");
+		Path pathTarget = Paths.get(path + File.separator + "myplugins"
+				+ File.separator + "repository" + File.separator
+				+ "color" + File.separator + couleur + ".class");
+
+		Path testPathSource = Paths.get(path + File.separator + "myPluginsList"
+				+ File.separator + "color" + File.separator
+				+ couleur + "Test" + ".class");
+		Path testPathTarget = Paths.get(path + File.separator + "myplugins"
+				+ File.separator + "repository" + File.separator
+				+ "color" + File.separator + couleur + "Test"
+				+ ".class");
+
+		try {
+			Files.copy(pathSource, pathTarget, REPLACE_EXISTING);
+			Files.copy(testPathSource, testPathTarget, REPLACE_EXISTING);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**

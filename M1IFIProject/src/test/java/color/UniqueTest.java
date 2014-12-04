@@ -1,14 +1,15 @@
 package color;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-public class ColorCubeTest {
+public class UniqueTest {
 	
 	@Test
 	public void test(){
 		assertTrue(true);
 	}
+
 
 }
