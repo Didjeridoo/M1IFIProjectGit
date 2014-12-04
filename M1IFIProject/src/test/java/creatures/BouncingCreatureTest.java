@@ -29,11 +29,6 @@ public class BouncingCreatureTest {
 	public void setup() {
 		when(environment.getSize()).thenReturn(new Dimension((int)w, (int)h));
 	}
-
-	@Test
-	public void testTestFaux() throws Exception {
-		fail();
-	}
 	
 	@Test
 	public void testDirectLeftUp() throws Exception {

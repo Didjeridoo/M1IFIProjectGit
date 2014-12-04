@@ -73,7 +73,7 @@ public class Launcher extends JFrame {
 		factory = CreaturePluginFactory.getInstance();
 		comportementFactory = ComportementPluginFactory.getInstance();
 		deplacementFactory = DeplacementPluginFactory.getInstance();
-
+		
 		setName("Creature Simulator Plugin Version");
 		setLayout(new BorderLayout());
 
@@ -104,7 +104,7 @@ public class Launcher extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (currentConstructor != null) {
 					Collection<? extends ICreature> creatures = factory
-							.createCreatures(simulator,comportement,move, quantity, config.getColor(),
+							.createCreatures(simulator,Config.getInstance().getEnvironnement(),move, quantity, config.getColor(),
 									currentConstructor);
 					simulator.addAllCreatures(creatures);
 					currentConstructor = null;
@@ -127,7 +127,7 @@ public class Launcher extends JFrame {
 					}
 					simulator.clearCreatures();
 					Collection<? extends ICreature> creatures = factory
-							.createCreatures(simulator, comportement, move, quantity, config.getColor(),
+							.createCreatures(simulator, Config.getInstance().getEnvironnement(), move, quantity, config.getColor(),
 									currentConstructor);
 					simulator.addAllCreatures(creatures);
 					simulator.start();
@@ -210,7 +210,8 @@ public class Launcher extends JFrame {
 			    
 			    submit.addActionListener(new ActionListener() {
 			      public void actionPerformed(ActionEvent e) {
-			        quantity = Integer.parseInt(form.getText(0));
+			    	  quantity = Integer.parseInt(form.getText(0));
+			    	  //quantity = config.getNombre();
 			        if(res.equals("creatures.CustomCreature")){
 			        	menuBuilderDeplacement.getMenu().setEnabled(true);
 			        } else {
@@ -231,6 +232,9 @@ public class Launcher extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				constructorComportement = comportementFactory.getConstructorMap().get(
 						((JMenuItem) e.getSource()).getActionCommand());
+//				faire le set ici pour modifier le comportement aux bords
+//				System.out.println(constructorComportement);
+//				Config.getInstance().setEnvironnement(constructorComportement);
 				try {
 					comportement = constructorComportement.newInstance();
 				} catch (InstantiationException e1) {
@@ -301,7 +305,8 @@ public class Launcher extends JFrame {
 		Logger.getLogger("plug").setLevel(Level.INFO);
 		generate = Generate.getInstance();
 		generate.generateConfig();
-		double myMaxSpeed = 5;
+		Config config = Config.getInstance();
+		double myMaxSpeed = config.getVitesse();
 		CreaturePluginFactory.init(myMaxSpeed);
 		ComportementPluginFactory.init();
 		DeplacementPluginFactory.init();

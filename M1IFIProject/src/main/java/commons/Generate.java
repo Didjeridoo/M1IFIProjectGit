@@ -1,12 +1,18 @@
 package commons;
 
+import java.util.Random;
+
+import comportements.Circular;
+import comportements.Closed;
+import comportements.Toric;
 import creatures.visual.ColorCube;
 import creatures.visual.ColorUnique;
 
 public class Generate {
 	private Config config;
 	private String[] features;
-	private static Generate instance = new Generate(new String[] {"moyen", "cube", "VFixe"});
+	private static Generate instance = new Generate(new String[] {"moyen", "cube", "VAleatoire", "DAleatoire", "Ferme", "Fixe"});
+
 
 	private Generate(String[] args) {
 		// TODO Auto-generated constructor stub
@@ -21,7 +27,10 @@ public class Generate {
 	public void generateConfig() {
 		generateMoteur(features[0]);
 		generateColor(features[1]);
-		//generateVitesse(features[2]);
+		generateVitesse(features[2]);
+		generateDirection(features[3]);
+		generateEnvironnement(features[4]);
+		generateNombre(features[5]);
 	}
 
 	public void generateMoteur(String vitesse) {
@@ -49,11 +58,51 @@ public class Generate {
 		}*/
 	}
 	
-	/*private void generateVitesse(String vitesse){
+	public void generateVitesse(String vitesse){
 		if(vitesse.equalsIgnoreCase("VAleatoire")){
-			config.setVitesse();
+			config.setVitesse(-1);
 		} else if(vitesse.equalsIgnoreCase("VFixe")){
-			config.setVitesse());
+			config.setVitesse(5);
 		}
-	}*/
+	}
+	
+	public void generateDirection(String direction){
+		if(direction.equalsIgnoreCase("DAleatoire")){
+			config.setDirection(-1);
+		} else if(direction.equalsIgnoreCase("DFixe")){
+			config.setDirection(0.d);
+		}
+	}
+	
+	public void generateNombre(String nombre){
+		String[] nbTmp = nombre.split(" ");
+		if(nombre.equalsIgnoreCase("Fixe")){
+			config.setNombre(5);
+		} else if(nbTmp[0].equalsIgnoreCase("NAleatoire")){
+			if(nbTmp[1].equalsIgnoreCase("Dizaine")){
+				Random r = new Random();
+				int i1 = (r.nextInt(100 - 10) + 10);
+				config.setNombre(i1);
+			}else if(nbTmp[1].equalsIgnoreCase("Centaine")){
+				Random r = new Random();
+				int i1 = (r.nextInt(1000 - 100) + 100);
+				config.setNombre(i1);
+			}else if(nbTmp[1].equalsIgnoreCase("Millier")){
+				Random r = new Random();
+				int i1 = (r.nextInt(10000 - 1000) + 1000);
+				config.setNombre(i1);
+			}
+		}
+	}
+
+	private void generateEnvironnement(String environnement) {
+		// TODO Auto-generated method stub
+		if(environnement.equalsIgnoreCase("torique")){
+			config.setEnvironnement(Toric.getInstance());
+		} else if(environnement.equalsIgnoreCase("ferme")){
+			config.setEnvironnement(Closed.getInstance());
+		} else if(environnement.equalsIgnoreCase("monde")){
+			config.setEnvironnement(Circular.getInstance());
+		}
+	}
 }
