@@ -1,6 +1,5 @@
 package commons;
 
-<<<<<<< HEAD
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 import java.io.File;
@@ -8,14 +7,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
-=======
 import java.util.Random;
 
-import comportements.Circular;
-import comportements.Closed;
-import comportements.Toric;
->>>>>>> 255af0e6afb78eb10ba39a842a542707bbe5b173
 import creatures.visual.ColorCube;
 import creatures.visual.ColorUnique;
 
@@ -44,12 +37,8 @@ public class Generate {
 		generateVitesse(features[2]);
 		generateDirection(features[3]);
 		generateEnvironnement(features[4]);
-<<<<<<< HEAD
 		generateCreature(features[5]);
 		generateDeplacement(features[6]);
-=======
-		generateNombre(features[5]);
->>>>>>> 255af0e6afb78eb10ba39a842a542707bbe5b173
 	}
 
 	public void generateMoteur(String vitesse) {
@@ -66,17 +55,6 @@ public class Generate {
 			config.setVitesseSimu(5);
 		}
 	}
-<<<<<<< HEAD
-
-	private void generateColor(String couleur) {
-		if (couleur.equalsIgnoreCase("cube")) {
-			config.setColor(new ColorCube(50));
-		} /*
-		 * else if(couleur.equalsIgnoreCase("unique")){ config.setColor(new
-		 * Unique()); } else if(couleur.equalsIgnoreCase("group")){
-		 * config.setColor(new Group()); }
-		 */
-=======
 	
 	private void generateColor(String couleur){
 		if(couleur.equalsIgnoreCase("cube")){
@@ -86,7 +64,6 @@ public class Generate {
 		}/* else if(couleur.equalsIgnoreCase("group")){
 			config.setColor(new Group());
 		}*/
->>>>>>> 255af0e6afb78eb10ba39a842a542707bbe5b173
 	}
 
 	public void generateVitesse(String vitesse) {
@@ -104,8 +81,6 @@ public class Generate {
 			config.setDirection(0.d);
 		}
 	}
-<<<<<<< HEAD
-=======
 	
 	public void generateNombre(String nombre){
 		String[] nbTmp = nombre.split(" ");
@@ -127,7 +102,6 @@ public class Generate {
 			}
 		}
 	}
->>>>>>> 255af0e6afb78eb10ba39a842a542707bbe5b173
 
 	private void generateEnvironnement(String environnement) {
 		// TODO Auto-generated method stub
