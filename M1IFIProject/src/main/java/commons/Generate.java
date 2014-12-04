@@ -1,5 +1,7 @@
 package commons;
 
+import java.util.Random;
+
 import comportements.Circular;
 import comportements.Closed;
 import comportements.Toric;
@@ -71,7 +73,6 @@ public class Generate {
 		}
 	}
 	
-<<<<<<< HEAD
 	public void generateNombre(String nombre){
 		String[] nbTmp = nombre.split(" ");
 		if(nombre.equalsIgnoreCase("Fixe")){
@@ -90,7 +91,9 @@ public class Generate {
 				int i1 = (r.nextInt(10000 - 1000) + 1000);
 				config.setNombre(i1);
 			}
-=======
+		}
+	}
+
 	private void generateEnvironnement(String environnement) {
 		// TODO Auto-generated method stub
 		if(environnement.equalsIgnoreCase("torique")){
@@ -99,7 +102,6 @@ public class Generate {
 			config.setEnvironnement(Closed.getInstance());
 		} else if(environnement.equalsIgnoreCase("monde")){
 			config.setEnvironnement(Circular.getInstance());
->>>>>>> 61a676b362a096e48ce367efda82255beecd332a
 		}
 	}
 }
