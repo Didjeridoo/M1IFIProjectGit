@@ -5,14 +5,41 @@ import comportements.IComportement;
 import comportements.Toric;
 
 public class Config {
+	/**
+	 * Instance de la classe Config. (Pattern Singleton).
+	 */
 	private static Config config = new Config();
+	/**
+	 * Execution delay in milliseconds.
+	 */
 	private int vitesseSimu;
+	/**
+	 * Strategy de couleur.
+	 */
 	private IColorStrategy couleur;
+	/**
+	 * Vitesse de la simulation.
+	 */
 	private int vitesse;
+	/**
+	 * Direction des créatures.
+	 */
 	private double direction;
+	/**
+	 * Nombre de créatures à créer.
+	 */
 	private int nombre;
+	/**
+	 * Comportement aux bords pour les créatures.
+	 */
 	private IComportement environnement;
 	
+	/**
+	 * Constructeur.
+	 * On initialise les variables de la classe.
+	 * On part du principe que le monde est torique
+	 * s'il n'est pas modifié par l'utilisateur.
+	 */
 	private Config() {
 		// TODO Auto-generated constructor stub
 		vitesseSimu = 0;
