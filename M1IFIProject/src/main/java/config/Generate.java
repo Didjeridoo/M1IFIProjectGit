@@ -25,12 +25,12 @@ public class Generate {
 	private Config config;
 	//private String[] features;
 	private String path;
-	HashMap collecConfig;
+	HashMap<String,ArrayList<String> > collecConfig;
 	/*private static Generate instance = new Generate(new String[] { "moyen",
 			"Unique", "VAleatoire", "DAleatoire", "Circular", "CustomCreature",
 			"Troupeau"});*/
 
-	public Generate(HashMap fml) {
+	public Generate(HashMap<String,ArrayList<String> > fml) {
 		// TODO Auto-generated constructor stub
 		config = Config.getInstance();
 		collecConfig = fml;
@@ -59,7 +59,7 @@ public class Generate {
 		generateDeplacement(collecConfig.get("Deplacement"));
 	}
 
-	public void generateMoteur(HashMap vitesse) {
+	public void generateMoteur(ArrayList<String> vitesse) {
 		generateVitesseSimu(vitesse);
 	}
 
@@ -73,9 +73,9 @@ public class Generate {
 	 *         milliseconds 5ms
 	 * 
 	 */
-	private void generateVitesseSimu(HashMap vitesseSimu) {
+	private void generateVitesseSimu(ArrayList<String> vitesseSimu) {
 		// TODO Auto-generated method stub
-		if (vitesseSimu.equalsIgnoreCase("lent")) {
+		if (vitesseSimu.get(0).equalsIgnoreCase("lent")) {
 			config.setVitesseSimu(20);
 		} else if (vitesseSimu.equalsIgnoreCase("moyen")) {
 			config.setVitesseSimu(10);
@@ -89,7 +89,7 @@ public class Generate {
 	 * @String couleur correspondante au plugin de
 	 * couleur voulu pour les cr�atures.
 	 */
-	private void generateColor(String couleur) {
+	private void generateColor(ArrayList<String> couleur) {
 		// if(couleur.equalsIgnoreCase("cube")){
 		// config.setColor(new Cube());
 		// }else if(couleur.equalsIgnoreCase("unique")){
@@ -126,7 +126,7 @@ public class Generate {
 	 * @String vitesse correspondante � la vitesse
 	 * des cr�atures.
 	 */
-	public void generateVitesse(String vitesse) {
+	public void generateVitesse(ArrayList<String> vitesse) {
 		if (vitesse.equalsIgnoreCase("VAleatoire")) {
 			config.setVitesse(-1);
 		} else if (vitesse.equalsIgnoreCase("VFixe")) {
@@ -139,7 +139,7 @@ public class Generate {
 	 * @String direction correspondante � la direction
 	 * des cr�atures.
 	 */
-	public void generateDirection(String direction) {
+	public void generateDirection(ArrayList<String> direction) {
 		if (direction.equalsIgnoreCase("DAleatoire")) {
 			config.setDirection(-1);
 		} else if (direction.equalsIgnoreCase("DFixe")) {
@@ -152,7 +152,7 @@ public class Generate {
 	 * @String nombre correspondante au nombre de
 	 * cr�atures � cr�er.
 	 */
-	public void generateNombre(String nombre) {
+	public void generateNombre(ArrayList<String> nombre) {
 		if (nombre.equalsIgnoreCase("Fixe")) {
 			config.setNombre(-1);
 		} else if (nombre.equalsIgnoreCase("Dizaine")) {
@@ -180,7 +180,7 @@ public class Generate {
 	 * Circular : rebonds en haut et en bas de la fen�tre, libre sur
 	 * 			  les cot�s.
 	 */
-	private void generateEnvironnement(String environnement) {
+	private void generateEnvironnement(ArrayList<String> environnement) {
 
 		Path pathSource = Paths.get(path + File.separator + "myPluginsList"
 				+ File.separator + "comportements" + File.separator
@@ -212,7 +212,7 @@ public class Generate {
 	 * cr�atures que l'utilisateur souhaite pouvoir
 	 * selectionner.
 	 */
-	private void generateCreature(String creature) {
+	private void generateCreature(ArrayList<String> creature) {
 
 		Path pathSource = Paths.get(path + File.separator + "myPluginsList"
 				+ File.separator + "creatures" + File.separator + creature
@@ -246,7 +246,7 @@ public class Generate {
 	 * Troupeau : d�placement en fonction des cr�atures autour d'elle.
 	 * Hasard 	: d�placement al�atoire qui change � un tick donn�.
 	 */
-	public void generateDeplacement(String deplacement) {
+	public void generateDeplacement(ArrayList<String> deplacement) {
 
 		Path pathSource = Paths.get(path + File.separator + "myPluginsList"
 				+ File.separator + "deplacements" + File.separator
