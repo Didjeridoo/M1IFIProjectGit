@@ -9,12 +9,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Random;
 
-import color.Cube;
-import color.Unique;
-
 /**
- * Permet de génerer les plugins, et donc construire un produit à partir
- * de la configuration entrée par l'utilisateur.
+ * Permet de gï¿½nerer les plugins, et donc construire un produit ï¿½ partir
+ * de la configuration entrï¿½e par l'utilisateur.
  * 
  * classe singleton
  * 
@@ -45,7 +42,7 @@ public class Generate {
 	}
 
 	/**
-	 * Génère les plugins demandés par l'utilisateur
+	 * Gï¿½nï¿½re les plugins demandï¿½s par l'utilisateur
 	 */
 	public void generateConfig() {
 		generateMoteur(features[0]);
@@ -63,7 +60,7 @@ public class Generate {
 
 	/**
 	 * 
-	 * @String vitesseSimu correspondante à la vitesse d'execution 
+	 * @String vitesseSimu correspondante ï¿½ la vitesse d'execution 
 	 * de la simulation.
 	 * 
 	 * lent : Execution delay in milliseconds 20ms 
@@ -85,7 +82,7 @@ public class Generate {
 	/**
 	 * 
 	 * @String couleur correspondante au plugin de
-	 * couleur voulu pour les créatures.
+	 * couleur voulu pour les crï¿½atures.
 	 */
 	private void generateColor(String couleur){
 //		if(couleur.equalsIgnoreCase("cube")){
@@ -122,8 +119,8 @@ public class Generate {
 
 	/**
 	 * 
-	 * @String vitesse correspondante à la vitesse
-	 * des créatures.
+	 * @String vitesse correspondante ï¿½ la vitesse
+	 * des crï¿½atures.
 	 */
 	public void generateVitesse(String vitesse) {
 		if (vitesse.equalsIgnoreCase("VAleatoire")) {
@@ -135,8 +132,8 @@ public class Generate {
 
 	/**
 	 * 
-	 * @String direction correspondante à la direction
-	 * des créatures.
+	 * @String direction correspondante ï¿½ la direction
+	 * des crï¿½atures.
 	 */
 	public void generateDirection(String direction) {
 		if (direction.equalsIgnoreCase("DAleatoire")) {
@@ -149,7 +146,7 @@ public class Generate {
 	/**
 	 * 
 	 * @String nombre correspondante au nombre de
-	 * créatures à créer.
+	 * crï¿½atures ï¿½ crï¿½er.
 	 */
 	public void generateNombre(String nombre){
 		String[] nbTmp = nombre.split(" ");
@@ -175,12 +172,12 @@ public class Generate {
 	/**
 	 * 
 	 * @String environnement correspondante au comportement
-	 * aux bords pour les créatures.
+	 * aux bords pour les crï¿½atures.
 	 * 
-	 * Closed 	: monde fermé
+	 * Closed 	: monde fermï¿½
 	 * Toric 	: monde libre
-	 * Circular : rebonds en haut et en bas de la fenêtre, libre sur
-	 * 			  les cotés.
+	 * Circular : rebonds en haut et en bas de la fenï¿½tre, libre sur
+	 * 			  les cotï¿½s.
 	 */
 	private void generateEnvironnement(String environnement) {
 
@@ -211,7 +208,7 @@ public class Generate {
 	/**
 	 * 
 	 * @String creature correspondante aux types de 
-	 * créatures que l'utilisateur souhaite pouvoir
+	 * crï¿½atures que l'utilisateur souhaite pouvoir
 	 * selectionner.
 	 */
 	private void generateCreature(String creature) {
@@ -241,12 +238,12 @@ public class Generate {
 
 	/**
 	 * 
-	 * @String deplacement correspondante au type de déplacement
-	 * des créatures.
+	 * @String deplacement correspondante au type de dï¿½placement
+	 * des crï¿½atures.
 	 * 
-	 * Stupid 	: déplacement dans une seule direction.
-	 * Troupeau : déplacement en fonction des créatures autour d'elle.
-	 * Hasard 	: déplacement aléatoire qui change à un tick donné.
+	 * Stupid 	: dï¿½placement dans une seule direction.
+	 * Troupeau : dï¿½placement en fonction des crï¿½atures autour d'elle.
+	 * Hasard 	: dï¿½placement alï¿½atoire qui change ï¿½ un tick donnï¿½.
 	 */
 	public void generateDeplacement(String deplacement) {
 
@@ -269,7 +266,6 @@ public class Generate {
 			Files.copy(pathSource, pathTarget, REPLACE_EXISTING);
 			Files.copy(testPathSource, testPathTarget, REPLACE_EXISTING);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
