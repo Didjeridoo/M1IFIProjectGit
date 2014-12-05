@@ -71,7 +71,7 @@ public class FMLConfig
 		        	System.out.println("Unselected features :"+fi.getUnselectedFeature(configName));
 		        	System.out.println("The configuration is complete : "+fi.getConfigurationVariable(configName).isComplete());
 	        	}
-	        } while (!s.equalsIgnoreCase("valider") || !fi.getConfigurationVariable(configName).isComplete() || !fi.getConfigurationVariable(configName).isValid());
+	        } while (!s.equalsIgnoreCase("valider") || !fi.getConfigurationVariable(configName).isValid());
 	        scan.close();
 	        return fi.getSelectedFeature(configName);
 		} catch (FMEngineException e) {
