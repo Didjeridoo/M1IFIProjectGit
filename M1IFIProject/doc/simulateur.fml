@@ -10,7 +10,7 @@ fmTechno = FM(SimuTechno: [Creature] [Visu] Moteur;
 			  Comportement: (Stupid|Smart|Bouncing)+;
 			  Vitesse: (VFixe|VAleatoire);
 			  Direction: (DFixe|DAleatoire);
-			  Couleur: (Cube|Groupe|Unique);
+			  Couleur: (Cube|Groupe|Unique)+;
 			  Environnement: (Torique|Monde|Ferme);
 			  Nombre: (NAleatoire|Fixe);
 			  NAleatoire: (Dizaine|Centaine|Milliers);
