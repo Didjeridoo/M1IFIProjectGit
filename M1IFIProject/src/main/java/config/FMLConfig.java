@@ -1,4 +1,4 @@
-package config.fml;
+package config;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

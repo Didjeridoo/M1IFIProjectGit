@@ -1,4 +1,4 @@
-package commons;
+package config;
 
 import color.IColorStrategy;
 import comportements.IComportement;

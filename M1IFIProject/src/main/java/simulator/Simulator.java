@@ -3,8 +3,8 @@ package simulator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import commons.Config;
-import commons.Generate;
+import config.Config;
+import config.Generate;
 
 public class Simulator<T extends IActionable> { 
 	
