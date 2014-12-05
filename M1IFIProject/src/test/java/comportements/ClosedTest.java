@@ -12,6 +12,8 @@ import java.awt.geom.Point2D;
 import org.junit.Before;
 import org.junit.Test;
 
+import color.Unique;
+import color.IColorStrategy;
 import creatures.CustomCreature;
 import creatures.visual.CreatureSimulator;
 import deplacements.Hasard;
@@ -24,6 +26,7 @@ public class ClosedTest {
 	CreatureSimulator environment = mock(CreatureSimulator.class);
 	final double w = 200;
 	final double h = 100;
+	IColorStrategy color = new Unique();
 
 	// Utilisation du mock afin de renvoyer les tailles de cotes que nous fixons pour les tests
 	@Before

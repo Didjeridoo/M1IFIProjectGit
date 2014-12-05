@@ -1,0 +1,20 @@
+fmDomaine = FM(SimuDomaine: [Apercu] Sujet VitesseSimu [Environnement] Performance;
+			   Sujet: (Creature|Maladie|Particule);
+			   VitesseSimu: (Lent|Rapide|Normal);
+			   Performance: Precision Echantillon;
+			   Precision: [NbSimulation] (Fine|Grossiere);
+			   Echantillon: (Large|Small|Medium);)
+			   
+fmTechno = FM(SimuTechno: [Creature] [Visu] Moteur;
+			  Creature: Vitesse Direction Comportement Environnement Couleur Nombre;
+			  Comportement: (Stupid|Smart|Bouncing)+;
+			  Vitesse: (VFixe|VAleatoire);
+			  Direction: (DFixe|DAleatoire);
+			  Couleur: (Cube|Groupe|Unique);
+			  Environnement: (Torique|Monde|Ferme);
+			  Nombre: (NAleatoire|Fixe);
+			  NAleatoire: (Dizaine|Centaine|Milliers);
+			  Moteur: VitesseSimu Action;
+			  Action: Sequentiel;
+			  VitesseSimu: (Lent|Rapide|Normal);
+			  Torique -> !Bouncing;)

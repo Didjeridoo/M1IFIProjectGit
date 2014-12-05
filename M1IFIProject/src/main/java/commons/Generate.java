@@ -1,24 +1,31 @@
 package commons;
 
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Random;
+import color.Cube;
+import color.Unique;
 
-import creatures.visual.ColorCube;
-import creatures.visual.ColorUnique;
-
+/**
+ * Permet de génerer les plugins, et donc construire un produit à partir
+ * de la configuration entrée par l'utilisateur.
+ * 
+ * classe singleton
+ * 
+ * @author Marc
+ *
+ */
 public class Generate {
 	private Config config;
 	private String[] features;
 	private String path;
 	private static Generate instance = new Generate(new String[] { "moyen",
-			"cube", "VAleatoire", "DAleatoire", "Circular", "CustomCreature",
-			"Troupeau" });
+			"Unique", "VAleatoire", "DAleatoire", "Circular", "CustomCreature",
+			"Troupeau"});
 
 	private Generate(String[] args) {
 		// TODO Auto-generated constructor stub
@@ -27,10 +34,17 @@ public class Generate {
 		path = new File("").getAbsolutePath();
 	}
 
+	/**
+	 * 
+	 * @return l'instance de la classe Generate
+	 */
 	public static Generate getInstance() {
 		return instance;
 	}
 
+	/**
+	 * Génère les plugins demandés par l'utilisateur
+	 */
 	public void generateConfig() {
 		generateMoteur(features[0]);
 		generateColor(features[1]);
@@ -45,6 +59,16 @@ public class Generate {
 		generateVitesseSimu(vitesse);
 	}
 
+	/**
+	 * 
+	 * @String vitesseSimu correspondante à la vitesse d'execution 
+	 * de la simulation.
+	 * 
+	 * lent : Execution delay in milliseconds 20ms 
+	 * moyen : Execution delay in milliseconds 10ms
+	 * rapide : Execution delay in milliseconds 5ms
+	 * 
+	 */
 	private void generateVitesseSimu(String vitesseSimu) {
 		// TODO Auto-generated method stub
 		if (vitesseSimu.equalsIgnoreCase("lent")) {
@@ -56,16 +80,49 @@ public class Generate {
 		}
 	}
 	
+	/**
+	 * 
+	 * @String couleur correspondante au plugin de
+	 * couleur voulu pour les créatures.
+	 */
 	private void generateColor(String couleur){
-		if(couleur.equalsIgnoreCase("cube")){
-			config.setColor(new ColorCube(50)); 
-		}else if(couleur.equalsIgnoreCase("unique")){
-			config.setColor(new ColorUnique());
-		}/* else if(couleur.equalsIgnoreCase("group")){
-			config.setColor(new Group());
-		}*/
+//		if(couleur.equalsIgnoreCase("cube")){
+//			config.setColor(new Cube()); 
+//		}else if(couleur.equalsIgnoreCase("unique")){
+//			config.setColor(new Unique());
+//		} else if(couleur.equalsIgnoreCase("group")){
+//			config.setColor(new Group());
+//		}
+		
+		Path pathSource = Paths.get(path + File.separator + "myPluginsList"
+				+ File.separator + "color" + File.separator
+				+ couleur + ".class");
+		Path pathTarget = Paths.get(path + File.separator + "myplugins"
+				+ File.separator + "repository" + File.separator
+				+ "color" + File.separator + couleur + ".class");
+
+		Path testPathSource = Paths.get(path + File.separator + "myPluginsList"
+				+ File.separator + "color" + File.separator
+				+ couleur + "Test" + ".class");
+		Path testPathTarget = Paths.get(path + File.separator + "myplugins"
+				+ File.separator + "repository" + File.separator
+				+ "color" + File.separator + couleur + "Test"
+				+ ".class");
+
+		try {
+			Files.copy(pathSource, pathTarget, REPLACE_EXISTING);
+			Files.copy(testPathSource, testPathTarget, REPLACE_EXISTING);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
+	/**
+	 * 
+	 * @String vitesse correspondante à la vitesse
+	 * des créatures.
+	 */
 	public void generateVitesse(String vitesse) {
 		if (vitesse.equalsIgnoreCase("VAleatoire")) {
 			config.setVitesse(-1);
@@ -74,6 +131,11 @@ public class Generate {
 		}
 	}
 
+	/**
+	 * 
+	 * @String direction correspondante à la direction
+	 * des créatures.
+	 */
 	public void generateDirection(String direction) {
 		if (direction.equalsIgnoreCase("DAleatoire")) {
 			config.setDirection(-1);
@@ -82,6 +144,11 @@ public class Generate {
 		}
 	}
 	
+	/**
+	 * 
+	 * @String nombre correspondante au nombre de
+	 * créatures à créer.
+	 */
 	public void generateNombre(String nombre){
 		String[] nbTmp = nombre.split(" ");
 		if(nombre.equalsIgnoreCase("Fixe")){
@@ -103,22 +170,17 @@ public class Generate {
 		}
 	}
 
+	/**
+	 * 
+	 * @String environnement correspondante au comportement
+	 * aux bords pour les créatures.
+	 * 
+	 * Closed 	: monde fermé
+	 * Toric 	: monde libre
+	 * Circular : rebonds en haut et en bas de la fenêtre, libre sur
+	 * 			  les cotés.
+	 */
 	private void generateEnvironnement(String environnement) {
-		// TODO Auto-generated method stub
-		// String env = "";
-		// if (environnement.equalsIgnoreCase("torique")) {
-		// env = "Toric";
-		// config.setEnvironnement(Toric.getInstance());
-		// } else if (environnement.equalsIgnoreCase("ferme")) {
-		// env = "Closed";
-		// config.setEnvironnement(Closed.getInstance());
-		// } else if (environnement.equalsIgnoreCase("monde")) {
-		// env = "Circular";
-		// config.setEnvironnement(Circular.getInstance());
-		// }
-
-		// récupère le comportement aux bords voulu
-		// String env = config.getEnvironnement().getName().split("\\.")[1];
 
 		Path pathSource = Paths.get(path + File.separator + "myPluginsList"
 				+ File.separator + "comportements" + File.separator
@@ -144,6 +206,12 @@ public class Generate {
 		}
 	}
 
+	/**
+	 * 
+	 * @String creature correspondante aux types de 
+	 * créatures que l'utilisateur souhaite pouvoir
+	 * selectionner.
+	 */
 	private void generateCreature(String creature) {
 
 		Path pathSource = Paths.get(path + File.separator + "myPluginsList"
@@ -169,6 +237,15 @@ public class Generate {
 		}
 	}
 
+	/**
+	 * 
+	 * @String deplacement correspondante au type de déplacement
+	 * des créatures.
+	 * 
+	 * Stupid 	: déplacement dans une seule direction.
+	 * Troupeau : déplacement en fonction des créatures autour d'elle.
+	 * Hasard 	: déplacement aléatoire qui change à un tick donné.
+	 */
 	public void generateDeplacement(String deplacement) {
 
 		Path pathSource = Paths.get(path + File.separator + "myPluginsList"

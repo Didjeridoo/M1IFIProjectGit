@@ -16,7 +16,7 @@ public class StupidCreature extends AbstractCreature {
 
 	public StupidCreature(IEnvironment environment, IComportement comportement, IDeplacement deplacement, Point2D position,
 			double speed, double direction, Color color) {
-		super(environment,comportement, new Stupid(), position);
+		super(environment,comportement, new Stupid(), color, position);
 		
 		this.direction = direction;
 		this.speed = speed;

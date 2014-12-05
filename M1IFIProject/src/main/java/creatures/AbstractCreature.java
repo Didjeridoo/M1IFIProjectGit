@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import color.IColorStrategy;
 import commons.Utils.Predicate;
 import comportements.IComportement;
 import deplacements.IDeplacement;
@@ -61,10 +62,11 @@ public abstract class AbstractCreature implements ICreature {
 	protected int currCycle;
 	
 
-	public AbstractCreature(IEnvironment environment, IComportement comportement, IDeplacement deplacement, Point2D position) {
+	public AbstractCreature(IEnvironment environment, IComportement comportement, IDeplacement deplacement, Color color, Point2D position) {
 		this.environment = environment;
 		comport = comportement;
 		move = deplacement;
+		this.color = color;
 		setPosition(position);
 		
 		currCycle = 0;
