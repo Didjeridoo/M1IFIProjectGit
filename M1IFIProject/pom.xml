@@ -7,6 +7,13 @@
 	<version>1.0-SNAPSHOT</version>
 	<name>M1IFIProject</name>
 	<url>http://maven.apache.org</url>
+	<repositories>
+		<repository>
+      		<id>releases</id>
+				<name>I3S Maven Releases Repository</name>
+				<url>http://nyx.unice.fr/nexus/content/repositories/i3s-public</url>	
+		</repository>
+	</repositories>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -18,6 +25,16 @@
 			<artifactId>mockito-all</artifactId>
 			<version>1.10.8</version>
 		</dependency>
+			<dependency>
+    	<groupId>fr.unice.deptinfo</groupId>
+		<artifactId>familiar-interpreter</artifactId>
+		<version>0.0.1</version>
+	</dependency>
+	<dependency>
+  		<groupId>fr.unice.deptinfo</groupId>
+  		<artifactId>maven-compiler</artifactId>
+  		<version>0.0.1</version>
+  	</dependency>
 	</dependencies>
 	<build>
 		<plugins>
