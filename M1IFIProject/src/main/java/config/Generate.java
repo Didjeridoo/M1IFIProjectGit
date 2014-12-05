@@ -26,7 +26,7 @@ public class Generate {
 	private String[] features;
 	private String path;
 	private static Generate instance = new Generate(new String[] { "moyen",
-			"Groupe", "VAleatoire", "DAleatoire", "Circular", "CustomCreature",
+			"Groupe", "VAleatoire", "DAleatoire", "Closed", "CustomCreature",
 			"Troupeau", "Dizaine" });
 
 	private Generate(String[] args) {
