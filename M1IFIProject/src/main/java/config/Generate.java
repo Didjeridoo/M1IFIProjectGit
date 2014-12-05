@@ -13,8 +13,8 @@ import color.Cube;
 import color.Unique;
 
 /**
- * Permet de génerer les plugins, et donc construire un produit à partir
- * de la configuration entrée par l'utilisateur.
+ * Permet de génerer les plugins, et donc construire un produit à partir de la
+ * configuration entrée par l'utilisateur.
  * 
  * classe singleton
  * 
@@ -27,7 +27,7 @@ public class Generate {
 	private String path;
 	private static Generate instance = new Generate(new String[] { "moyen",
 			"Groupe", "VAleatoire", "DAleatoire", "Circular", "CustomCreature",
-			"Troupeau"});
+			"Troupeau", "Dizaine" });
 
 	private Generate(String[] args) {
 		// TODO Auto-generated constructor stub
@@ -55,6 +55,7 @@ public class Generate {
 		generateEnvironnement(features[4]);
 		generateCreature(features[5]);
 		generateDeplacement(features[6]);
+		generateNombre(features[7]);
 	}
 
 	public void generateMoteur(String vitesse) {
@@ -63,12 +64,12 @@ public class Generate {
 
 	/**
 	 * 
-	 * @String vitesseSimu correspondante à la vitesse d'execution 
-	 * de la simulation.
+	 * @String vitesseSimu correspondante à la vitesse d'execution de la
+	 *         simulation.
 	 * 
-	 * lent : Execution delay in milliseconds 20ms 
-	 * moyen : Execution delay in milliseconds 10ms
-	 * rapide : Execution delay in milliseconds 5ms
+	 *         lent : Execution delay in milliseconds 20ms moyen : Execution
+	 *         delay in milliseconds 10ms rapide : Execution delay in
+	 *         milliseconds 5ms
 	 * 
 	 */
 	private void generateVitesseSimu(String vitesseSimu) {
@@ -81,35 +82,34 @@ public class Generate {
 			config.setVitesseSimu(5);
 		}
 	}
-	
+
 	/**
 	 * 
-	 * @String couleur correspondante au plugin de
-	 * couleur voulu pour les créatures.
+	 * @String couleur correspondante au plugin de couleur voulu pour les
+	 *         créatures.
 	 */
-	private void generateColor(String couleur){
-//		if(couleur.equalsIgnoreCase("cube")){
-//			config.setColor(new Cube()); 
-//		}else if(couleur.equalsIgnoreCase("unique")){
-//			config.setColor(new Unique());
-//		} else if(couleur.equalsIgnoreCase("group")){
-//			config.setColor(new Group());
-//		}
-		
+	private void generateColor(String couleur) {
+		// if(couleur.equalsIgnoreCase("cube")){
+		// config.setColor(new Cube());
+		// }else if(couleur.equalsIgnoreCase("unique")){
+		// config.setColor(new Unique());
+		// } else if(couleur.equalsIgnoreCase("group")){
+		// config.setColor(new Group());
+		// }
+
 		Path pathSource = Paths.get(path + File.separator + "myPluginsList"
-				+ File.separator + "color" + File.separator
-				+ couleur + ".class");
+				+ File.separator + "color" + File.separator + couleur
+				+ ".class");
 		Path pathTarget = Paths.get(path + File.separator + "myplugins"
-				+ File.separator + "repository" + File.separator
-				+ "color" + File.separator + couleur + ".class");
+				+ File.separator + "repository" + File.separator + "color"
+				+ File.separator + couleur + ".class");
 
 		Path testPathSource = Paths.get(path + File.separator + "myPluginsList"
-				+ File.separator + "color" + File.separator
-				+ couleur + "Test" + ".class");
-		Path testPathTarget = Paths.get(path + File.separator + "myplugins"
-				+ File.separator + "repository" + File.separator
-				+ "color" + File.separator + couleur + "Test"
+				+ File.separator + "color" + File.separator + couleur + "Test"
 				+ ".class");
+		Path testPathTarget = Paths.get(path + File.separator + "myplugins"
+				+ File.separator + "repository" + File.separator + "color"
+				+ File.separator + couleur + "Test" + ".class");
 
 		try {
 			Files.copy(pathSource, pathTarget, REPLACE_EXISTING);
@@ -122,8 +122,7 @@ public class Generate {
 
 	/**
 	 * 
-	 * @String vitesse correspondante à la vitesse
-	 * des créatures.
+	 * @String vitesse correspondante à la vitesse des créatures.
 	 */
 	public void generateVitesse(String vitesse) {
 		if (vitesse.equalsIgnoreCase("VAleatoire")) {
@@ -135,8 +134,7 @@ public class Generate {
 
 	/**
 	 * 
-	 * @String direction correspondante à la direction
-	 * des créatures.
+	 * @String direction correspondante à la direction des créatures.
 	 */
 	public void generateDirection(String direction) {
 		if (direction.equalsIgnoreCase("DAleatoire")) {
@@ -145,42 +143,36 @@ public class Generate {
 			config.setDirection(0.d);
 		}
 	}
-	
+
 	/**
 	 * 
-	 * @String nombre correspondante au nombre de
-	 * créatures à créer.
+	 * @String nombre correspondante au nombre de créatures à créer.
 	 */
-	public void generateNombre(String nombre){
-		String[] nbTmp = nombre.split(" ");
-		if(nombre.equalsIgnoreCase("Fixe")){
-			config.setNombre(5);
-		} else if(nbTmp[0].equalsIgnoreCase("NAleatoire")){
-			if(nbTmp[1].equalsIgnoreCase("Dizaine")){
-				Random r = new Random();
-				int i1 = (r.nextInt(100 - 10) + 10);
-				config.setNombre(i1);
-			}else if(nbTmp[1].equalsIgnoreCase("Centaine")){
-				Random r = new Random();
-				int i1 = (r.nextInt(1000 - 100) + 100);
-				config.setNombre(i1);
-			}else if(nbTmp[1].equalsIgnoreCase("Millier")){
-				Random r = new Random();
-				int i1 = (r.nextInt(10000 - 1000) + 1000);
-				config.setNombre(i1);
-			}
+	public void generateNombre(String nombre) {
+		if (nombre.equalsIgnoreCase("Fixe")) {
+			config.setNombre(-1);
+		} else if (nombre.equalsIgnoreCase("Dizaine")) {
+			Random r = new Random();
+			int i1 = (r.nextInt(100 - 10) + 10);
+			config.setNombre(i1);
+		} else if (nombre.equalsIgnoreCase("Centaine")) {
+			Random r = new Random();
+			int i1 = (r.nextInt(1000 - 100) + 100);
+			config.setNombre(i1);
+		} else if (nombre.equalsIgnoreCase("Millier")) {
+			Random r = new Random();
+			int i1 = (r.nextInt(10000 - 1000) + 1000);
+			config.setNombre(i1);
 		}
 	}
 
 	/**
 	 * 
-	 * @String environnement correspondante au comportement
-	 * aux bords pour les créatures.
+	 * @String environnement correspondante au comportement aux bords pour les
+	 *         créatures.
 	 * 
-	 * Closed 	: monde fermé
-	 * Toric 	: monde libre
-	 * Circular : rebonds en haut et en bas de la fenêtre, libre sur
-	 * 			  les cotés.
+	 *         Closed : monde fermé Toric : monde libre Circular : rebonds en
+	 *         haut et en bas de la fenêtre, libre sur les cotés.
 	 */
 	private void generateEnvironnement(String environnement) {
 
@@ -210,9 +202,8 @@ public class Generate {
 
 	/**
 	 * 
-	 * @String creature correspondante aux types de 
-	 * créatures que l'utilisateur souhaite pouvoir
-	 * selectionner.
+	 * @String creature correspondante aux types de créatures que l'utilisateur
+	 *         souhaite pouvoir selectionner.
 	 */
 	private void generateCreature(String creature) {
 
@@ -241,12 +232,11 @@ public class Generate {
 
 	/**
 	 * 
-	 * @String deplacement correspondante au type de déplacement
-	 * des créatures.
+	 * @String deplacement correspondante au type de déplacement des créatures.
 	 * 
-	 * Stupid 	: déplacement dans une seule direction.
-	 * Troupeau : déplacement en fonction des créatures autour d'elle.
-	 * Hasard 	: déplacement aléatoire qui change à un tick donné.
+	 *         Stupid : déplacement dans une seule direction. Troupeau :
+	 *         déplacement en fonction des créatures autour d'elle. Hasard :
+	 *         déplacement aléatoire qui change à un tick donné.
 	 */
 	public void generateDeplacement(String deplacement) {
 
