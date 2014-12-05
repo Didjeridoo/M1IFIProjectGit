@@ -19,6 +19,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 import color.Cube;
+import color.Groupe;
 import color.IColorStrategy;
 import color.Unique;
 import plug.color.ColorPluginFactory;
@@ -311,6 +312,8 @@ public class Launcher extends JFrame {
 						Config.getInstance().setColor(new Unique());
 					} else if(couleur.equalsIgnoreCase("Cube")){
 						Config.getInstance().setColor(new Cube());
+					} else if(couleur.equalsIgnoreCase("Groupe")){
+						Config.getInstance().setColor(new Groupe());
 					}
 				} catch (IllegalArgumentException e1) {
 					// TODO Auto-generated catch block
