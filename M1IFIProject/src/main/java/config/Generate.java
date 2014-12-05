@@ -23,8 +23,8 @@ public class Generate {
 	private String[] features;
 	private String path;
 	private static Generate instance = new Generate(new String[] { "moyen",
-			"Cube", "VAleatoire", "DAleatoire", "Circular", "CustomCreature",
-			"Troupeau"});
+			"Groupe", "VAleatoire", "DAleatoire", "Closed", "CustomCreature",
+			"Troupeau", "Dizaine" });
 
 	private Generate(String[] args) {
 		// TODO Auto-generated constructor stub
@@ -52,6 +52,7 @@ public class Generate {
 		generateEnvironnement(features[4]);
 		generateCreature(features[5]);
 		generateDeplacement(features[6]);
+		generateNombre(features[7]);
 	}
 
 	public void generateMoteur(String vitesse) {
@@ -63,9 +64,9 @@ public class Generate {
 	 * @String vitesseSimu correspondante � la vitesse d'execution 
 	 * de la simulation.
 	 * 
-	 * lent : Execution delay in milliseconds 20ms 
-	 * moyen : Execution delay in milliseconds 10ms
-	 * rapide : Execution delay in milliseconds 5ms
+	 *         lent : Execution delay in milliseconds 20ms moyen : Execution
+	 *         delay in milliseconds 10ms rapide : Execution delay in
+	 *         milliseconds 5ms
 	 * 
 	 */
 	private void generateVitesseSimu(String vitesseSimu) {
@@ -78,35 +79,34 @@ public class Generate {
 			config.setVitesseSimu(5);
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @String couleur correspondante au plugin de
 	 * couleur voulu pour les cr�atures.
 	 */
-	private void generateColor(String couleur){
-//		if(couleur.equalsIgnoreCase("cube")){
-//			config.setColor(new Cube()); 
-//		}else if(couleur.equalsIgnoreCase("unique")){
-//			config.setColor(new Unique());
-//		} else if(couleur.equalsIgnoreCase("group")){
-//			config.setColor(new Group());
-//		}
-		
+	private void generateColor(String couleur) {
+		// if(couleur.equalsIgnoreCase("cube")){
+		// config.setColor(new Cube());
+		// }else if(couleur.equalsIgnoreCase("unique")){
+		// config.setColor(new Unique());
+		// } else if(couleur.equalsIgnoreCase("group")){
+		// config.setColor(new Group());
+		// }
+
 		Path pathSource = Paths.get(path + File.separator + "myPluginsList"
-				+ File.separator + "color" + File.separator
-				+ couleur + ".class");
+				+ File.separator + "color" + File.separator + couleur
+				+ ".class");
 		Path pathTarget = Paths.get(path + File.separator + "myplugins"
-				+ File.separator + "repository" + File.separator
-				+ "color" + File.separator + couleur + ".class");
+				+ File.separator + "repository" + File.separator + "color"
+				+ File.separator + couleur + ".class");
 
 		Path testPathSource = Paths.get(path + File.separator + "myPluginsList"
-				+ File.separator + "color" + File.separator
-				+ couleur + "Test" + ".class");
-		Path testPathTarget = Paths.get(path + File.separator + "myplugins"
-				+ File.separator + "repository" + File.separator
-				+ "color" + File.separator + couleur + "Test"
+				+ File.separator + "color" + File.separator + couleur + "Test"
 				+ ".class");
+		Path testPathTarget = Paths.get(path + File.separator + "myplugins"
+				+ File.separator + "repository" + File.separator + "color"
+				+ File.separator + couleur + "Test" + ".class");
 
 		try {
 			Files.copy(pathSource, pathTarget, REPLACE_EXISTING);
@@ -142,30 +142,27 @@ public class Generate {
 			config.setDirection(0.d);
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @String nombre correspondante au nombre de
 	 * cr�atures � cr�er.
 	 */
-	public void generateNombre(String nombre){
-		String[] nbTmp = nombre.split(" ");
-		if(nombre.equalsIgnoreCase("Fixe")){
-			config.setNombre(5);
-		} else if(nbTmp[0].equalsIgnoreCase("NAleatoire")){
-			if(nbTmp[1].equalsIgnoreCase("Dizaine")){
-				Random r = new Random();
-				int i1 = (r.nextInt(100 - 10) + 10);
-				config.setNombre(i1);
-			}else if(nbTmp[1].equalsIgnoreCase("Centaine")){
-				Random r = new Random();
-				int i1 = (r.nextInt(1000 - 100) + 100);
-				config.setNombre(i1);
-			}else if(nbTmp[1].equalsIgnoreCase("Millier")){
-				Random r = new Random();
-				int i1 = (r.nextInt(10000 - 1000) + 1000);
-				config.setNombre(i1);
-			}
+	public void generateNombre(String nombre) {
+		if (nombre.equalsIgnoreCase("Fixe")) {
+			config.setNombre(-1);
+		} else if (nombre.equalsIgnoreCase("Dizaine")) {
+			Random r = new Random();
+			int i1 = (r.nextInt(100 - 10) + 10);
+			config.setNombre(i1);
+		} else if (nombre.equalsIgnoreCase("Centaine")) {
+			Random r = new Random();
+			int i1 = (r.nextInt(1000 - 100) + 100);
+			config.setNombre(i1);
+		} else if (nombre.equalsIgnoreCase("Millier")) {
+			Random r = new Random();
+			int i1 = (r.nextInt(10000 - 1000) + 1000);
+			config.setNombre(i1);
 		}
 	}
 
