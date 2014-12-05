@@ -18,7 +18,10 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import color.Cube;
+import color.Groupe;
 import color.IColorStrategy;
+import color.Unique;
 import plug.color.ColorPluginFactory;
 import plug.color.PluginMenuItemBuilderColor;
 import plug.comportements.ComportementPluginFactory;
@@ -29,7 +32,10 @@ import plug.deplacements.DeplacementPluginFactory;
 import plug.deplacements.PluginMenuItemBuilderDeplacement;
 import visual.FormDesiredQuantity;
 import visual.TestResultsDisplay;
+import comportements.Circular;
+import comportements.Closed;
 import comportements.IComportement;
+import comportements.Toric;
 import config.Config;
 import config.Generate;
 import creatures.ICreature;
@@ -45,11 +51,11 @@ import deplacements.IDeplacement;
 @SuppressWarnings("serial")
 public class Launcher extends JFrame {
 	private Config config = Config.getInstance();
-	
+
 	private static Generate generate;
 	private TestResultsDisplay testResultsDisplay;
 	private int quantity;
-	
+
 	private IComportement comportement;
 	private IDeplacement move;
 	private IColorStrategy color;
@@ -74,14 +80,13 @@ public class Launcher extends JFrame {
 	private Constructor<? extends IColorStrategy> constructorColor = null;
 	final JButton restart;
 
-
 	public Launcher() {
 		quantity = 0;
 		factory = CreaturePluginFactory.getInstance();
 		comportementFactory = ComportementPluginFactory.getInstance();
 		deplacementFactory = DeplacementPluginFactory.getInstance();
 		colorFactory = ColorPluginFactory.getInstance();
-		
+
 		setName("Creature Simulator Plugin Version");
 		setLayout(new BorderLayout());
 
@@ -93,11 +98,11 @@ public class Launcher extends JFrame {
 				comportementFactory.load();
 				deplacementFactory.load();
 				colorFactory.load();
-				//buildPluginMenus();
+				// buildPluginMenus();
 			}
 		});
 		buttons.add(loader);
-		
+
 		JButton reloader = new JButton("Reload plugins");
 		reloader.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -105,7 +110,7 @@ public class Launcher extends JFrame {
 				comportementFactory.reload();
 				deplacementFactory.reload();
 				colorFactory.reload();
-				//buildPluginMenus();
+				// buildPluginMenus();
 			}
 		});
 		buttons.add(reloader);
@@ -114,13 +119,16 @@ public class Launcher extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (currentConstructor != null) {
 					Collection<? extends ICreature> creatures = factory
-							.createCreatures(simulator,Config.getInstance().getEnvironnement(),move, quantity, color,
+							.createCreatures(simulator, Config.getInstance()
+									.getEnvironnement(), move, quantity, Config
+									.getInstance().getColor(),
 									currentConstructor);
 					simulator.addAllCreatures(creatures);
 					currentConstructor = null;
-					menuBuilderCreature.getMenu().setEnabled(true);;
+					menuBuilderCreature.getMenu().setEnabled(true);
+					;
 				}
-				
+
 			}
 		});
 		buttons.add(add);
@@ -137,7 +145,9 @@ public class Launcher extends JFrame {
 					}
 					simulator.clearCreatures();
 					Collection<? extends ICreature> creatures = factory
-							.createCreatures(simulator, Config.getInstance().getEnvironnement(), move, quantity, color,
+							.createCreatures(simulator, Config.getInstance()
+									.getEnvironnement(), move, quantity, Config
+									.getInstance().getColor(),
 									currentConstructor);
 					simulator.addAllCreatures(creatures);
 					simulator.start();
@@ -183,7 +193,7 @@ public class Launcher extends JFrame {
 				exit(evt);
 			}
 		});
-		
+
 		menuBuilderDeplacement.getMenu().setEnabled(false);
 		menuBuilderCreature.getMenu().setEnabled(false);
 
@@ -197,54 +207,82 @@ public class Launcher extends JFrame {
 		mb.removeAll();
 		ActionListener listener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// the name of the plugin is in the ActionCommand
-				
-				String[] labels = { "Enter the desired quantity" };
-			    char[] mnemonics = { 'Q' };
-			    int[] widths = { 4 };
-			    String[] descs = { "Enter the desired quantity" };
 
-			    final FormDesiredQuantity form = new FormDesiredQuantity(labels, mnemonics, widths, descs);
+				if (Config.getInstance().getNombre() != -1) {
+					quantity = Config.getInstance().getNombre();
+					final String res = ((JMenuItem) e.getSource())
+							.getActionCommand();
+					if (res.equals("creatures.CustomCreature")) {
+						menuBuilderDeplacement.getMenu().setEnabled(
+								true);
+					} else {
+						menuBuilderDeplacement.getMenu().setEnabled(
+								false);
+						restart.setEnabled(true);
+					}
+					menuBuilderCreature.getMenu().setEnabled(false);
+				} else {
+					// the name of the plugin is in the ActionCommand
 
-			    JButton submit = new JButton("Submit");
+					String[] labels = { "Enter the desired quantity" };
+					char[] mnemonics = { 'Q' };
+					int[] widths = { 4 };
+					String[] descs = { "Enter the desired quantity" };
 
-			    final JFrame f = new JFrame("Configuration");
-			    f.getContentPane().add(form, BorderLayout.NORTH);
-			    JPanel p = new JPanel();
-			    p.add(submit);
-			    f.getContentPane().add(p, BorderLayout.SOUTH);
-			    f.pack();
-			    f.setVisible(true);
-			    
-			    final String res = ((JMenuItem) e.getSource()).getActionCommand();
-			    
-			    submit.addActionListener(new ActionListener() {
-			      public void actionPerformed(ActionEvent e) {
-			    	  quantity = Integer.parseInt(form.getText(0));
-			    	  //quantity = config.getNombre();
-			        if(res.equals("creatures.CustomCreature")){
-			        	menuBuilderDeplacement.getMenu().setEnabled(true);
-			        } else {
-			        	menuBuilderDeplacement.getMenu().setEnabled(false);
-			        	restart.setEnabled(true);
-			        }
-			        menuBuilderCreature.getMenu().setEnabled(false);
-			        f.dispose();
-			      }
-			    });
-				
+					final FormDesiredQuantity form = new FormDesiredQuantity(
+							labels, mnemonics, widths, descs);
+
+					JButton submit = new JButton("Submit");
+
+					final JFrame f = new JFrame("Configuration");
+					f.getContentPane().add(form, BorderLayout.NORTH);
+					JPanel p = new JPanel();
+					p.add(submit);
+					f.getContentPane().add(p, BorderLayout.SOUTH);
+					f.pack();
+					f.setVisible(true);
+
+					final String res = ((JMenuItem) e.getSource())
+							.getActionCommand();
+
+					submit.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							quantity = Integer.parseInt(form.getText(0));
+							// quantity = config.getNombre();
+							if (res.equals("creatures.CustomCreature")) {
+								menuBuilderDeplacement.getMenu().setEnabled(
+										true);
+							} else {
+								menuBuilderDeplacement.getMenu().setEnabled(
+										false);
+								restart.setEnabled(true);
+							}
+							menuBuilderCreature.getMenu().setEnabled(false);
+							f.dispose();
+						}
+					});
+				}
+
 				currentConstructor = factory.getConstructorMap().get(
 						((JMenuItem) e.getSource()).getActionCommand());
-				
+
 			}
 		};
 		ActionListener listenerComportement = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				constructorComportement = comportementFactory.getConstructorMap().get(
-						((JMenuItem) e.getSource()).getActionCommand());
-//				faire le set ici pour modifier le comportement aux bords
-//				System.out.println(constructorComportement);
-//				Config.getInstance().setEnvironnement(constructorComportement);
+				constructorComportement = comportementFactory
+						.getConstructorMap().get(
+								((JMenuItem) e.getSource()).getActionCommand());
+				String comportementAuxBords = constructorComportement.getName()
+						.split("\\.")[1];
+				if (comportementAuxBords.equalsIgnoreCase("Circular")) {
+					Config.getInstance().setEnvironnement(
+							Circular.getInstance());
+				} else if (comportementAuxBords.equalsIgnoreCase("Toric")) {
+					Config.getInstance().setEnvironnement(Toric.getInstance());
+				} else if (comportementAuxBords.equalsIgnoreCase("Closed")) {
+					Config.getInstance().setEnvironnement(Closed.getInstance());
+				}
 				try {
 					comportement = constructorComportement.newInstance();
 				} catch (InstantiationException e1) {
@@ -262,14 +300,15 @@ public class Launcher extends JFrame {
 				}
 				menuBuilderComportement.getMenu().setEnabled(false);
 				menuBuilderCreature.getMenu().setEnabled(true);
-				menuBuilderComportement.setMenuTitle(constructorComportement.getName());
+				menuBuilderComportement.setMenuTitle(constructorComportement
+						.getName());
 			}
 		};
 
 		ActionListener listenerDeplacement = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				constructorDeplacement = deplacementFactory.getConstructorMap().get(
-						((JMenuItem) e.getSource()).getActionCommand());
+				constructorDeplacement = deplacementFactory.getConstructorMap()
+						.get(((JMenuItem) e.getSource()).getActionCommand());
 				try {
 					move = constructorDeplacement.newInstance();
 				} catch (InstantiationException e1) {
@@ -285,55 +324,55 @@ public class Launcher extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-			    menuBuilderCreature.getMenu().setEnabled(true);
+				menuBuilderCreature.getMenu().setEnabled(true);
 				menuBuilderDeplacement.getMenu().setEnabled(false);
 				restart.setEnabled(true);
 			}
 		};
-		
+
 		ActionListener listenerColor = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				constructorColor = colorFactory.getConstructorMap().get(
 						((JMenuItem) e.getSource()).getActionCommand());
 				try {
-					color = constructorColor.newInstance();
-				} catch (InstantiationException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IllegalAccessException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					String couleur = constructorColor.getName().split("\\.")[1];
+					if (couleur.equalsIgnoreCase("Unique")) {
+						Config.getInstance().setColor(new Unique());
+					} else if (couleur.equalsIgnoreCase("Cube")) {
+						Config.getInstance().setColor(new Cube());
+					} else if (couleur.equalsIgnoreCase("Groupe")) {
+						Config.getInstance().setColor(new Groupe());
+					}
 				} catch (IllegalArgumentException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				} catch (InvocationTargetException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
 				}
-//			    menuBuilderCreature.getMenu().setEnabled(true);
-//				menuBuilderDeplacement.getMenu().setEnabled(false);
-//				restart.setEnabled(true);
+				// menuBuilderCreature.getMenu().setEnabled(true);
+				// menuBuilderDeplacement.getMenu().setEnabled(false);
+				// restart.setEnabled(true);
 			}
 		};
-		
-		menuBuilderComportement = new PluginMenuItemBuilderComportement(comportementFactory.getConstructorMap(), listenerComportement);
+
+		menuBuilderComportement = new PluginMenuItemBuilderComportement(
+				comportementFactory.getConstructorMap(), listenerComportement);
 		menuBuilderComportement.setMenuTitle("Comportements");
 		menuBuilderComportement.buildMenu();
 		mb.add(menuBuilderComportement.getMenu());
-		
-		menuBuilderCreature = new PluginMenuItemBuilderCreature(factory.getConstructorMap(),
-				listener);
+
+		menuBuilderCreature = new PluginMenuItemBuilderCreature(
+				factory.getConstructorMap(), listener);
 		menuBuilderCreature.setMenuTitle("Creatures");
 		menuBuilderCreature.buildMenu();
 		mb.add(menuBuilderCreature.getMenu());
-		
-		
-		menuBuilderDeplacement = new PluginMenuItemBuilderDeplacement(deplacementFactory.getConstructorMap(), listenerDeplacement);
+
+		menuBuilderDeplacement = new PluginMenuItemBuilderDeplacement(
+				deplacementFactory.getConstructorMap(), listenerDeplacement);
 		menuBuilderDeplacement.setMenuTitle("Deplacements");
 		menuBuilderDeplacement.buildMenu();
 		mb.add(menuBuilderDeplacement.getMenu());
-		
-		menuBuilderColor = new PluginMenuItemBuilderColor(colorFactory.getConstructorMap(), listenerColor);
+
+		menuBuilderColor = new PluginMenuItemBuilderColor(
+				colorFactory.getConstructorMap(), listenerColor);
 		menuBuilderColor.setMenuTitle("Color");
 		menuBuilderColor.buildMenu();
 		mb.add(menuBuilderColor.getMenu());
