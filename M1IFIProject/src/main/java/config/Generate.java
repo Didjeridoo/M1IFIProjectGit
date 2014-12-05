@@ -8,7 +8,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -20,7 +19,6 @@ import comportements.Toric;
  * Permet de g�nerer les plugins, et donc construire un produit � partir de
  * la configuration entr�e par l'utilisateur.
  * 
- * classe singleton
  * 
  * @author Marc
  *
@@ -30,9 +28,6 @@ public class Generate {
 	//private String[] features;
 	private String path;
 	HashMap<String,ArrayList<String> > collecConfig;
-	/*private static Generate instance = new Generate(new String[] { "moyen",
-			"Unique", "VAleatoire", "DAleatoire", "Circular", "CustomCreature",
-			"Troupeau"});*/
 
 	public Generate(HashMap<String,ArrayList<String> > fml) {
 		// TODO Auto-generated constructor stub
@@ -61,7 +56,6 @@ public class Generate {
 			generateVitesse(collecConfig.get("Vitesse"));
 			generateDirection(collecConfig.get("Direction"));
 			generateEnvironnement(collecConfig.get("Environnement"));
-			//generateCreature(collecConfig.get("Creature"));
 			generateDeplacement(collecConfig.get("Deplacement"));
 			generateNombre(collecConfig.get("Nombre"));
 		}else{
@@ -220,36 +214,6 @@ public class Generate {
 			e.printStackTrace();
 		}
 	}
-
-	/**
-	 * 
-	 * @String creature correspondante aux types de cr�atures que
-	 *         l'utilisateur souhaite pouvoir selectionner.
-	 */
-	/*private void generateCreature(ArrayList<String> creature) {
-
-		Path pathSource = Paths.get(path + File.separator + "myPluginsList"
-				+ File.separator + "creatures" + File.separator + creature
-				+ ".class");
-		Path pathTarget = Paths.get(path + File.separator + "myplugins"
-				+ File.separator + "repository" + File.separator + "creatures"
-				+ File.separator + creature + ".class");
-
-		Path testPathSource = Paths.get(path + File.separator + "myPluginsList"
-				+ File.separator + "creatures" + File.separator + creature
-				+ "Test" + ".class");
-		Path testPathTarget = Paths.get(path + File.separator + "myplugins"
-				+ File.separator + "repository" + File.separator + "creatures"
-				+ File.separator + creature + "Test" + ".class");
-
-		try {
-			Files.copy(pathSource, pathTarget, REPLACE_EXISTING);
-			Files.copy(testPathSource, testPathTarget, REPLACE_EXISTING);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}*/
 
 	/**
 	 * 

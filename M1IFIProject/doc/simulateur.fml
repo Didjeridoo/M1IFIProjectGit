@@ -16,5 +16,4 @@ fmTechno = FM(SimuTechno: [Creature] [Visu] Moteur;
 			  NAleatoire: (Dizaine|Centaine|Milliers);
 			  Moteur: VitesseSimu Action;
 			  Action: Sequentiel;
-			  VitesseSimu: (Lent|Rapide|Normal);
-			  Torique -> !Bouncing;)
+			  VitesseSimu: (Lent|Rapide|Normal);)
