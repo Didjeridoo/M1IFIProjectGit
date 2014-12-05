@@ -16,17 +16,23 @@ import comportements.Toric;
 import creatures.CustomCreature;
 import creatures.visual.CreatureSimulator;
 
+//Test d'un deplacement stupide. Les creatures ne vont jamais changer de direction qu'importe le sens de deplacement.
+//Nous utiliserons ici des CustomCreatures auxquelles nous definirons un environnement torique.
 public class StupidTest {
 
+	// Creation d'un mock du simulateur et definition des largeurs et hauteurs
 	CreatureSimulator environment = mock(CreatureSimulator.class);
 	final double w = 200;
 	final double h = 100;
 
+	// Utilisation du mock afin de renvoyer les tailles de cotes que nous fixons pour les tests
 	@Before
 	public void setup() {
 		when(environment.getSize()).thenReturn(new Dimension((int) w, (int) h));
 	}
 	
+	// Verification que la creature qui est creee au centre du simulateur avec une direction GAUCHE ne change pas de direction
+	// et avance dans la direction donnee
 	@Test
 	public void testDirectLeft() throws Exception {
 		CustomCreature creature = new CustomCreature(environment, Toric.getInstance(),
@@ -39,6 +45,8 @@ public class StupidTest {
 		assertEquals(0, creature.getPosition().getY(), 2);
 	}
 	
+	// Verification que la creature qui est creee au centre du simulateur avec une direction DROITE ne change pas de direction
+	// et avance dans la direction donnee
 	@Test
 	public void testDirectRight() throws Exception {
 		CustomCreature creature = new CustomCreature(environment, Toric.getInstance(),
@@ -51,6 +59,8 @@ public class StupidTest {
 		assertEquals(0, creature.getPosition().getY(), 2);
 	}
 	
+	// Verification que la creature qui est creee au centre du simulateur avec une direction HAUT ne change pas de direction
+	// et avance dans la direction donnee
 	@Test
 	public void testDirectTop() throws Exception {
 		CustomCreature creature = new CustomCreature(environment, Toric.getInstance(),
@@ -63,6 +73,8 @@ public class StupidTest {
 		assertEquals(10, creature.getPosition().getY(), 2);
 	}
 	
+	// Verification que la creature qui est creee au centre du simulateur avec une direction BAS ne change pas de direction
+	// et avance dans la direction donnee
 	@Test
 	public void testDirectDown() throws Exception {
 		CustomCreature creature = new CustomCreature(environment, Toric.getInstance(),
@@ -75,6 +87,8 @@ public class StupidTest {
 		assertEquals(-10, creature.getPosition().getY(), 2);
 	}
 	
+	// Verification que la creature qui est creee au centre du simulateur avec une direction HAUT-GAUCHE ne change pas de direction
+	// et avance dans la direction donnee
 	@Test
 	public void testCornerTopLeft() throws Exception {
 		CustomCreature creature = new CustomCreature(environment, Toric.getInstance(),
@@ -87,6 +101,8 @@ public class StupidTest {
 		assertEquals(5, creature.getPosition().getY(), 3);
 	}
 	
+	// Verification que la creature qui est creee au centre du simulateur avec une direction HAUT-DROITE ne change pas de direction
+	// et avance dans la direction donnee
 	@Test
 	public void testCornerTopRight() throws Exception {
 		CustomCreature creature = new CustomCreature(environment, Toric.getInstance(),
@@ -99,6 +115,8 @@ public class StupidTest {
 		assertEquals(5, creature.getPosition().getY(), 3);
 	}
 	
+	// Verification que la creature qui est creee au centre du simulateur avec une direction BAS-GAUCHE ne change pas de direction
+	// et avance dans la direction donnee
 	@Test
 	public void testCornerDownLeft() throws Exception {
 		CustomCreature creature = new CustomCreature(environment, Toric.getInstance(),
@@ -111,6 +129,8 @@ public class StupidTest {
 		assertEquals(-5, creature.getPosition().getY(), 3);
 	}
 	
+	// Verification que la creature qui est creee au centre du simulateur avec une direction BAS-DROITE ne change pas de direction
+	// et avance dans la direction donnee
 	@Test
 	public void testCornerDownRight() throws Exception {
 		CustomCreature creature = new CustomCreature(environment, Toric.getInstance(),
@@ -123,6 +143,8 @@ public class StupidTest {
 		assertEquals(-5, creature.getPosition().getY(), 3);
 	}
 	
+	// Verification que la creature qui est creee sur le cote DROIT du simulateur avec une direction DROITE ne change pas de direction au premier tick
+	// malgres le changement de cote et avance dans la direction donnee
 	@Test
 	public void testExtremeRight() throws Exception {
 		CustomCreature creature = new CustomCreature(environment, Toric.getInstance(),
@@ -135,6 +157,8 @@ public class StupidTest {
 		assertEquals(0, creature.getPosition().getY(), 3);
 	}
 	
+	// Verification que la creature qui est creee sur le cote DROIT du simulateur avec une direction GAUCHE ne change pas de direction au premier tick
+	// malgres le changement de cote et avance dans la direction donnee
 	@Test
 	public void testExtremeLeft() throws Exception {
 		CustomCreature creature = new CustomCreature(environment, Toric.getInstance(),
@@ -147,6 +171,8 @@ public class StupidTest {
 		assertEquals(0, creature.getPosition().getY(), 3);
 	}
 	
+	// Verification que la creature qui est creee sur le cote DROIT du simulateur avec une direction HAUT ne change pas de direction au premier tick
+	// malgres le changement de cote et avance dans la direction donnee
 	@Test
 	public void testExtremeTop() throws Exception {
 		CustomCreature creature = new CustomCreature(environment, Toric.getInstance(),
@@ -159,6 +185,8 @@ public class StupidTest {
 		assertEquals(h/2, creature.getPosition().getY(), 3);
 	}
 	
+	// Verification que la creature qui est creee sur le cote DROIT du simulateur avec une direction BAS ne change pas de direction au premier tick
+	// malgres le changement de cote et avance dans la direction donnee
 	@Test
 	public void testExtremeDown() throws Exception {
 		CustomCreature creature = new CustomCreature(environment, Toric.getInstance(),

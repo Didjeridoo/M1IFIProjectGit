@@ -16,17 +16,22 @@ import creatures.CustomCreature;
 import creatures.visual.CreatureSimulator;
 import deplacements.Hasard;
 
+//Test d'un monde ferme. Les creatures vont rebondir sur tous les cotes.
+//Nous utiliserons ici des CustomCreatures auxquelles nous definirons un deplacement au hasard.
 public class ClosedTest {
 
+	// Creation d'un mock du simulateur et definition des largeurs et hauteurs
 	CreatureSimulator environment = mock(CreatureSimulator.class);
 	final double w = 200;
 	final double h = 100;
 
+	// Utilisation du mock afin de renvoyer les tailles de cotes que nous fixons pour les tests
 	@Before
 	public void setup() {
 		when(environment.getSize()).thenReturn(new Dimension((int) w, (int) h));
 	}
 	
+	// Verification que la creature avec une direction HAUT-GAUCHE rebondis bien sur le bord GAUCHE et change de direction
 	@Test
 	public void testDirectLeftUp() throws Exception {
 		CustomCreature creature = new CustomCreature(environment,Closed.getInstance(),new Hasard(), new Point2D.Double(-w/2+1, 0), 10, toRadians(150), Color.RED);
@@ -37,6 +42,7 @@ public class ClosedTest {
 		assertEquals(-w/2+6, creature.getPosition().getX(), 2);
     }	
 	
+	// Verification que la creature avec une direction BAS-GAUCHE rebondis bien sur le bord GAUCHE et change de direction
 	@Test
 	public void testDirectLeftDown() throws Exception {
 		CustomCreature creature = new CustomCreature(environment, Closed.getInstance(),new Hasard(), new Point2D.Double(-w/2+1, 0), 10, toRadians(210), Color.RED);
@@ -47,7 +53,7 @@ public class ClosedTest {
 		assertEquals(-w/2+6, creature.getPosition().getX(), 2);
     }	
 	
-	
+	// Verification que la creature avec une direction HAUT-DROITE rebondis bien sur le bord DROIT et change de direction
 	@Test 
 	public void testDirectRightUp() throws Exception {
 		CustomCreature creature = new CustomCreature(environment,Closed.getInstance(),new Hasard(), new Point2D.Double(w/2-1, 0), 10, toRadians(30), Color.RED);
@@ -57,6 +63,7 @@ public class ClosedTest {
 		assertEquals(w/2-6, creature.getPosition().getX(), 2);
     }	
 	
+	// Verification que la creature avec une direction BAS-DROITE rebondis bien sur le bord DROIT et change de direction
 	@Test 
 	public void testDirectRightDown() throws Exception {
 		CustomCreature creature = new CustomCreature(environment,Closed.getInstance(),new Hasard(), new Point2D.Double(w/2-1, 0), 10, toRadians(330), Color.RED);
@@ -66,7 +73,7 @@ public class ClosedTest {
 		assertEquals(w/2-6, creature.getPosition().getX(), 2);
     }	
 	
-	
+	// Verification que la creature avec une direction HAUT-DROITE rebondis bien sur le bord HAUT et change de direction
 	@Test
 	public void testDirectUpRight() throws Exception {
 		CustomCreature creature = new CustomCreature(environment,Closed.getInstance(),new Hasard(), new Point2D.Double(0, -h/2+1), 10, toRadians(30), Color.RED);
@@ -76,6 +83,7 @@ public class ClosedTest {
 		assertEquals(-h/2+4, creature.getPosition().getY(), 2);
     }	
 	
+	// Verification que la creature avec une direction HAUT-GAUCHE rebondis bien sur le bord HAUT et change de direction
 	@Test
 	public void testDirectUpLeft() throws Exception {
 		CustomCreature creature = new CustomCreature(environment,Closed.getInstance(),new Hasard(), new Point2D.Double(0, -h/2+1), 10, toRadians(150), Color.RED);
@@ -85,6 +93,7 @@ public class ClosedTest {
 		assertEquals(-h/2+4, creature.getPosition().getY(), 2);
     }
 	
+	// Verification que la creature avec une direction BAS-DROITE rebondis bien sur le bord BAS et change de direction
 	@Test
 	public void testDirectDownRight() throws Exception {
 		CustomCreature creature = new CustomCreature(environment,Closed.getInstance(),new Hasard(), new Point2D.Double(0, h/2-1), 10, toRadians(330), Color.RED);
@@ -94,6 +103,7 @@ public class ClosedTest {
 		assertEquals(h/2-4, creature.getPosition().getY(), 2);
     }	
 	
+	// Verification que la creature avec une direction BAS-GAUCHE rebondis bien sur le bord BAS et change de direction
 	@Test
 	public void testDirectDownLeft() throws Exception {
 		CustomCreature creature = new CustomCreature(environment,Closed.getInstance(),new Hasard(), new Point2D.Double(0, h/2-1), 10, toRadians(210), Color.RED);

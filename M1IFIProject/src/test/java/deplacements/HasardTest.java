@@ -17,17 +17,23 @@ import comportements.Toric;
 import creatures.CustomCreature;
 import creatures.visual.CreatureSimulator;
 
+// Test d'un deplacement au hasard. Les creatures vont se deplacer tout droit sans changer de direction et au 30eme tick elles vont changer de direction aleatoirement.
+// Nous utiliserons ici des CustomCreatures auxquelles nous definirons un environnement torique.
 public class HasardTest {
 
+	// Creation d'un mock du simulateur et definition des largeurs et hauteurs
 	CreatureSimulator environment = mock(CreatureSimulator.class);
 	final double w = 200;
 	final double h = 100;
 
+	// Utilisation du mock afin de renvoyer les tailles de cotes que nous fixons pour les tests
 	@Before
 	public void setup() {
 		when(environment.getSize()).thenReturn(new Dimension((int) w, (int) h));
 	}
 	
+	// Verification que la creature qui est creee au centre du simulateur avec une direction GAUCHE ne change pas de direction au premier tick
+	// et avance dans la direction donnee
 	@Test
 	public void testDirectLeft() throws Exception {
 		CustomCreature creature = new CustomCreature(environment, Toric.getInstance(),
@@ -40,6 +46,8 @@ public class HasardTest {
 		assertEquals(0, creature.getPosition().getY(), 2);
 	}
 	
+	// Verification que la creature qui est creee au centre du simulateur avec une direction DROITE ne change pas de direction au premier tick
+	// et avance dans la direction donnee
 	@Test
 	public void testDirectRight() throws Exception {
 		CustomCreature creature = new CustomCreature(environment, Toric.getInstance(),
@@ -52,6 +60,8 @@ public class HasardTest {
 		assertEquals(0, creature.getPosition().getY(), 2);
 	}
 	
+	// Verification que la creature qui est creee au centre du simulateur avec une direction HAUT ne change pas de direction au premier tick
+	// et avance dans la direction donnee
 	@Test
 	public void testDirectTop() throws Exception {
 		CustomCreature creature = new CustomCreature(environment, Toric.getInstance(),
@@ -64,6 +74,8 @@ public class HasardTest {
 		assertEquals(-10, creature.getPosition().getY(), 2);
 	}
 	
+	// Verification que la creature qui est creee au centre du simulateur avec une direction BAS ne change pas de direction au premier tick
+	// et avance dans la direction donnee
 	@Test
 	public void testDirectDown() throws Exception {
 		CustomCreature creature = new CustomCreature(environment, Toric.getInstance(),
@@ -76,6 +88,8 @@ public class HasardTest {
 		assertEquals(10, creature.getPosition().getY(), 2);
 	}
 	
+	// Verification que la creature qui est creee au centre du simulateur avec une direction HAUT-GAUCHE ne change pas de direction au premier tick
+	// et avance dans la direction donnee
 	@Test
 	public void testCornerTopLeft() throws Exception {
 		CustomCreature creature = new CustomCreature(environment, Toric.getInstance(),
@@ -88,6 +102,8 @@ public class HasardTest {
 		assertEquals(-5, creature.getPosition().getY(), 3);
 	}
 	
+	// Verification que la creature qui est creee au centre du simulateur avec une direction HAUT-DROITE ne change pas de direction au premier tick
+	// et avance dans la direction donnee
 	@Test
 	public void testCornerTopRight() throws Exception {
 		CustomCreature creature = new CustomCreature(environment, Toric.getInstance(),
@@ -100,6 +116,8 @@ public class HasardTest {
 		assertEquals(-5, creature.getPosition().getY(), 3);
 	}
 	
+	// Verification que la creature qui est creee au centre du simulateur avec une direction BAS-GAUCHE ne change pas de direction au premier tick
+	// et avance dans la direction donnee
 	@Test
 	public void testCornerDownLeft() throws Exception {
 		CustomCreature creature = new CustomCreature(environment, Toric.getInstance(),
@@ -112,6 +130,8 @@ public class HasardTest {
 		assertEquals(5, creature.getPosition().getY(), 3);
 	}
 	
+	// Verification que la creature qui est creee au centre du simulateur avec une direction BAS-DROITE ne change pas de direction au premier tick
+	// et avance dans la direction donnee
 	@Test
 	public void testCornerDownRight() throws Exception {
 		CustomCreature creature = new CustomCreature(environment, Toric.getInstance(),
@@ -124,6 +144,8 @@ public class HasardTest {
 		assertEquals(5, creature.getPosition().getY(), 3);
 	}
 	
+	// Verification que la creature qui est creee sur le cote DROIT du simulateur avec une direction DROITE ne change pas de direction au premier tick
+	// malgres le changement de cote et avance dans la direction donnee
 	@Test
 	public void testExtremeRight() throws Exception {
 		CustomCreature creature = new CustomCreature(environment, Toric.getInstance(),
@@ -136,6 +158,8 @@ public class HasardTest {
 		assertEquals(0, creature.getPosition().getY(), 3);
 	}
 	
+	// Verification que la creature qui est creee sur le cote GAUCHE du simulateur avec une direction GAUCHE ne change pas de direction au premier tick
+	// malgres le changement de cote et avance dans la direction donnee
 	@Test
 	public void testExtremeLeft() throws Exception {
 		CustomCreature creature = new CustomCreature(environment, Toric.getInstance(),
@@ -148,6 +172,8 @@ public class HasardTest {
 		assertEquals(0, creature.getPosition().getY(), 3);
 	}
 	
+	// Verification que la creature qui est creee sur le cote HAUT du simulateur avec une direction HAUT ne change pas de direction au premier tick
+	// malgres le changement de cote et avance dans la direction donnee
 	@Test
 	public void testExtremeTop() throws Exception {
 		CustomCreature creature = new CustomCreature(environment, Toric.getInstance(),
@@ -160,6 +186,8 @@ public class HasardTest {
 		assertEquals(h/2, creature.getPosition().getY(), 3);
 	}
 	
+	// Verification que la creature qui est creee sur le cote BAS du simulateur avec une direction BAS ne change pas de direction au premier tick
+	// malgres le changement de cote et avance dans la direction donnee
 	@Test
 	public void testExtremeDown() throws Exception {
 		CustomCreature creature = new CustomCreature(environment, Toric.getInstance(),
@@ -172,6 +200,7 @@ public class HasardTest {
 		assertEquals(-h/2, creature.getPosition().getY(), 3);
 	}
 
+	// Verification qu'au 30eme tick la creature change bien de direction lors de son deplacement
 	@Test
 	public void testChangeDirection() throws Exception{
 		CustomCreature creature = new CustomCreature(environment, Toric.getInstance(),
@@ -182,7 +211,7 @@ public class HasardTest {
 		creature.act();
 		
 		assertNotEquals(toRadians(315), creature.getDirection(), 0.01);
-		//assertNotEquals(0, creature.getPosition().getX(), 0.01);
-		//assertNotEquals(0, creature.getPosition().getY(), 0.01);
+		assertNotEquals(0, creature.getPosition().getX(), 0.01);
+		assertNotEquals(0, creature.getPosition().getY(), 0.01);
 	}
 }

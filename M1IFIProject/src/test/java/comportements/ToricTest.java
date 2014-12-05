@@ -16,17 +16,23 @@ import creatures.CustomCreature;
 import creatures.visual.CreatureSimulator;
 import deplacements.Hasard;
 
+//Test d'un monde torique. Les creatures ne vont rebondir sur aucun des cotes et vont reapparaitre sur le cote oppose.
+//Nous utiliserons ici des CustomCreatures auxquelles nous definirons un deplacement au hasard.
 public class ToricTest {
 
+	// Creation d'un mock du simulateur et definition des largeurs et hauteurs
 	CreatureSimulator environment = mock(CreatureSimulator.class);
 	final double w = 200;
 	final double h = 100;
 
+	// Utilisation du mock afin de renvoyer les tailles de cotes que nous fixons pour les tests
 	@Before
 	public void setup() {
 		when(environment.getSize()).thenReturn(new Dimension((int) w, (int) h));
 	}
 
+	// Verification que la creature avec une direction HAUT-GAUCHE ne rebondis pas et reapparait bien sur le cote DROIT sans changer de direction
+	// lorsque la creature sort du cadre par la GAUCHE
 	@Test
 	public void testDirectLeftUp() throws Exception {
 		CustomCreature creature = new CustomCreature(environment, Toric.getInstance(),
@@ -38,6 +44,8 @@ public class ToricTest {
 		assertEquals(w / 2, creature.getPosition().getX(), 2);
 	}
 
+	// Verification que la creature avec une direction BAS-GAUCHE ne rebondis pas et reapparait bien sur le cote DROIT sans changer de direction
+	// lorsque la creature sort du cadre par la GAUCHE
 	@Test
 	public void testDirectLeftDown() throws Exception {
 		CustomCreature creature = new CustomCreature(environment, Toric.getInstance(),
@@ -49,6 +57,8 @@ public class ToricTest {
 		assertEquals(w / 2, creature.getPosition().getX(), 2);
 	}
 
+	// Verification que la creature avec une direction HAUT-DROITE ne rebondis pas et reapparait bien sur le cote GAUCHE sans changer de direction
+	// lorsque la creature sort du cadre par la DROITE
 	@Test
 	public void testDirectRightUp() throws Exception {
 		CustomCreature creature = new CustomCreature(environment,Toric.getInstance(),
@@ -59,6 +69,8 @@ public class ToricTest {
 		assertEquals(-w / 2, creature.getPosition().getX(), 2);
 	}
 
+	// Verification que la creature avec une direction BAS-DROITE ne rebondis pas et reapparait bien sur le cote GAUCHE sans changer de direction
+	// lorsque la creature sort du cadre par la DROITE
 	@Test
 	public void testDirectRightDown() throws Exception {
 		CustomCreature creature = new CustomCreature(environment,Toric.getInstance(),
@@ -69,6 +81,8 @@ public class ToricTest {
 		assertEquals(-w / 2, creature.getPosition().getX(), 2);
 	}
 
+	// Verification que la creature avec une direction BAS-GAUCHE ne rebondis pas et reapparait bien sur le cote HAUT sans changer de direction
+	// lorsque la creature sort du cadre par la BAS
 	@Test
 	public void testDirectDownLeft() throws Exception {
 		CustomCreature creature = new CustomCreature(environment,Toric.getInstance(),
@@ -79,6 +93,8 @@ public class ToricTest {
 		assertEquals(-h / 2, creature.getPosition().getY(), 2);
 	}
 	
+	// Verification que la creature avec une direction BAS-DROITE ne rebondis pas et reapparait bien sur le cote HAUT sans changer de direction
+	// lorsque la creature sort du cadre par la BAS
 	@Test
 	public void testDirectDownRight() throws Exception {
 		CustomCreature creature = new CustomCreature(environment,Toric.getInstance(),
@@ -89,6 +105,8 @@ public class ToricTest {
 		assertEquals(-h / 2, creature.getPosition().getY(), 2);
 	}
 	
+	// Verification que la creature avec une direction HAUT-GAUCHE ne rebondis pas et reapparait bien sur le cote BAS sans changer de direction
+	// lorsque la creature sort du cadre par la HAUT
 	@Test
 	public void testDirectTopLeft() throws Exception {
 		CustomCreature creature = new CustomCreature(environment,Toric.getInstance(),
@@ -99,6 +117,8 @@ public class ToricTest {
 		assertEquals(h / 2, creature.getPosition().getY(), 2);
 	}
 	
+	// Verification que la creature avec une direction HAUT-DROITE ne rebondis pas et reapparait bien sur le cote BAS sans changer de direction
+	// lorsque la creature sort du cadre par la HAUT
 	@Test
 	public void testDirectTopRight() throws Exception {
 		CustomCreature creature = new CustomCreature(environment,Toric.getInstance(),

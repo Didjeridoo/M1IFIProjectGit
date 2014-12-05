@@ -16,17 +16,24 @@ import creatures.CustomCreature;
 import creatures.visual.CreatureSimulator;
 import deplacements.Hasard;
 
+// Test d'un monde circulaire. Les creatures vont rebondir si elles touchent les bords en haut et en bas et elles vont
+// reapparaitre sur le cote oppose lorsqu'elles toucheront les cotes
+//Nous utiliserons ici des CustomCreatures auxquelles nous definirons un deplacement au hasard.
 public class CircularTest {
 
+	// Creation d'un mock du simulateur et definition des largeurs et hauteurs
 	CreatureSimulator environment = mock(CreatureSimulator.class);
 	final double w = 200;
 	final double h = 100;
 
+	// Utilisation du mock afin de renvoyer les tailles de cotes que nous fixons pour les tests
 	@Before
 	public void setup() {
 		when(environment.getSize()).thenReturn(new Dimension((int) w, (int) h));
 	}
 	
+	// Verification que la creature avec une direction HAUT-GAUCHE ne rebondis pas et reapparait bien sur le cote DROIT sans changer de direction
+	// lorsque la creature sort du cadre par la GAUCHE
 	@Test
 	public void testDirectLeftUp() throws Exception {
 		CustomCreature creature = new CustomCreature(environment,Circular.getInstance(),new Hasard(), new Point2D.Double(-w/2+1, 0), 10, toRadians(150), Color.RED);
@@ -37,6 +44,8 @@ public class CircularTest {
 		assertEquals(w / 2, creature.getPosition().getX(), 2);
     }	
 	
+	// Verification que la creature avec une direction BAS-GAUCHE ne rebondis pas et reapparait bien sur le cote DROIT sans changer de direction
+	// lorsque la creature sort du cadre par la GAUCHE
 	@Test
 	public void testDirectLeftDown() throws Exception {
 		CustomCreature creature = new CustomCreature(environment, Circular.getInstance(),new Hasard(), new Point2D.Double(-w/2+1, 0), 10, toRadians(210), Color.RED);
@@ -47,7 +56,8 @@ public class CircularTest {
 		assertEquals(w / 2, creature.getPosition().getX(), 2);
     }	
 	
-	
+	// Verification que la creature avec une direction HAUT-DROITE ne rebondis pas et reapparait bien sur le cote GAUCHE sans changer de direction
+	// lorsque la creature sort du cadre par la DROITE
 	@Test 
 	public void testDirectRightUp() throws Exception {
 		CustomCreature creature = new CustomCreature(environment,Circular.getInstance(),new Hasard(), new Point2D.Double(w/2-1, 0), 10, toRadians(30), Color.RED);
@@ -57,6 +67,8 @@ public class CircularTest {
 		assertEquals(-w / 2, creature.getPosition().getX(), 2);
     }	
 	
+	// Verification que la creature avec une direction BAS-DROITE ne rebondis pas et reapparait bien sur le cote GAUCHE sans changer de direction
+	// lorsque la creature sort du cadre par la DROITE
 	@Test 
 	public void testDirectRightDown() throws Exception {
 		CustomCreature creature = new CustomCreature(environment,Circular.getInstance(),new Hasard(), new Point2D.Double(w/2-1, 0), 10, toRadians(330), Color.RED);
@@ -66,7 +78,7 @@ public class CircularTest {
 		assertEquals(-w / 2, creature.getPosition().getX(), 2);
     }	
 	
-	
+	// Verification que la creature avec une direction HAUT-DROITE rebondis sur le cote HAUT et change de direction
 	@Test
 	public void testDirectUpRight() throws Exception {
 		CustomCreature creature = new CustomCreature(environment,Circular.getInstance(),new Hasard(), new Point2D.Double(0, -h/2+1), 10, toRadians(30), Color.RED);
@@ -76,6 +88,7 @@ public class CircularTest {
 		assertEquals(-h/2+4, creature.getPosition().getY(), 2);
     }	
 	
+	// Verification que la creature avec une direction HAUT-GAUCHE rebondis sur le cote HAUT et change de direction
 	@Test
 	public void testDirectUpLeft() throws Exception {
 		CustomCreature creature = new CustomCreature(environment,Circular.getInstance(),new Hasard(), new Point2D.Double(0, -h/2+1), 10, toRadians(150), Color.RED);
@@ -85,6 +98,7 @@ public class CircularTest {
 		assertEquals(-h/2+4, creature.getPosition().getY(), 2);
     }
 	
+	// Verification que la creature avec une direction BAS-DROITE rebondis sur le cote BAS et change de direction
 	@Test
 	public void testDirectDownRight() throws Exception {
 		CustomCreature creature = new CustomCreature(environment,Circular.getInstance(),new Hasard(), new Point2D.Double(0, h/2-1), 10, toRadians(330), Color.RED);
@@ -94,6 +108,7 @@ public class CircularTest {
 		assertEquals(h/2-4, creature.getPosition().getY(), 2);
     }	
 	
+	// Verification que la creature avec une direction BAS-GAUCHE rebondis sur le cote BAS et change de direction
 	@Test
 	public void testDirectDownLeft() throws Exception {
 		CustomCreature creature = new CustomCreature(environment,Circular.getInstance(),new Hasard(), new Point2D.Double(0, h/2-1), 10, toRadians(210), Color.RED);
