@@ -36,6 +36,7 @@ public class Generate {
 
 	public Generate(HashMap<String,ArrayList<String> > fml) {
 		// TODO Auto-generated constructor stub
+		System.out.println("Bueno");
 		config = Config.getInstance();
 		collecConfig = fml;
 		//features = args;
@@ -54,14 +55,19 @@ public class Generate {
 	 * Gï¿½nï¿½re les plugins demandï¿½s par l'utilisateur
 	 */
 	public void generateConfig() {
-		generateMoteur(collecConfig.get("VitesseSimu"));
-		generateColor(collecConfig.get("Couleur"));
-		generateVitesse(collecConfig.get("Vitesse"));
-		generateDirection(collecConfig.get("Direction"));
-		generateEnvironnement(collecConfig.get("Environnement"));
-		//generateCreature(collecConfig.get("Creature"));
-		generateDeplacement(collecConfig.get("Deplacement"));
-		generateNombre(collecConfig.get("Nombre"));
+		if(collecConfig != null){
+			generateMoteur(collecConfig.get("VitesseSimu"));
+			generateColor(collecConfig.get("Couleur"));
+			generateVitesse(collecConfig.get("Vitesse"));
+			generateDirection(collecConfig.get("Direction"));
+			generateEnvironnement(collecConfig.get("Environnement"));
+			//generateCreature(collecConfig.get("Creature"));
+			generateDeplacement(collecConfig.get("Deplacement"));
+			generateNombre(collecConfig.get("Nombre"));
+		}else{
+			System.out.println("Erreur : Vous avez quitté la configuration du simulateur.");
+		}
+		
 	}
 
 	public void generateMoteur(ArrayList<String> vitesse) {

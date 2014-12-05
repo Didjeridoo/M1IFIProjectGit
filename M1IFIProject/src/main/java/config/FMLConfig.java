@@ -93,9 +93,9 @@ public class FMLConfig
 	        	}
 	        	else
 	        	{
-	        		if(feature.equalsIgnoreCase("unique")||
-	        				feature.equalsIgnoreCase("cube")||
-	        				feature.equalsIgnoreCase("group"))
+	        		if(feature.equalsIgnoreCase("Unique")||
+	        				feature.equalsIgnoreCase("Cube")||
+	        				feature.equalsIgnoreCase("Group"))
 	        		{
 	        			colors.add(feature);
 	        		}
@@ -122,16 +122,16 @@ public class FMLConfig
 	        			params.add(feature);
 	        			hashMap.put("Vitesse", params);
 	        		}
-	        		else if(feature.equalsIgnoreCase("Monde")||
-	        				feature.equalsIgnoreCase("Torique")||
-	        				feature.equalsIgnoreCase("Ferme"))
+	        		else if(feature.equalsIgnoreCase("Circular")||
+	        				feature.equalsIgnoreCase("Toric")||
+	        				feature.equalsIgnoreCase("Closed"))
 	        		{
 	        			params = new ArrayList<String>();
 	        			params.add(feature);
 	        			hashMap.put("Environnement", params);
 	        		}
-	        		else if(feature.equalsIgnoreCase("Bouncing")||
-	        				feature.equalsIgnoreCase("Smart")||
+	        		else if(feature.equalsIgnoreCase("Hasard")||
+	        				feature.equalsIgnoreCase("Troupeau")||
 	        				feature.equalsIgnoreCase("Stupid"))
 	        		{
 	        			deplacements.add(feature);
@@ -166,11 +166,11 @@ public class FMLConfig
     public static void main(String []args){
     	FMLConfig fml = FMLConfig.getinstance();
     	
-    	HashMap<String, ArrayList<String>> coucou = fml.getFMLConfig();
+    	HashMap<String, ArrayList<String>> configFML = fml.getFMLConfig();
     	
-    	System.out.println(coucou);
-    	generate = new Generate(fml.getFMLConfig());
-    	
+    	System.out.println(configFML);
+    	generate = new Generate(configFML);
+    	generate.generateConfig();
     }
 }
 

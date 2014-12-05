@@ -7,11 +7,11 @@ fmDomaine = FM(SimuDomaine: [Apercu] Sujet VitesseSimu [Environnement] Performan
 			   
 fmTechno = FM(SimuTechno: [Creature] [Visu] Moteur;
 			  Creature: Vitesse Direction Deplacement Environnement Couleur Nombre;
-			  Deplacement: (Stupid|Smart|Bouncing)+;
+			  Deplacement: (Stupid|Troupeau|Hasard)+;
 			  Vitesse: (VFixe|VAleatoire);
 			  Direction: (DFixe|DAleatoire);
 			  Couleur: (Cube|Groupe|Unique)+;
-			  Environnement: (Torique|Monde|Ferme);
+			  Environnement: (Toric|Circular|Closed);
 			  Nombre: (NAleatoire|Fixe);
 			  NAleatoire: (Dizaine|Centaine|Milliers);
 			  Moteur: VitesseSimu Action;
