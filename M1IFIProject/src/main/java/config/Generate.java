@@ -12,9 +12,13 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Random;
 
+import comportements.Circular;
+import comportements.Closed;
+import comportements.Toric;
+
 /**
- * Permet de g�nerer les plugins, et donc construire un produit � partir
- * de la configuration entr�e par l'utilisateur.
+ * Permet de g�nerer les plugins, et donc construire un produit � partir de
+ * la configuration entr�e par l'utilisateur.
  * 
  * classe singleton
  * 
@@ -66,8 +70,8 @@ public class Generate {
 
 	/**
 	 * 
-	 * @String vitesseSimu correspondante � la vitesse d'execution 
-	 * de la simulation.
+	 * @String vitesseSimu correspondante � la vitesse d'execution de la
+	 *         simulation.
 	 * 
 	 *         lent : Execution delay in milliseconds 20ms moyen : Execution
 	 *         delay in milliseconds 10ms rapide : Execution delay in
@@ -87,8 +91,8 @@ public class Generate {
 
 	/**
 	 * 
-	 * @String couleur correspondante au plugin de
-	 * couleur voulu pour les cr�atures.
+	 * @String couleur correspondante au plugin de couleur voulu pour les
+	 *         cr�atures.
 	 */
 	private void generateColor(ArrayList<String> couleur) {
 		// if(couleur.equalsIgnoreCase("cube")){
@@ -125,8 +129,7 @@ public class Generate {
 
 	/**
 	 * 
-	 * @String vitesse correspondante � la vitesse
-	 * des cr�atures.
+	 * @String vitesse correspondante � la vitesse des cr�atures.
 	 */
 	public void generateVitesse(ArrayList<String> vitesse) {
 		if (vitesse.get(0).equalsIgnoreCase("VAleatoire")) {
@@ -138,8 +141,7 @@ public class Generate {
 
 	/**
 	 * 
-	 * @String direction correspondante � la direction
-	 * des cr�atures.
+	 * @String direction correspondante � la direction des cr�atures.
 	 */
 	public void generateDirection(ArrayList<String> direction) {
 		if (direction.get(0).equalsIgnoreCase("DAleatoire")) {
@@ -151,8 +153,7 @@ public class Generate {
 
 	/**
 	 * 
-	 * @String nombre correspondante au nombre de
-	 * cr�atures � cr�er.
+	 * @String nombre correspondante au nombre de cr�atures � cr�er.
 	 */
 	public void generateNombre(ArrayList<String> nombre) {
 		if (nombre.get(0).equalsIgnoreCase("Fixe")) {
@@ -174,15 +175,21 @@ public class Generate {
 
 	/**
 	 * 
-	 * @String environnement correspondante au comportement
-	 * aux bords pour les cr�atures.
+	 * @String environnement correspondante au comportement aux bords pour les
+	 *         cr�atures.
 	 * 
-	 * Closed 	: monde ferm�
-	 * Toric 	: monde libre
-	 * Circular : rebonds en haut et en bas de la fen�tre, libre sur
-	 * 			  les cot�s.
+	 *         Closed : monde ferm� Toric : monde libre Circular : rebonds en
+	 *         haut et en bas de la fen�tre, libre sur les cot�s.
 	 */
 	private void generateEnvironnement(ArrayList<String> environnement) {
+
+		if (environnement.get(0).equalsIgnoreCase("toric")) {
+			config.setEnvironnement(Toric.getInstance());
+		} else if (environnement.get(0).equalsIgnoreCase("closed")) {
+			config.setEnvironnement(Closed.getInstance());
+		} else if (environnement.get(0).equalsIgnoreCase("circular")) {
+			config.setEnvironnement(Circular.getInstance());
+		}
 
 		Path pathSource = Paths.get(path + File.separator + "myPluginsList"
 				+ File.separator + "comportements" + File.separator
@@ -210,9 +217,8 @@ public class Generate {
 
 	/**
 	 * 
-	 * @String creature correspondante aux types de 
-	 * cr�atures que l'utilisateur souhaite pouvoir
-	 * selectionner.
+	 * @String creature correspondante aux types de cr�atures que
+	 *         l'utilisateur souhaite pouvoir selectionner.
 	 */
 	/*private void generateCreature(ArrayList<String> creature) {
 
@@ -241,12 +247,12 @@ public class Generate {
 
 	/**
 	 * 
-	 * @String deplacement correspondante au type de d�placement
-	 * des cr�atures.
+	 * @String deplacement correspondante au type de d�placement des
+	 *         cr�atures.
 	 * 
-	 * Stupid 	: d�placement dans une seule direction.
-	 * Troupeau : d�placement en fonction des cr�atures autour d'elle.
-	 * Hasard 	: d�placement al�atoire qui change � un tick donn�.
+	 *         Stupid : d�placement dans une seule direction. Troupeau :
+	 *         d�placement en fonction des cr�atures autour d'elle. Hasard :
+	 *         d�placement al�atoire qui change � un tick donn�.
 	 */
 	public void generateDeplacement(ArrayList<String> deplacement) {
 

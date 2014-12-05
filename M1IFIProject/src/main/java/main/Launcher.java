@@ -86,10 +86,10 @@ public class Launcher extends JFrame {
 		comportementFactory = ComportementPluginFactory.getInstance();
 		deplacementFactory = DeplacementPluginFactory.getInstance();
 		colorFactory = ColorPluginFactory.getInstance();
-
+		
 		setName("Creature Simulator Plugin Version");
 		setLayout(new BorderLayout());
-
+		
 		JPanel buttons = new JPanel();
 		JButton loader = new JButton("Load plugins");
 		loader.addActionListener(new ActionListener() {
@@ -195,7 +195,7 @@ public class Launcher extends JFrame {
 		});
 
 		menuBuilderDeplacement.getMenu().setEnabled(false);
-		menuBuilderCreature.getMenu().setEnabled(false);
+		menuBuilderCreature.getMenu().setEnabled(true);
 
 	}
 
@@ -300,8 +300,7 @@ public class Launcher extends JFrame {
 				}
 				menuBuilderComportement.getMenu().setEnabled(false);
 				menuBuilderCreature.getMenu().setEnabled(true);
-				menuBuilderComportement.setMenuTitle(constructorComportement
-						.getName());
+				menuBuilderComportement.setMenuTitle(Config.getInstance().getEnvironnement().getName());
 			}
 		};
 
@@ -355,7 +354,8 @@ public class Launcher extends JFrame {
 
 		menuBuilderComportement = new PluginMenuItemBuilderComportement(
 				comportementFactory.getConstructorMap(), listenerComportement);
-		menuBuilderComportement.setMenuTitle("Comportements");
+		menuBuilderComportement.setMenuTitle(Config.getInstance().getEnvironnement().getName());
+		menuBuilderComportement.getMenu().setEnabled(false);
 		menuBuilderComportement.buildMenu();
 		mb.add(menuBuilderComportement.getMenu());
 
