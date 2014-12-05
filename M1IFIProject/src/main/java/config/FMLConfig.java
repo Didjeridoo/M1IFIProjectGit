@@ -95,7 +95,7 @@ public class FMLConfig
 	        	{
 	        		if(feature.equalsIgnoreCase("Unique")||
 	        				feature.equalsIgnoreCase("Cube")||
-	        				feature.equalsIgnoreCase("Group"))
+	        				feature.equalsIgnoreCase("Groupe"))
 	        		{
 	        			colors.add(feature);
 	        		}
