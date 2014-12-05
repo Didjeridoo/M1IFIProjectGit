@@ -18,7 +18,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import color.Cube;
 import color.IColorStrategy;
+import color.Unique;
 import plug.color.ColorPluginFactory;
 import plug.color.PluginMenuItemBuilderColor;
 import plug.comportements.ComportementPluginFactory;
@@ -117,7 +119,7 @@ public class Launcher extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (currentConstructor != null) {
 					Collection<? extends ICreature> creatures = factory
-							.createCreatures(simulator,Config.getInstance().getEnvironnement(),move, quantity, color,
+							.createCreatures(simulator,Config.getInstance().getEnvironnement(),move, quantity, Config.getInstance().getColor(),
 									currentConstructor);
 					simulator.addAllCreatures(creatures);
 					currentConstructor = null;
@@ -140,7 +142,7 @@ public class Launcher extends JFrame {
 					}
 					simulator.clearCreatures();
 					Collection<? extends ICreature> creatures = factory
-							.createCreatures(simulator, Config.getInstance().getEnvironnement(), move, quantity, color,
+							.createCreatures(simulator, Config.getInstance().getEnvironnement(), move, quantity, Config.getInstance().getColor(),
 									currentConstructor);
 					simulator.addAllCreatures(creatures);
 					simulator.start();
@@ -304,17 +306,13 @@ public class Launcher extends JFrame {
 				constructorColor = colorFactory.getConstructorMap().get(
 						((JMenuItem) e.getSource()).getActionCommand());
 				try {
-					color = constructorColor.newInstance();
-				} catch (InstantiationException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IllegalAccessException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					String couleur = constructorColor.getName().split("\\.")[1];
+					if(couleur.equalsIgnoreCase("Unique")){
+						Config.getInstance().setColor(new Unique());
+					} else if(couleur.equalsIgnoreCase("Cube")){
+						Config.getInstance().setColor(new Cube());
+					}
 				} catch (IllegalArgumentException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (InvocationTargetException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}

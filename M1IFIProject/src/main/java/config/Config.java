@@ -1,6 +1,7 @@
 package config;
 
 import color.IColorStrategy;
+import color.Unique;
 import comportements.IComportement;
 import comportements.Toric;
 
@@ -47,6 +48,7 @@ public class Config {
 		direction = 0d;
 		nombre = 0;
 		environnement = Toric.getInstance();
+		couleur = new Unique();
 	}
 	
 	public static Config getInstance(){
