@@ -23,7 +23,7 @@ public class FMLConfig
 	private static Generate generate;
 	HashMap<String,ArrayList<String> > hashMap;
 	ArrayList<String> params;
-	ArrayList<String> comportements;
+	ArrayList<String> deplacements;
 	ArrayList<String> colors;
 	
 	private FMLConfig()
@@ -33,7 +33,7 @@ public class FMLConfig
 		configName = "config";
 		url_file_fml = "doc/simulateur.fml";
 		hashMap = new HashMap<String, ArrayList<String>>();
-		comportements = new ArrayList<String>();
+		deplacements = new ArrayList<String>();
 		params = new ArrayList<String>();
 		colors = new ArrayList<String>();
 	}
@@ -86,7 +86,8 @@ public class FMLConfig
 	        {
 	        	if(feature.equalsIgnoreCase("Couleur")|| feature.equalsIgnoreCase("Nombre")||
 	        		feature.equalsIgnoreCase("Vitesse")||feature.equalsIgnoreCase("Environnement")||
-	        		feature.equalsIgnoreCase("Comportement")||feature.equalsIgnoreCase("VitesseSimu"))
+	        		feature.equalsIgnoreCase("Deplacement")||feature.equalsIgnoreCase("VitesseSimu")||
+	        		feature.equalsIgnoreCase("Direction"))
 	        	{
 	        		continue;
 	        	}
@@ -133,7 +134,7 @@ public class FMLConfig
 	        				feature.equalsIgnoreCase("Smart")||
 	        				feature.equalsIgnoreCase("Stupid"))
 	        		{
-	        			comportements.add(feature);
+	        			deplacements.add(feature);
 	        		}
 	        		else if(feature.equalsIgnoreCase("Lent")||
 	        				feature.equalsIgnoreCase("Normal")||
@@ -146,7 +147,7 @@ public class FMLConfig
 	        	}
 	        }
 	        hashMap.put("Couleur", colors);
-	        hashMap.put("Comportement", comportements);
+	        hashMap.put("Deplacement", deplacements);
 	        return hashMap;
 		} catch (FMEngineException e) {
 			// TODO Auto-generated catch block

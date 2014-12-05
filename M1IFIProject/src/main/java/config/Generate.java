@@ -50,13 +50,14 @@ public class Generate {
 	 * G�n�re les plugins demand�s par l'utilisateur
 	 */
 	public void generateConfig() {
-		generateMoteur(collecConfig.get("Moteur"));
+		generateMoteur(collecConfig.get("VitesseSimu"));
 		generateColor(collecConfig.get("Couleur"));
 		generateVitesse(collecConfig.get("Vitesse"));
 		generateDirection(collecConfig.get("Direction"));
 		generateEnvironnement(collecConfig.get("Environnement"));
-		generateCreature(collecConfig.get("Creature"));
+		//generateCreature(collecConfig.get("Creature"));
 		generateDeplacement(collecConfig.get("Deplacement"));
+		generateNombre(collecConfig.get("Nombre"));
 	}
 
 	public void generateMoteur(ArrayList<String> vitesse) {
@@ -77,9 +78,9 @@ public class Generate {
 		// TODO Auto-generated method stub
 		if (vitesseSimu.get(0).equalsIgnoreCase("lent")) {
 			config.setVitesseSimu(20);
-		} else if (vitesseSimu.equalsIgnoreCase("moyen")) {
+		} else if (vitesseSimu.get(0).equalsIgnoreCase("moyen")) {
 			config.setVitesseSimu(10);
-		} else if (vitesseSimu.equalsIgnoreCase("rapide")) {
+		} else if (vitesseSimu.get(0).equalsIgnoreCase("rapide")) {
 			config.setVitesseSimu(5);
 		}
 	}
@@ -97,27 +98,28 @@ public class Generate {
 		// } else if(couleur.equalsIgnoreCase("group")){
 		// config.setColor(new Group());
 		// }
+		for(int i = 0; i < couleur.size(); i++){
+			Path pathSource = Paths.get(path + File.separator + "myPluginsList"
+					+ File.separator + "color" + File.separator + couleur.get(i)
+					+ ".class");
+			Path pathTarget = Paths.get(path + File.separator + "myplugins"
+					+ File.separator + "repository" + File.separator + "color"
+					+ File.separator + couleur + ".class");
 
-		Path pathSource = Paths.get(path + File.separator + "myPluginsList"
-				+ File.separator + "color" + File.separator + couleur
-				+ ".class");
-		Path pathTarget = Paths.get(path + File.separator + "myplugins"
-				+ File.separator + "repository" + File.separator + "color"
-				+ File.separator + couleur + ".class");
+			Path testPathSource = Paths.get(path + File.separator + "myPluginsList"
+					+ File.separator + "color" + File.separator + couleur.get(i) + "Test"
+					+ ".class");
+			Path testPathTarget = Paths.get(path + File.separator + "myplugins"
+					+ File.separator + "repository" + File.separator + "color"
+					+ File.separator + couleur.get(i) + "Test" + ".class");
 
-		Path testPathSource = Paths.get(path + File.separator + "myPluginsList"
-				+ File.separator + "color" + File.separator + couleur + "Test"
-				+ ".class");
-		Path testPathTarget = Paths.get(path + File.separator + "myplugins"
-				+ File.separator + "repository" + File.separator + "color"
-				+ File.separator + couleur + "Test" + ".class");
-
-		try {
-			Files.copy(pathSource, pathTarget, REPLACE_EXISTING);
-			Files.copy(testPathSource, testPathTarget, REPLACE_EXISTING);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			try {
+				Files.copy(pathSource, pathTarget, REPLACE_EXISTING);
+				Files.copy(testPathSource, testPathTarget, REPLACE_EXISTING);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -127,9 +129,9 @@ public class Generate {
 	 * des cr�atures.
 	 */
 	public void generateVitesse(ArrayList<String> vitesse) {
-		if (vitesse.equalsIgnoreCase("VAleatoire")) {
+		if (vitesse.get(0).equalsIgnoreCase("VAleatoire")) {
 			config.setVitesse(-1);
-		} else if (vitesse.equalsIgnoreCase("VFixe")) {
+		} else if (vitesse.get(0).equalsIgnoreCase("VFixe")) {
 			config.setVitesse(5);
 		}
 	}
@@ -140,9 +142,9 @@ public class Generate {
 	 * des cr�atures.
 	 */
 	public void generateDirection(ArrayList<String> direction) {
-		if (direction.equalsIgnoreCase("DAleatoire")) {
+		if (direction.get(0).equalsIgnoreCase("DAleatoire")) {
 			config.setDirection(-1);
-		} else if (direction.equalsIgnoreCase("DFixe")) {
+		} else if (direction.get(0).equalsIgnoreCase("DFixe")) {
 			config.setDirection(0.d);
 		}
 	}
@@ -153,17 +155,17 @@ public class Generate {
 	 * cr�atures � cr�er.
 	 */
 	public void generateNombre(ArrayList<String> nombre) {
-		if (nombre.equalsIgnoreCase("Fixe")) {
+		if (nombre.get(0).equalsIgnoreCase("Fixe")) {
 			config.setNombre(-1);
-		} else if (nombre.equalsIgnoreCase("Dizaine")) {
+		} else if (nombre.get(0).equalsIgnoreCase("Dizaine")) {
 			Random r = new Random();
 			int i1 = (r.nextInt(100 - 10) + 10);
 			config.setNombre(i1);
-		} else if (nombre.equalsIgnoreCase("Centaine")) {
+		} else if (nombre.get(0).equalsIgnoreCase("Centaine")) {
 			Random r = new Random();
 			int i1 = (r.nextInt(1000 - 100) + 100);
 			config.setNombre(i1);
-		} else if (nombre.equalsIgnoreCase("Millier")) {
+		} else if (nombre.get(0).equalsIgnoreCase("Millier")) {
 			Random r = new Random();
 			int i1 = (r.nextInt(10000 - 1000) + 1000);
 			config.setNombre(i1);
@@ -184,17 +186,17 @@ public class Generate {
 
 		Path pathSource = Paths.get(path + File.separator + "myPluginsList"
 				+ File.separator + "comportements" + File.separator
-				+ environnement + ".class");
+				+ environnement.get(0) + ".class");
 		Path pathTarget = Paths.get(path + File.separator + "myplugins"
 				+ File.separator + "repository" + File.separator
-				+ "comportements" + File.separator + environnement + ".class");
+				+ "comportements" + File.separator + environnement.get(0) + ".class");
 
 		Path testPathSource = Paths.get(path + File.separator + "myPluginsList"
 				+ File.separator + "comportements" + File.separator
-				+ environnement + "Test" + ".class");
+				+ environnement.get(0) + "Test" + ".class");
 		Path testPathTarget = Paths.get(path + File.separator + "myplugins"
 				+ File.separator + "repository" + File.separator
-				+ "comportements" + File.separator + environnement + "Test"
+				+ "comportements" + File.separator + environnement.get(0) + "Test"
 				+ ".class");
 
 		try {
@@ -212,7 +214,7 @@ public class Generate {
 	 * cr�atures que l'utilisateur souhaite pouvoir
 	 * selectionner.
 	 */
-	private void generateCreature(ArrayList<String> creature) {
+	/*private void generateCreature(ArrayList<String> creature) {
 
 		Path pathSource = Paths.get(path + File.separator + "myPluginsList"
 				+ File.separator + "creatures" + File.separator + creature
@@ -235,7 +237,7 @@ public class Generate {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 	/**
 	 * 
@@ -248,26 +250,29 @@ public class Generate {
 	 */
 	public void generateDeplacement(ArrayList<String> deplacement) {
 
-		Path pathSource = Paths.get(path + File.separator + "myPluginsList"
-				+ File.separator + "deplacements" + File.separator
-				+ deplacement + ".class");
-		Path pathTarget = Paths.get(path + File.separator + "myplugins"
-				+ File.separator + "repository" + File.separator
-				+ "deplacements" + File.separator + deplacement + ".class");
+		for(int i = 0; i < deplacement.size(); i++){
+			Path pathSource = Paths.get(path + File.separator + "myPluginsList"
+					+ File.separator + "deplacements" + File.separator
+					+ deplacement.get(i) + ".class");
+			Path pathTarget = Paths.get(path + File.separator + "myplugins"
+					+ File.separator + "repository" + File.separator
+					+ "deplacements" + File.separator + deplacement.get(i) + ".class");
 
-		Path testPathSource = Paths.get(path + File.separator + "myPluginsList"
-				+ File.separator + "deplacements" + File.separator
-				+ deplacement + "Test" + ".class");
-		Path testPathTarget = Paths.get(path + File.separator + "myplugins"
-				+ File.separator + "repository" + File.separator
-				+ "deplacements" + File.separator + deplacement + "Test"
-				+ ".class");
+			Path testPathSource = Paths.get(path + File.separator + "myPluginsList"
+					+ File.separator + "deplacements" + File.separator
+					+ deplacement.get(i) + "Test" + ".class");
+			Path testPathTarget = Paths.get(path + File.separator + "myplugins"
+					+ File.separator + "repository" + File.separator
+					+ "deplacements" + File.separator + deplacement.get(i) + "Test"
+					+ ".class");
 
-		try {
-			Files.copy(pathSource, pathTarget, REPLACE_EXISTING);
-			Files.copy(testPathSource, testPathTarget, REPLACE_EXISTING);
-		} catch (IOException e) {
-			e.printStackTrace();
+			try {
+				Files.copy(pathSource, pathTarget, REPLACE_EXISTING);
+				Files.copy(testPathSource, testPathTarget, REPLACE_EXISTING);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
+		
 	}
 }

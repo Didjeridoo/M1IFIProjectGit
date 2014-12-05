@@ -382,8 +382,8 @@ public class Launcher extends JFrame {
 
 	public static void main(String args[]) {
 		Logger.getLogger("plug").setLevel(Level.INFO);
-		generate = Generate.getInstance();
-		generate.generateConfig();
+		//generate = Generate.getInstance();
+		//generate.generateConfig();
 		Config config = Config.getInstance();
 		double myMaxSpeed = config.getVitesse();
 		CreaturePluginFactory.init(myMaxSpeed);

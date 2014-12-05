@@ -6,8 +6,8 @@ fmDomaine = FM(SimuDomaine: [Apercu] Sujet VitesseSimu [Environnement] Performan
 			   Echantillon: (Large|Small|Medium);)
 			   
 fmTechno = FM(SimuTechno: [Creature] [Visu] Moteur;
-			  Creature: Vitesse Direction Comportement Environnement Couleur Nombre;
-			  Comportement: (Stupid|Smart|Bouncing)+;
+			  Creature: Vitesse Direction Deplacement Environnement Couleur Nombre;
+			  Deplacement: (Stupid|Smart|Bouncing)+;
 			  Vitesse: (VFixe|VAleatoire);
 			  Direction: (DFixe|DAleatoire);
 			  Couleur: (Cube|Groupe|Unique)+;
