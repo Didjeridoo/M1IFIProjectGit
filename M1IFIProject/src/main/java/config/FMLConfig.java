@@ -1,6 +1,5 @@
 package config;
 
-import java.awt.print.Paper;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,6 +24,7 @@ public class FMLConfig
 	HashMap<String,ArrayList<String> > hashMap;
 	ArrayList<String> params;
 	ArrayList<String> comportements;
+	ArrayList<String> colors;
 	
 	private FMLConfig()
 	{
@@ -35,6 +35,7 @@ public class FMLConfig
 		hashMap = new HashMap<String, ArrayList<String>>();
 		comportements = new ArrayList<String>();
 		params = new ArrayList<String>();
+		colors = new ArrayList<String>();
 	}
 	
 	
@@ -95,9 +96,7 @@ public class FMLConfig
 	        				feature.equalsIgnoreCase("cube")||
 	        				feature.equalsIgnoreCase("group"))
 	        		{
-	        			params = new ArrayList<String>();
-	        			params.add(feature);
-	        			hashMap.put("Couleur",params);
+	        			colors.add(feature);
 	        		}
 	        		else if(feature.equalsIgnoreCase("Fixe")||
 	        				feature.equalsIgnoreCase("Dizaine")||
@@ -146,6 +145,7 @@ public class FMLConfig
 	        		}
 	        	}
 	        }
+	        hashMap.put("Couleur", colors);
 	        hashMap.put("Comportement", comportements);
 	        return hashMap;
 		} catch (FMEngineException e) {
