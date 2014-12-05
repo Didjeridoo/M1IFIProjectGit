@@ -29,7 +29,10 @@ import plug.deplacements.DeplacementPluginFactory;
 import plug.deplacements.PluginMenuItemBuilderDeplacement;
 import visual.FormDesiredQuantity;
 import visual.TestResultsDisplay;
+import comportements.Circular;
+import comportements.Closed;
 import comportements.IComportement;
+import comportements.Toric;
 import config.Config;
 import config.Generate;
 import creatures.ICreature;
@@ -242,9 +245,14 @@ public class Launcher extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				constructorComportement = comportementFactory.getConstructorMap().get(
 						((JMenuItem) e.getSource()).getActionCommand());
-//				faire le set ici pour modifier le comportement aux bords
-//				System.out.println(constructorComportement);
-//				Config.getInstance().setEnvironnement(constructorComportement);
+				String comportementAuxBords = constructorComportement.getName().split("\\.")[1];
+				if(comportementAuxBords.equalsIgnoreCase("Circular")){
+					Config.getInstance().setEnvironnement(Circular.getInstance());
+				} else if(comportementAuxBords.equalsIgnoreCase("Toric")){
+					Config.getInstance().setEnvironnement(Toric.getInstance());
+				} else if(comportementAuxBords.equalsIgnoreCase("Closed")){
+					Config.getInstance().setEnvironnement(Closed.getInstance());
+				}
 				try {
 					comportement = constructorComportement.newInstance();
 				} catch (InstantiationException e1) {
