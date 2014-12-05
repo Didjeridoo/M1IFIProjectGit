@@ -22,6 +22,7 @@ public class FMLConfig
 	String fmName;
 	String configName;
 	String url_file_fml;
+	private static Generate generate;
 	
 	private FMLConfig()
 	{
@@ -96,6 +97,8 @@ public class FMLConfig
     	
     	Collection<String> coucou = fml.getFMLConfig();
     	System.out.println(coucou);
+    	generate = new Generate(fml.getFMLConfig());
+    	
     }
 }
 

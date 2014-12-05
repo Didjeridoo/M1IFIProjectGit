@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.Random;
 
 import color.Cube;
@@ -23,16 +25,18 @@ import color.Unique;
  */
 public class Generate {
 	private Config config;
-	private String[] features;
+	//private String[] features;
 	private String path;
-	private static Generate instance = new Generate(new String[] { "moyen",
+	HashMap collecConfig;
+	/*private static Generate instance = new Generate(new String[] { "moyen",
 			"Unique", "VAleatoire", "DAleatoire", "Circular", "CustomCreature",
-			"Troupeau"});
+			"Troupeau"});*/
 
-	private Generate(String[] args) {
+	public Generate(HashMap fml) {
 		// TODO Auto-generated constructor stub
 		config = Config.getInstance();
-		features = args;
+		collecConfig = fml;
+		//features = args;
 		path = new File("").getAbsolutePath();
 	}
 
@@ -40,21 +44,21 @@ public class Generate {
 	 * 
 	 * @return l'instance de la classe Generate
 	 */
-	public static Generate getInstance() {
+	/*public static Generate getInstance() {
 		return instance;
-	}
+	}*/
 
 	/**
 	 * Génère les plugins demandés par l'utilisateur
 	 */
 	public void generateConfig() {
-		generateMoteur(features[0]);
-		generateColor(features[1]);
-		generateVitesse(features[2]);
-		generateDirection(features[3]);
-		generateEnvironnement(features[4]);
-		generateCreature(features[5]);
-		generateDeplacement(features[6]);
+		generateMoteur(fml.get("Moteur"));
+		generateColor(fml.get("Couleur"));
+		generateVitesse(fml.get("Vitesse"));
+		generateDirection(fml.get("Direction"));
+		generateEnvironnement(fml.get("Environnement"));
+		generateCreature(fml.get("Creature"));
+		generateDeplacement(fml.get("Deplacement"));
 	}
 
 	public void generateMoteur(String vitesse) {
