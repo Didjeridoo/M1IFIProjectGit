@@ -36,7 +36,7 @@ public class Generate {
 	}
 
 	/**
-	 * G�n�re les plugins demand�s par l'utilisateur
+	 * Genere les plugins demandes par l'utilisateur
 	 */
 	public void generateConfig() {
 		if(collecConfig != null){
