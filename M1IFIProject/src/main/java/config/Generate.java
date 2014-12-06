@@ -16,8 +16,8 @@ import comportements.Closed;
 import comportements.Toric;
 
 /**
- * Permet de g�nerer les plugins, et donc construire un produit � partir de
- * la configuration entr�e par l'utilisateur.
+ * Permet de generer les plugins, et donc construire un produit a partir de
+ * la configuration entree par l'utilisateur.
  * 
  * 
  * @author Marc
@@ -25,7 +25,6 @@ import comportements.Toric;
  */
 public class Generate {
 	private Config config;
-	//private String[] features;
 	private String path;
 	HashMap<String,ArrayList<String> > collecConfig;
 
@@ -35,14 +34,6 @@ public class Generate {
 		collecConfig = fml;
 		path = new File("").getAbsolutePath();
 	}
-
-	/**
-	 * 
-	 * @return l'instance de la classe Generate
-	 */
-	/*public static Generate getInstance() {
-		return instance;
-	}*/
 
 	/**
 	 * G�n�re les plugins demand�s par l'utilisateur
@@ -68,12 +59,12 @@ public class Generate {
 
 	/**
 	 * 
-	 * @String vitesseSimu correspondante � la vitesse d'execution de la
-	 *         simulation.
+	 * @ArrayList<String> vitesseSimu correspondante a la vitesse d'execution de la
+	 *         			  simulation.
 	 * 
-	 *         lent : Execution delay in milliseconds 20ms moyen : Execution
-	 *         delay in milliseconds 10ms rapide : Execution delay in
-	 *         milliseconds 5ms
+	 * lent 	: Execution delay in milliseconds 20ms 
+	 * moyen 	: Execution delay in milliseconds 10ms 
+	 * rapide 	: Execution delay in milliseconds 5ms
 	 * 
 	 */
 	private void generateVitesseSimu(ArrayList<String> vitesseSimu) {
@@ -89,8 +80,8 @@ public class Generate {
 
 	/**
 	 * 
-	 * @String couleur correspondante au plugin de couleur voulu pour les
-	 *         cr�atures.
+	 * @ArrayList<String> couleur correspondante au plugin de couleur voulu pour les
+	 *         			  creatures.
 	 */
 	private void generateColor(ArrayList<String> couleur) {
 		// if(couleur.equalsIgnoreCase("cube")){
@@ -127,7 +118,7 @@ public class Generate {
 
 	/**
 	 * 
-	 * @String vitesse correspondante � la vitesse des cr�atures.
+	 * @ArrayList<String> vitesse correspondante a la vitesse des creatures.
 	 */
 	public void generateVitesse(ArrayList<String> vitesse) {
 		if (vitesse.get(0).equalsIgnoreCase("VAleatoire")) {
@@ -139,7 +130,7 @@ public class Generate {
 
 	/**
 	 * 
-	 * @String direction correspondante � la direction des cr�atures.
+	 * @ArrayList<String> direction correspondante a la direction des creatures.
 	 */
 	public void generateDirection(ArrayList<String> direction) {
 		if (direction.get(0).equalsIgnoreCase("DAleatoire")) {
@@ -151,7 +142,7 @@ public class Generate {
 
 	/**
 	 * 
-	 * @String nombre correspondante au nombre de cr�atures � cr�er.
+	 * @ArrayList<String> nombre correspondante au nombre de creatures a creer.
 	 */
 	public void generateNombre(ArrayList<String> nombre) {
 		if (nombre.get(0).equalsIgnoreCase("Fixe")) {
@@ -173,11 +164,13 @@ public class Generate {
 
 	/**
 	 * 
-	 * @String environnement correspondante au comportement aux bords pour les
-	 *         cr�atures.
+	 * @ArrayList<String> correspondante au comportement aux bords pour les
+	 * 					  creatures.
 	 * 
-	 *         Closed : monde ferm� Toric : monde libre Circular : rebonds en
-	 *         haut et en bas de la fen�tre, libre sur les cot�s.
+	 * Closed 	: monde ferme.
+	 * Toric	: monde libre.
+	 * Circular	: rebons en haut et en bas de la fenetre, libre
+	 * 			  sur les cotes.
 	 */
 	private void generateEnvironnement(ArrayList<String> environnement) {
 
@@ -215,12 +208,12 @@ public class Generate {
 
 	/**
 	 * 
-	 * @String deplacement correspondante au type de d�placement des
-	 *         cr�atures.
+	 * @ArrayList<String> deplacement correspondante au type de deplacement des
+	 *         			  creatures.
 	 * 
-	 *         Stupid : d�placement dans une seule direction. Troupeau :
-	 *         d�placement en fonction des cr�atures autour d'elle. Hasard :
-	 *         d�placement al�atoire qui change � un tick donn�.
+	 * Stupid 	: deplacement dans une seule direction. 
+	 * Troupeau : deplacement en fonction des creatures autour d'elle. 
+	 * Hasard 	: deplacement aleatoire qui change a un tick donne.
 	 */
 	public void generateDeplacement(ArrayList<String> deplacement) {
 
