@@ -113,6 +113,9 @@ public class FMLConfig
 	        		scan.close();
 	        		return null;
 	        	}
+	        	if(s.equalsIgnoreCase("")){
+	        		continue;
+	        	}
 	        	if (!s.equalsIgnoreCase("valider")) {
 		        	fi.eval(selectCmd+s+" in "+configName);
 		        	System.out.println("Selected features :"+fi.getSelectedFeature(configName));
@@ -131,65 +134,72 @@ public class FMLConfig
 	        		feature.equalsIgnoreCase("Deplacement")||feature.equalsIgnoreCase("VitesseSimu")||
 	        		feature.equalsIgnoreCase("Direction"))
 	        	{
-	        		continue;
-	        	}
-	        	else
-	        	{
-	        		if(feature.equalsIgnoreCase("Unique")||
-	        				feature.equalsIgnoreCase("Cube")||
-	        				feature.equalsIgnoreCase("Groupe"))
-	        		{
-	        			colors.add(feature);
-	        		}
-	        		else if(feature.equalsIgnoreCase("Fixe")||
-	        				feature.equalsIgnoreCase("Dizaine")||
-	        				feature.equalsIgnoreCase("Centaine")||
-	        				feature.equalsIgnoreCase("Milliers"))
-	        		{
-	        			params = new ArrayList<String>();
-	        			params.add(feature);
-	        			hashMap.put("Nombre",params);
-	        		}
-	        		else if(feature.equalsIgnoreCase("DFixe")||
-	        				feature.equalsIgnoreCase("DAleatoire"))
-	        		{
-	        			params = new ArrayList<String>();
-	        			params.add(feature);
-	        			hashMap.put("Direction", params);
-	        		}
-	        		else if (feature.equalsIgnoreCase("VFixe")||
-	        				feature.equalsIgnoreCase("VAleatoire"))
-	        		{
-	        			params = new ArrayList<String>();
-	        			params.add(feature);
-	        			hashMap.put("Vitesse", params);
-	        		}
-	        		else if(feature.equalsIgnoreCase("Circular")||
-	        				feature.equalsIgnoreCase("Toric")||
-	        				feature.equalsIgnoreCase("Closed"))
-	        		{
-	        			params = new ArrayList<String>();
-	        			params.add(feature);
-	        			hashMap.put("Environnement", params);
-	        		}
-	        		else if(feature.equalsIgnoreCase("Hasard")||
-	        				feature.equalsIgnoreCase("Troupeau")||
-	        				feature.equalsIgnoreCase("Stupid"))
-	        		{
-	        			deplacements.add(feature);
-	        		}
-	        		else if(feature.equalsIgnoreCase("Lent")||
-	        				feature.equalsIgnoreCase("Normal")||
-	        				feature.equalsIgnoreCase("Rapide"))
-	        		{
-	        			params = new ArrayList<String>();
-	        			params.add(feature);
-	        			hashMap.put("VitesseSimu", params);
-	        		}
+	        		hashMap.put(feature,null);
 	        	}
 	        }
-	        hashMap.put("Couleur", colors);
-	        hashMap.put("Deplacement", deplacements);
+	        for(String feature : fmList){
+	        	if(feature.equalsIgnoreCase("Unique")||
+        				feature.equalsIgnoreCase("Cube")||
+        				feature.equalsIgnoreCase("Groupe"))
+        		{
+        			colors.add(feature);
+        		}
+        		else if(feature.equalsIgnoreCase("Fixe")||
+        				feature.equalsIgnoreCase("Dizaine")||
+        				feature.equalsIgnoreCase("Centaine")||
+        				feature.equalsIgnoreCase("Milliers"))
+        		{
+        			params = new ArrayList<String>();
+        			params.add(feature);
+        			hashMap.put("Nombre",params);
+        		}
+        		else if(feature.equalsIgnoreCase("DFixe")||
+        				feature.equalsIgnoreCase("DAleatoire"))
+        		{
+        			params = new ArrayList<String>();
+        			params.add(feature);
+        			hashMap.put("Direction", params);
+        		}
+        		else if (feature.equalsIgnoreCase("VFixe")||
+        				feature.equalsIgnoreCase("VAleatoire"))
+        		{
+        			params = new ArrayList<String>();
+        			params.add(feature);
+        			hashMap.put("Vitesse", params);
+        		}
+        		else if(feature.equalsIgnoreCase("Circular")||
+        				feature.equalsIgnoreCase("Toric")||
+        				feature.equalsIgnoreCase("Closed"))
+        		{
+        			params = new ArrayList<String>();
+        			params.add(feature);
+        			hashMap.put("Environnement", params);
+        		}
+        		else if(feature.equalsIgnoreCase("Hasard")||
+        				feature.equalsIgnoreCase("Troupeau")||
+        				feature.equalsIgnoreCase("Stupid"))
+        		{
+        			deplacements.add(feature);
+        		}
+        		else if(feature.equalsIgnoreCase("Lent")||
+        				feature.equalsIgnoreCase("Normal")||
+        				feature.equalsIgnoreCase("Rapide"))
+        		{
+        			params = new ArrayList<String>();
+        			params.add(feature);
+        			hashMap.put("VitesseSimu", params);
+        		}
+	        }
+	        if(colors.isEmpty()){
+	        	hashMap.put("Couleur", null);
+	        }else if(!colors.isEmpty()){
+	        	hashMap.put("Couleur", colors);
+	        }
+	        if(deplacements.isEmpty()){
+	        	hashMap.put("Deplacement", null);
+	        }else if(!deplacements.isEmpty()){
+		        hashMap.put("Deplacement", deplacements);
+	        }
 	        return hashMap;
 		} catch (FMEngineException e) {
 			// TODO Auto-generated catch block
@@ -212,8 +222,8 @@ public class FMLConfig
     	HashMap<String, ArrayList<String>> configFML = fml.getFMLConfig();
     	
     	System.out.println(configFML);
-    	generate = new Generate(configFML);
-    	generate.generateConfig();
+        generate = new Generate(configFML);
+        generate.generateConfig();
     }
 }
 
