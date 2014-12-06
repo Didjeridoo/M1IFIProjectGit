@@ -31,10 +31,8 @@ public class Generate {
 
 	public Generate(HashMap<String,ArrayList<String> > fml) {
 		// TODO Auto-generated constructor stub
-		System.out.println("Bueno");
 		config = Config.getInstance();
 		collecConfig = fml;
-		//features = args;
 		path = new File("").getAbsolutePath();
 	}
 

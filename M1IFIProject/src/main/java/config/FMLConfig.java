@@ -1,5 +1,6 @@
 package config;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,6 +26,10 @@ public class FMLConfig
 	ArrayList<String> params;
 	ArrayList<String> deplacements;
 	ArrayList<String> colors;
+	private String path;
+	private static File fileColor;
+	private static File fileComportements;
+	private static File fileDeplacements;
 	
 	private FMLConfig()
 	{
@@ -36,8 +41,45 @@ public class FMLConfig
 		deplacements = new ArrayList<String>();
 		params = new ArrayList<String>();
 		colors = new ArrayList<String>();
+		path = new File("").getAbsolutePath();
+		fileColor = new File(path + File.separator + "myplugins"
+				+ File.separator + "repository" + File.separator + "color");
+		fileComportements = new File(path + File.separator + "myplugins"
+				+ File.separator + "repository" + File.separator + "comportements");
+		fileDeplacements = new File(path + File.separator + "myplugins"
+				+ File.separator + "repository" + File.separator + "deplacements");
 	}
 	
+	public static void deleteFiles(){
+		String[] myFiles;
+    	if(fileColor.isDirectory()){
+    		if(fileColor.list().length>0){
+    			myFiles = fileColor.list();
+    			for(int i = 0; i<myFiles.length; i++){
+    				File myFile = new File(fileColor, myFiles[i]);
+    				myFile.delete();
+    			}
+    		}
+    	}
+    	if(fileComportements.isDirectory()){
+    		if(fileComportements.list().length>0){
+    			myFiles = fileComportements.list();
+    			for(int i = 0; i<myFiles.length; i++){
+    				File myFile = new File(fileComportements, myFiles[i]);
+    				myFile.delete();
+    			}
+    		}
+    	}
+    	if(fileDeplacements.isDirectory()){
+    		if(fileDeplacements.list().length>0){
+    			myFiles = fileDeplacements.list();
+    			for(int i = 0; i<myFiles.length; i++){
+    				File myFile = new File(fileDeplacements, myFiles[i]);
+    				myFile.delete();
+    			}
+    		}
+    	}
+	}
 	
     public HashMap<String,ArrayList<String>> getFMLConfig()
     {
@@ -164,6 +206,7 @@ public class FMLConfig
     public static FMLConfig getinstance(){return fmlConfig;}
     
     public static void main(String []args){
+    	deleteFiles();
     	FMLConfig fml = FMLConfig.getinstance();
     	
     	HashMap<String, ArrayList<String>> configFML = fml.getFMLConfig();
