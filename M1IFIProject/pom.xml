@@ -9,9 +9,9 @@
 	<url>http://maven.apache.org</url>
 	<repositories>
 		<repository>
-      		<id>releases</id>
-				<name>I3S Maven Releases Repository</name>
-				<url>http://nyx.unice.fr/nexus/content/repositories/i3s-public</url>	
+			<id>releases</id>
+			<name>I3S Maven Releases Repository</name>
+			<url>http://nyx.unice.fr/nexus/content/repositories/i3s-public</url>
 		</repository>
 	</repositories>
 	<dependencies>
@@ -25,16 +25,16 @@
 			<artifactId>mockito-all</artifactId>
 			<version>1.10.8</version>
 		</dependency>
-			<dependency>
-    	<groupId>fr.unice.deptinfo</groupId>
-		<artifactId>familiar-interpreter</artifactId>
-		<version>0.0.1</version>
-	</dependency>
-	<dependency>
-  		<groupId>fr.unice.deptinfo</groupId>
-  		<artifactId>maven-compiler</artifactId>
-  		<version>0.0.1</version>
-  	</dependency>
+		<dependency>
+			<groupId>fr.unice.deptinfo</groupId>
+			<artifactId>familiar-interpreter</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>fr.unice.deptinfo</groupId>
+			<artifactId>maven-compiler</artifactId>
+			<version>0.0.1</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -55,6 +55,32 @@
 					<target>1.7</target>
 				</configuration>
 			</plugin>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.2-beta-2</version>
+				<executions>
+					<execution>
+						<id>create-executable-jar</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<descriptorRefs>
+								<descriptorRef>
+									jar-with-dependencies
+								</descriptorRef>
+							</descriptorRefs>
+							<archive>
+								<manifest>
+									<mainClass>main.Launcher</mainClass>
+								</manifest>
+							</archive>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
+
 </project>
