@@ -1,1 +1,1 @@
-package config;import comportements.*;public class ConfigFile{public static int nombre=-1;public static int vitesseSimu=10;public static double vitesse=5;public static double direction=-1;public static IComportement environnement =Closed.getInstance();}
+package config;import comportements.*;public class ConfigFile{public static int nombre=-1;public static int vitesseSimu=10;public static double vitesse=5;public static double direction=0.d;public static IComportement environnement =Circular.getInstance();}
