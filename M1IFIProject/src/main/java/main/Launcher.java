@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
@@ -55,7 +57,6 @@ import deplacements.IDeplacement;
 public class Launcher extends JFrame {
 	private Config config = Config.getInstance();
 
-	private static Generate generate;
 	private TestResultsDisplay testResultsDisplay;
 	private int quantity;
 
@@ -82,6 +83,7 @@ public class Launcher extends JFrame {
 	private Constructor<? extends IDeplacement> constructorDeplacement = null;
 	private Constructor<? extends IColorStrategy> constructorColor = null;
 	final JButton restart;
+	private String path;
 
 	public Launcher() {
 		quantity = 0;
@@ -89,6 +91,18 @@ public class Launcher extends JFrame {
 		comportementFactory = ComportementPluginFactory.getInstance();
 		deplacementFactory = DeplacementPluginFactory.getInstance();
 		colorFactory = ColorPluginFactory.getInstance();
+		path = new File("").getAbsolutePath();
+		System.out.println("okokokokokokoko");
+		try {
+			Process proc1 = Runtime.getRuntime().exec("javac " + path + File.separator + "src"
+					+ File.separator + "main" + File.separator + "java"
+					+ File.separator + "config" + File.separator
+					+ "ConfigFile.java");
+			System.out.println("aloooooooooooooo" + ConfigFile.nombre);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		setName("Creature Simulator Plugin Version");
 		setLayout(new BorderLayout());
@@ -210,7 +224,6 @@ public class Launcher extends JFrame {
 		mb.removeAll();
 		ActionListener listener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
 				if (ConfigFile.nombre != -1) {
 					quantity = ConfigFile.nombre;
 					final String res = ((JMenuItem) e.getSource())

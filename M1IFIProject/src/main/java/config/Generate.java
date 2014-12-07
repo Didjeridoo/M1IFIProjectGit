@@ -3,7 +3,9 @@ package config;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -27,6 +29,7 @@ public class Generate {
 	private Config config;
 	private String path;
 	HashMap<String, ArrayList<String>> collecConfig;
+	private FileWriter writer;
 
 	public Generate(HashMap<String, ArrayList<String>> fml) {
 		// TODO Auto-generated constructor stub
@@ -41,6 +44,27 @@ public class Generate {
 	 */
 	public void generateConfig() throws IOException {
 		if (collecConfig != null) {
+			try {
+				writer = new FileWriter(path + File.separator + "src"
+						+ File.separator + "main" + File.separator + "java"
+						+ File.separator + "config" + File.separator
+						+ "ConfigFile.java", false);
+				writer.write("package config;\n");
+				writer.write("public class ConfigFile{\n");
+				writer.write("public static int nombre=99;\n");
+				writer.write("}");
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			} finally {
+				if (writer != null) {
+					try {
+						writer.close();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
 			generateMoteur(collecConfig.get("VitesseSimu"));
 			generateColor(collecConfig.get("Couleur"));
 			generateVitesse(collecConfig.get("Vitesse"));
@@ -177,7 +201,7 @@ public class Generate {
 			config.setDirection(0.d);
 			System.out.println("Direction non définie.");
 			System.out.println("Direction par défaut : Fixe.");
-		}else if (direction.get(0).equalsIgnoreCase("DAleatoire")) {
+		} else if (direction.get(0).equalsIgnoreCase("DAleatoire")) {
 			config.setDirection(-1);
 		} else if (direction.get(0).equalsIgnoreCase("DFixe")) {
 			config.setDirection(0.d);
@@ -192,21 +216,22 @@ public class Generate {
 		if (nombre == null) {
 			config.setNombre(-1);
 			System.out.println("Nombre de créature non définie.");
-			System.out.println("Nombre par défaut : Selection par l'utilisateur.");
+			System.out
+					.println("Nombre par défaut : Selection par l'utilisateur.");
 		} else if (nombre.get(0).equalsIgnoreCase("Fixe")) {
-			config.setNombre(-1);
+			// ConfigFile.nombre = -1;
 		} else if (nombre.get(0).equalsIgnoreCase("Dizaine")) {
 			Random r = new Random();
 			int i1 = (r.nextInt(100 - 10) + 10);
-			config.setNombre(i1);
+			// ConfigFile.nombre = i1;
 		} else if (nombre.get(0).equalsIgnoreCase("Centaine")) {
 			Random r = new Random();
 			int i1 = (r.nextInt(1000 - 100) + 100);
-			config.setNombre(i1);
+			// ConfigFile.nombre = i1;
 		} else if (nombre.get(0).equalsIgnoreCase("Millier")) {
 			Random r = new Random();
 			int i1 = (r.nextInt(10000 - 1000) + 1000);
-			config.setNombre(i1);
+			// ConfigFile.nombre = i1;
 		}
 	}
 
