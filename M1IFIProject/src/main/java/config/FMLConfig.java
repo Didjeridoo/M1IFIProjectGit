@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 import fr.unice.deptinfo.familiar_interpreter.FMEngineException;
 import fr.unice.deptinfo.familiar_interpreter.impl.FamiliarInterpreter;
+import fr.unice.deptinfo.maven_compiler.MavenCompiler;
 import fr.unice.polytech.modalis.familiar.interpreter.VariableNotExistingException;
 import fr.unice.polytech.modalis.familiar.parser.VariableAmbigousConflictException;
 import fr.unice.polytech.modalis.familiar.variable.FeatureModelVariable;
@@ -22,6 +23,7 @@ public class FMLConfig
 	String configName;
 	String url_file_fml;
 	private static Generate generate;
+
 	HashMap<String,ArrayList<String> > hashMap;
 	ArrayList<String> params;
 	ArrayList<String> deplacements;
@@ -214,9 +216,10 @@ public class FMLConfig
 		return null;
     }
     public static FMLConfig getinstance(){return fmlConfig;}
-    
-    public static void main(String []args){
-    	deleteFiles();
+
+public static void main(String[] args) throws IOException {
+		
+		deleteFiles();
     	FMLConfig fml = FMLConfig.getinstance();
     	
     	HashMap<String, ArrayList<String>> configFML = fml.getFMLConfig();
@@ -224,6 +227,13 @@ public class FMLConfig
     	System.out.println(configFML);
         generate = new Generate(configFML);
         generate.generateConfig();
-    }
+		MavenCompiler mv = new MavenCompiler();
+		String path = new File("").getAbsolutePath();
+		File srcDir = new File(path);
+		File targetDir = new File(path);
+		mv.compile(srcDir, targetDir);
+		Process proc = Runtime.getRuntime().exec("java -jar " + path + File.separator + "M1IFIProject-1.0-SNAPSHOT-jar-with-dependencies.jar");
+	}
+
 }
 
