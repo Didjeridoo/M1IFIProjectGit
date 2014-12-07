@@ -29,12 +29,15 @@ public class Generate {
 	private Config config;
 	private String path;
 	HashMap<String, ArrayList<String>> collecConfig;
+	HashMap<String, ArrayList<String>> sendConfig;
+	ArrayList<String> listNombre = new ArrayList<String>();
 	private FileWriter writer;
 
 	public Generate(HashMap<String, ArrayList<String>> fml) {
 		// TODO Auto-generated constructor stub
 		config = Config.getInstance();
 		collecConfig = fml;
+		sendConfig = new HashMap<String, ArrayList<String>>();
 		path = new File("").getAbsolutePath();
 	}
 
@@ -72,7 +75,7 @@ public class Generate {
 			generateEnvironnement(collecConfig.get("Environnement"));
 			generateDeplacement(collecConfig.get("Deplacement"));
 			generateNombre(collecConfig.get("Nombre"));
-			WriteConfig wc = new WriteConfig();
+			WriteConfig wc = new WriteConfig(sendConfig);
 	        wc.write();
 		} else {
 			System.out
@@ -219,18 +222,26 @@ public class Generate {
 			System.out
 					.println("Nombre par défaut : Selection par l'utilisateur.");
 		} else if (nombre.get(0).equalsIgnoreCase("Fixe")) {
+			listNombre.add("-1");
+			sendConfig.put("Nombre", listNombre);
 			// ConfigFile.nombre = -1;
 		} else if (nombre.get(0).equalsIgnoreCase("Dizaine")) {
 			Random r = new Random();
 			int i1 = (r.nextInt(100 - 10) + 10);
+			listNombre.add(Integer.toString(i1));
+			sendConfig.put("Nombre", listNombre);
 			// ConfigFile.nombre = i1;
 		} else if (nombre.get(0).equalsIgnoreCase("Centaine")) {
 			Random r = new Random();
 			int i1 = (r.nextInt(1000 - 100) + 100);
+			sendConfig.put("Nombre", listNombre);
+			listNombre.add(Integer.toString(i1));
 			// ConfigFile.nombre = i1;
 		} else if (nombre.get(0).equalsIgnoreCase("Millier")) {
 			Random r = new Random();
 			int i1 = (r.nextInt(10000 - 1000) + 1000);
+			listNombre.add(Integer.toString(i1));
+			sendConfig.put("Nombre", listNombre);
 			// ConfigFile.nombre = i1;
 		}
 	}

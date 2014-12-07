@@ -1,4 +1,1 @@
-package config;
-public class ConfigFile{
-public static int nombre=13;
-}
+package config;public class ConfigFile{public static int nombre=48;}
