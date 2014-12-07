@@ -18,10 +18,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-import color.Cube;
-import color.Groupe;
-import color.IColorStrategy;
-import color.Unique;
 import plug.color.ColorPluginFactory;
 import plug.color.PluginMenuItemBuilderColor;
 import plug.comportements.ComportementPluginFactory;
@@ -32,11 +28,18 @@ import plug.deplacements.DeplacementPluginFactory;
 import plug.deplacements.PluginMenuItemBuilderDeplacement;
 import visual.FormDesiredQuantity;
 import visual.TestResultsDisplay;
+import color.Cube;
+import color.Groupe;
+import color.IColorStrategy;
+import color.Unique;
+
 import comportements.Circular;
 import comportements.Closed;
 import comportements.IComportement;
 import comportements.Toric;
+
 import config.Config;
+import config.ConfigFile;
 import config.Generate;
 import creatures.ICreature;
 import creatures.visual.CreatureInspector;
@@ -208,8 +211,8 @@ public class Launcher extends JFrame {
 		ActionListener listener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				if (Config.getInstance().getNombre() != -1) {
-					quantity = Config.getInstance().getNombre();
+				if (ConfigFile.nombre != -1) {
+					quantity = ConfigFile.nombre;
 					final String res = ((JMenuItem) e.getSource())
 							.getActionCommand();
 					if (res.equals("creatures.CustomCreature")) {

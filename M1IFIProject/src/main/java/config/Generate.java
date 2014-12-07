@@ -37,8 +37,9 @@ public class Generate {
 
 	/**
 	 * Genere les plugins demandes par l'utilisateur
+	 * @throws IOException 
 	 */
-	public void generateConfig() {
+	public void generateConfig() throws IOException {
 		if (collecConfig != null) {
 			generateMoteur(collecConfig.get("VitesseSimu"));
 			generateColor(collecConfig.get("Couleur"));
@@ -47,6 +48,8 @@ public class Generate {
 			generateEnvironnement(collecConfig.get("Environnement"));
 			generateDeplacement(collecConfig.get("Deplacement"));
 			generateNombre(collecConfig.get("Nombre"));
+			WriteConfig wc = new WriteConfig();
+	        wc.write();
 		} else {
 			System.out
 					.println("Erreur : Vous avez quitté la configuration du simulateur.");
