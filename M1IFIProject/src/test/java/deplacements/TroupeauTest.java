@@ -2,7 +2,7 @@ package deplacements;
 
 import static commons.Utils.filter;
 import static java.lang.Math.toRadians;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -16,10 +16,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import comportements.Toric;
-import creatures.AbstractCreature;
+
 import creatures.CustomCreature;
 import creatures.ICreature;
-import creatures.StupidCreature;
 import creatures.visual.CreatureSimulator;
 import deplacements.Troupeau.CreaturesAroundCreature;
 

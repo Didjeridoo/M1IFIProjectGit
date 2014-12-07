@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import config.Config;
-import config.Generate;
+import config.ConfigFile;
 
 public class Simulator<T extends IActionable> { 
 	
@@ -27,7 +27,7 @@ public class Simulator<T extends IActionable> {
 	public Simulator(List<T> actionables) {
 		this.actionables = actionables;
 		config = Config.getInstance();
-		setExecutionDelay(config.getVitesseSimu());
+		setExecutionDelay(ConfigFile.vitesseSimu);
 	}
 
 	public void start() {

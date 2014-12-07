@@ -12,11 +12,13 @@ import java.util.Map;
 import java.util.Random;
 import java.util.logging.Logger;
 
-import color.IColorStrategy;
 import plug.IPlugin;
 import plug.PluginLoader;
+import color.IColorStrategy;
+
 import comportements.IComportement;
-import config.Config;
+
+import config.ConfigFile;
 import creatures.ICreature;
 import creatures.IEnvironment;
 import deplacements.IDeplacement;
@@ -117,7 +119,7 @@ public class CreaturePluginFactory {
 			// Y coordinate
 			double y = (rand.nextDouble() * s.getHeight()) - s.getHeight() / 2;
 			// direction
-			double direction = Config.getInstance().getDirection();
+			double direction = ConfigFile.direction;
 			if(direction == -1){
 				Random rand = new Random();
 				direction = rand.nextDouble() * 2 * Math.PI;

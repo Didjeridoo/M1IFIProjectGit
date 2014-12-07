@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
@@ -42,7 +41,6 @@ import comportements.Toric;
 
 import config.Config;
 import config.ConfigFile;
-import config.Generate;
 import creatures.ICreature;
 import creatures.visual.CreatureInspector;
 import creatures.visual.CreatureSimulator;
@@ -55,14 +53,12 @@ import deplacements.IDeplacement;
  */
 @SuppressWarnings("serial")
 public class Launcher extends JFrame {
-	private Config config = Config.getInstance();
 
 	private TestResultsDisplay testResultsDisplay;
 	private int quantity;
 
 	private IComportement comportement;
 	private IDeplacement move;
-	private IColorStrategy color;
 
 	private final CreaturePluginFactory factory;
 	private final ComportementPluginFactory comportementFactory;
@@ -92,17 +88,6 @@ public class Launcher extends JFrame {
 		deplacementFactory = DeplacementPluginFactory.getInstance();
 		colorFactory = ColorPluginFactory.getInstance();
 		path = new File("").getAbsolutePath();
-		System.out.println("okokokokokokoko");
-		try {
-			Process proc1 = Runtime.getRuntime().exec("javac " + path + File.separator + "src"
-					+ File.separator + "main" + File.separator + "java"
-					+ File.separator + "config" + File.separator
-					+ "ConfigFile.java");
-			System.out.println("aloooooooooooooo" + ConfigFile.nombre);
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
 		
 		setName("Creature Simulator Plugin Version");
 		setLayout(new BorderLayout());
@@ -136,8 +121,7 @@ public class Launcher extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (currentConstructor != null) {
 					Collection<? extends ICreature> creatures = factory
-							.createCreatures(simulator, Config.getInstance()
-									.getEnvironnement(), move, quantity, Config
+							.createCreatures(simulator, ConfigFile.environnement, move, quantity, Config
 									.getInstance().getColor(),
 									currentConstructor);
 					simulator.addAllCreatures(creatures);
@@ -162,8 +146,7 @@ public class Launcher extends JFrame {
 					}
 					simulator.clearCreatures();
 					Collection<? extends ICreature> creatures = factory
-							.createCreatures(simulator, Config.getInstance()
-									.getEnvironnement(), move, quantity, Config
+							.createCreatures(simulator, ConfigFile.environnement, move, quantity, Config
 									.getInstance().getColor(),
 									currentConstructor);
 					simulator.addAllCreatures(creatures);
@@ -370,7 +353,7 @@ public class Launcher extends JFrame {
 
 		menuBuilderComportement = new PluginMenuItemBuilderComportement(
 				comportementFactory.getConstructorMap(), listenerComportement);
-		menuBuilderComportement.setMenuTitle(Config.getInstance().getEnvironnement().getName());
+		menuBuilderComportement.setMenuTitle(ConfigFile.environnement.getName());
 		menuBuilderComportement.getMenu().setEnabled(false);
 		menuBuilderComportement.buildMenu();
 		mb.add(menuBuilderComportement.getMenu());
@@ -398,11 +381,7 @@ public class Launcher extends JFrame {
 
 	public static void main(String args[]) {
 		Logger.getLogger("plug").setLevel(Level.INFO);
-		//generate = Generate.getInstance();
-		//generate.generateConfig();
-		Config config = Config.getInstance();
-		double myMaxSpeed = config.getVitesse();
-		CreaturePluginFactory.init(myMaxSpeed);
+		CreaturePluginFactory.init(ConfigFile.vitesse);
 		ComportementPluginFactory.init();
 		DeplacementPluginFactory.init();
 		ColorPluginFactory.init();

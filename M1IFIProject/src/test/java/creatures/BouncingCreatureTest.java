@@ -1,7 +1,7 @@
 package creatures;
 
 import static java.lang.Math.toRadians;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -13,10 +13,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import comportements.Closed;
-import comportements.IComportement;
+
 import creatures.visual.CreatureSimulator;
 import deplacements.Hasard;
-import deplacements.IDeplacement;
 
 public class BouncingCreatureTest {
 	

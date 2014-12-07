@@ -3,9 +3,9 @@ package creatures;
 import java.awt.Color;
 import java.awt.geom.Point2D;
 
-import color.IColorStrategy;
 import comportements.Closed;
 import comportements.IComportement;
+
 import deplacements.Hasard;
 import deplacements.IDeplacement;
 

@@ -16,9 +16,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import color.IColorStrategy;
 import commons.Utils.Predicate;
 import comportements.IComportement;
+
 import deplacements.IDeplacement;
 
 

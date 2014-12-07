@@ -1,7 +1,8 @@
 package deplacements;
 
 import static java.lang.Math.toRadians;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -12,9 +13,8 @@ import java.awt.geom.Point2D;
 import org.junit.Before;
 import org.junit.Test;
 
-import color.Unique;
-import color.IColorStrategy;
 import comportements.Toric;
+
 import creatures.CustomCreature;
 import creatures.visual.CreatureSimulator;
 
@@ -26,7 +26,6 @@ public class HasardTest {
 	CreatureSimulator environment = mock(CreatureSimulator.class);
 	final double w = 200;
 	final double h = 100;
-	IColorStrategy color = new Unique();
 
 	// Utilisation du mock afin de renvoyer les tailles de cotes que nous fixons pour les tests
 	@Before

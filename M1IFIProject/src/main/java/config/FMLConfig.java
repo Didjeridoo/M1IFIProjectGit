@@ -227,15 +227,6 @@ public static void main(String[] args) throws IOException {
     	System.out.println(configFML);
         generate = new Generate(configFML);
         generate.generateConfig();
-        Process proc1 = Runtime.getRuntime().exec("javac " + path + File.separator + "src"
-						+ File.separator + "main" + File.separator + "java"
-						+ File.separator + "config" + File.separator
-						+ "ConfigFile.java");
-        System.out.println("xxxxxxxxxxx : " + ConfigFile.nombre);
-        Process proc2 = Runtime.getRuntime().exec("javac " + path + File.separator + "src"
-				+ File.separator + "main" + File.separator + "java"
-				+ File.separator + "main" + File.separator
-				+ "Launcher.java");
 		MavenCompiler mv = new MavenCompiler();
 		String path = new File("").getAbsolutePath();
 		File srcDir = new File(path);

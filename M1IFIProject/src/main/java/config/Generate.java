@@ -3,9 +3,7 @@ package config;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -29,19 +27,13 @@ public class Generate {
 	private Config config;
 	private String path;
 	HashMap<String, ArrayList<String>> collecConfig;
-	HashMap<String, ArrayList<String>> sendConfig;
-	ArrayList<String> listNombre = new ArrayList<String>();
-	ArrayList<String> listVitesseSimu = new ArrayList<String>();
-	ArrayList<String> listVitesse = new ArrayList<String>();
-	ArrayList<String> listDirection = new ArrayList<String>();
-	ArrayList<String> listDeplacement = new ArrayList<String>();
-	private FileWriter writer;
+	HashMap<String, String> sendConfig;
 
 	public Generate(HashMap<String, ArrayList<String>> fml) {
 		// TODO Auto-generated constructor stub
 		config = Config.getInstance();
 		collecConfig = fml;
-		sendConfig = new HashMap<String, ArrayList<String>>();
+		sendConfig = new HashMap<String, String>();
 		path = new File("").getAbsolutePath();
 	}
 
@@ -51,27 +43,6 @@ public class Generate {
 	 */
 	public void generateConfig() throws IOException {
 		if (collecConfig != null) {
-			try {
-				writer = new FileWriter(path + File.separator + "src"
-						+ File.separator + "main" + File.separator + "java"
-						+ File.separator + "config" + File.separator
-						+ "ConfigFile.java", false);
-				writer.write("package config;\n");
-				writer.write("public class ConfigFile{\n");
-				writer.write("public static int nombre=99;\n");
-				writer.write("}");
-			} catch (IOException ex) {
-				ex.printStackTrace();
-			} finally {
-				if (writer != null) {
-					try {
-						writer.close();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			}
 			generateMoteur(collecConfig.get("VitesseSimu"));
 			generateColor(collecConfig.get("Couleur"));
 			generateVitesse(collecConfig.get("Vitesse"));
@@ -105,16 +76,17 @@ public class Generate {
 	private void generateVitesseSimu(ArrayList<String> vitesseSimu) {
 		// TODO Auto-generated method stub
 		if (vitesseSimu == null) {
-			config.setVitesseSimu(10);
+			sendConfig.put("VitesseSimu", "10");
 			System.out.println("Vitesse de simulation non définie.");
 			System.out.println("Vitesse de simulation par défaut : 10.");
 		} else if (vitesseSimu.get(0).equalsIgnoreCase("lent")) {
-			config.setVitesseSimu(20);
+			sendConfig.put("VitesseSimu", "20");
 		} else if (vitesseSimu.get(0).equalsIgnoreCase("moyen")) {
-			config.setVitesseSimu(10);
+			sendConfig.put("VitesseSimu", "10");
 		} else if (vitesseSimu.get(0).equalsIgnoreCase("rapide")) {
-			config.setVitesseSimu(5);
+			sendConfig.put("VitesseSimu", "5");
 		}
+		
 	}
 
 	/**
@@ -123,13 +95,6 @@ public class Generate {
 	 *                    les creatures.
 	 */
 	private void generateColor(ArrayList<String> couleur) {
-		// if(couleur.equalsIgnoreCase("cube")){
-		// config.setColor(new Cube());
-		// }else if(couleur.equalsIgnoreCase("unique")){
-		// config.setColor(new Unique());
-		// } else if(couleur.equalsIgnoreCase("group")){
-		// config.setColor(new Group());
-		// }
 		if (couleur == null) {
 			System.out.println("Couleur des créatures non définie.");
 			System.out.println("Couleur par défaut : Unique.");
@@ -189,13 +154,13 @@ public class Generate {
 	 */
 	public void generateVitesse(ArrayList<String> vitesse) {
 		if (vitesse == null) {
-			config.setVitesse(5);
+			sendConfig.put("Vitesse","5");
 			System.out.println("Vitesse non définie.");
 			System.out.println("Vitesse par défaut : 5.");
 		} else if (vitesse.get(0).equalsIgnoreCase("VAleatoire")) {
-			config.setVitesse(-1);
+			sendConfig.put("Vitesse","-1");
 		} else if (vitesse.get(0).equalsIgnoreCase("VFixe")) {
-			config.setVitesse(5);
+			sendConfig.put("Vitesse","5");
 		}
 	}
 
@@ -205,13 +170,13 @@ public class Generate {
 	 */
 	public void generateDirection(ArrayList<String> direction) {
 		if (direction == null) {
-			config.setDirection(0.d);
+			sendConfig.put("Direction","0.d");
 			System.out.println("Direction non définie.");
 			System.out.println("Direction par défaut : Fixe.");
 		} else if (direction.get(0).equalsIgnoreCase("DAleatoire")) {
-			config.setDirection(-1);
+			sendConfig.put("Direction","-1");
 		} else if (direction.get(0).equalsIgnoreCase("DFixe")) {
-			config.setDirection(0.d);
+			sendConfig.put("Direction","0.d");
 		}
 	}
 
@@ -221,32 +186,24 @@ public class Generate {
 	 */
 	public void generateNombre(ArrayList<String> nombre) {
 		if (nombre == null) {
-			config.setNombre(-1);
+			sendConfig.put("Nombre", "-1");
 			System.out.println("Nombre de créature non définie.");
 			System.out
 					.println("Nombre par défaut : Selection par l'utilisateur.");
 		} else if (nombre.get(0).equalsIgnoreCase("Fixe")) {
-			listNombre.add("-1");
-			sendConfig.put("Nombre", listNombre);
-			// ConfigFile.nombre = -1;
+			sendConfig.put("Nombre", "-1");
 		} else if (nombre.get(0).equalsIgnoreCase("Dizaine")) {
 			Random r = new Random();
 			int i1 = (r.nextInt(100 - 10) + 10);
-			listNombre.add(Integer.toString(i1));
-			sendConfig.put("Nombre", listNombre);
-			// ConfigFile.nombre = i1;
+			sendConfig.put("Nombre", Integer.toString(i1));
 		} else if (nombre.get(0).equalsIgnoreCase("Centaine")) {
 			Random r = new Random();
 			int i1 = (r.nextInt(1000 - 100) + 100);
-			sendConfig.put("Nombre", listNombre);
-			listNombre.add(Integer.toString(i1));
-			// ConfigFile.nombre = i1;
+			sendConfig.put("Nombre", Integer.toString(i1));
 		} else if (nombre.get(0).equalsIgnoreCase("Millier")) {
 			Random r = new Random();
 			int i1 = (r.nextInt(10000 - 1000) + 1000);
-			listNombre.add(Integer.toString(i1));
-			sendConfig.put("Nombre", listNombre);
-			// ConfigFile.nombre = i1;
+			sendConfig.put("Nombre", Integer.toString(i1));
 		}
 	}
 
@@ -261,7 +218,7 @@ public class Generate {
 	 */
 	private void generateEnvironnement(ArrayList<String> environnement) {
 		if (environnement == null) {
-			config.setEnvironnement(Toric.getInstance());
+			sendConfig.put("Comportement", "Toric.getInstance()");
 			System.out.println("Environnement non définie.");
 			System.out.println("Environnement par défaut : Toric.");
 
@@ -289,11 +246,11 @@ public class Generate {
 			}
 		} else {
 			if (environnement.get(0).equalsIgnoreCase("toric")) {
-				config.setEnvironnement(Toric.getInstance());
+				sendConfig.put("Comportement", "Toric.getInstance()");
 			} else if (environnement.get(0).equalsIgnoreCase("closed")) {
-				config.setEnvironnement(Closed.getInstance());
+				sendConfig.put("Comportement", "Closed.getInstance()");
 			} else if (environnement.get(0).equalsIgnoreCase("circular")) {
-				config.setEnvironnement(Circular.getInstance());
+				sendConfig.put("Comportement", "Circular.getInstance()");
 			}
 
 			Path pathSource = Paths.get(path + File.separator + "myPluginsList"

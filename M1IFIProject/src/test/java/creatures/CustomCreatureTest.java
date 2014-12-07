@@ -1,12 +1,6 @@
 package creatures;
 
-import static java.lang.Math.toRadians;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
-
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -17,6 +17,7 @@ import org.junit.Test;
 
 import comportements.Closed;
 import comportements.Toric;
+
 import creatures.visual.CreatureSimulator;
 import deplacements.Stupid;
 import deplacements.Troupeau;
