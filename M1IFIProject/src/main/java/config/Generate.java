@@ -31,6 +31,10 @@ public class Generate {
 	HashMap<String, ArrayList<String>> collecConfig;
 	HashMap<String, ArrayList<String>> sendConfig;
 	ArrayList<String> listNombre = new ArrayList<String>();
+	ArrayList<String> listVitesseSimu = new ArrayList<String>();
+	ArrayList<String> listVitesse = new ArrayList<String>();
+	ArrayList<String> listDirection = new ArrayList<String>();
+	ArrayList<String> listDeplacement = new ArrayList<String>();
 	private FileWriter writer;
 
 	public Generate(HashMap<String, ArrayList<String>> fml) {
